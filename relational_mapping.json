@@ -1,0 +1,5394 @@
+{
+  "schema_version": "1.0",
+  "database": "enveu_flow_db",
+  "tables_analyzed": [
+    "agent_conversation_messages",
+    "agent_conversation_seq",
+    "agent_execution_log",
+    "agent_tool_call_log",
+    "billing_parameters",
+    "credential_types",
+    "databasechangelog",
+    "databasechangeloglock",
+    "email_audit_log",
+    "flow_credentials",
+    "flow_ui_nodes",
+    "node_cached_outputs",
+    "node_credentials",
+    "node_execution_logs",
+    "oauth_states",
+    "plan_parameter_configs",
+    "plan_stripe_prices",
+    "plans",
+    "platform_configs",
+    "plugin_registrations",
+    "plugin_storage",
+    "plugins",
+    "promo_code_redemptions",
+    "promo_codes",
+    "referral_codes",
+    "referral_conversions",
+    "scheduled_job_locks",
+    "secrets",
+    "step_execution_sessions",
+    "stripe_events",
+    "subscription_changes",
+    "tenant_credit_grants",
+    "tenant_credit_transactions",
+    "tenant_invoices",
+    "tenant_plugins",
+    "tenant_subscriptions",
+    "tenant_wallets",
+    "tenants",
+    "tool_execution_cache",
+    "trusted_publishers",
+    "user_tenants",
+    "user_workspaces",
+    "workflow_execution_checkpoints",
+    "workflow_execution_logs",
+    "workflow_triggers",
+    "workflows",
+    "workspaces"
+  ],
+  "total_tables_in_dump": 47,
+  "entity_relationship_diagram": {
+    "nodes": [
+      {
+        "id": "agent_conversation_messages",
+        "label": "agent_conversation_messages",
+        "column_count": 11,
+        "primary_key": "id"
+      },
+      {
+        "id": "agent_conversation_seq",
+        "label": "agent_conversation_seq",
+        "column_count": 2,
+        "primary_key": "conversation_id"
+      },
+      {
+        "id": "agent_execution_log",
+        "label": "agent_execution_log",
+        "column_count": 30,
+        "primary_key": "id"
+      },
+      {
+        "id": "agent_tool_call_log",
+        "label": "agent_tool_call_log",
+        "column_count": 17,
+        "primary_key": "id"
+      },
+      {
+        "id": "billing_parameters",
+        "label": "billing_parameters",
+        "column_count": 19,
+        "primary_key": "id"
+      },
+      {
+        "id": "credential_types",
+        "label": "credential_types",
+        "column_count": 15,
+        "primary_key": "id"
+      },
+      {
+        "id": "databasechangelog",
+        "label": "databasechangelog",
+        "column_count": 14,
+        "primary_key": null
+      },
+      {
+        "id": "databasechangeloglock",
+        "label": "databasechangeloglock",
+        "column_count": 4,
+        "primary_key": "ID"
+      },
+      {
+        "id": "email_audit_log",
+        "label": "email_audit_log",
+        "column_count": 8,
+        "primary_key": "id"
+      },
+      {
+        "id": "flow_credentials",
+        "label": "flow_credentials",
+        "column_count": 17,
+        "primary_key": "id"
+      },
+      {
+        "id": "flow_ui_nodes",
+        "label": "flow_ui_nodes",
+        "column_count": 15,
+        "primary_key": "id"
+      },
+      {
+        "id": "node_cached_outputs",
+        "label": "node_cached_outputs",
+        "column_count": 15,
+        "primary_key": "id"
+      },
+      {
+        "id": "node_credentials",
+        "label": "node_credentials",
+        "column_count": 9,
+        "primary_key": "id"
+      },
+      {
+        "id": "node_execution_logs",
+        "label": "node_execution_logs",
+        "column_count": 17,
+        "primary_key": "id"
+      },
+      {
+        "id": "oauth_states",
+        "label": "oauth_states",
+        "column_count": 14,
+        "primary_key": "id"
+      },
+      {
+        "id": "plan_parameter_configs",
+        "label": "plan_parameter_configs",
+        "column_count": 14,
+        "primary_key": "id"
+      },
+      {
+        "id": "plan_stripe_prices",
+        "label": "plan_stripe_prices",
+        "column_count": 11,
+        "primary_key": "id"
+      },
+      {
+        "id": "plans",
+        "label": "plans",
+        "column_count": 23,
+        "primary_key": "id"
+      },
+      {
+        "id": "platform_configs",
+        "label": "platform_configs",
+        "column_count": 7,
+        "primary_key": "id"
+      },
+      {
+        "id": "plugin_registrations",
+        "label": "plugin_registrations",
+        "column_count": 21,
+        "primary_key": "id"
+      },
+      {
+        "id": "plugin_storage",
+        "label": "plugin_storage",
+        "column_count": 9,
+        "primary_key": "id"
+      },
+      {
+        "id": "plugins",
+        "label": "plugins",
+        "column_count": 32,
+        "primary_key": "id"
+      },
+      {
+        "id": "promo_code_redemptions",
+        "label": "promo_code_redemptions",
+        "column_count": 7,
+        "primary_key": "id"
+      },
+      {
+        "id": "promo_codes",
+        "label": "promo_codes",
+        "column_count": 12,
+        "primary_key": "id"
+      },
+      {
+        "id": "referral_codes",
+        "label": "referral_codes",
+        "column_count": 9,
+        "primary_key": "id"
+      },
+      {
+        "id": "referral_conversions",
+        "label": "referral_conversions",
+        "column_count": 9,
+        "primary_key": "id"
+      },
+      {
+        "id": "scheduled_job_locks",
+        "label": "scheduled_job_locks",
+        "column_count": 4,
+        "primary_key": "job_name"
+      },
+      {
+        "id": "secrets",
+        "label": "secrets",
+        "column_count": 15,
+        "primary_key": "id"
+      },
+      {
+        "id": "step_execution_sessions",
+        "label": "step_execution_sessions",
+        "column_count": 28,
+        "primary_key": "id"
+      },
+      {
+        "id": "stripe_events",
+        "label": "stripe_events",
+        "column_count": 12,
+        "primary_key": "id"
+      },
+      {
+        "id": "subscription_changes",
+        "label": "subscription_changes",
+        "column_count": 19,
+        "primary_key": "id"
+      },
+      {
+        "id": "tenant_credit_grants",
+        "label": "tenant_credit_grants",
+        "column_count": 18,
+        "primary_key": "id"
+      },
+      {
+        "id": "tenant_credit_transactions",
+        "label": "tenant_credit_transactions",
+        "column_count": 12,
+        "primary_key": "id"
+      },
+      {
+        "id": "tenant_invoices",
+        "label": "tenant_invoices",
+        "column_count": 17,
+        "primary_key": "id"
+      },
+      {
+        "id": "tenant_plugins",
+        "label": "tenant_plugins",
+        "column_count": 12,
+        "primary_key": "id"
+      },
+      {
+        "id": "tenant_subscriptions",
+        "label": "tenant_subscriptions",
+        "column_count": 14,
+        "primary_key": "id"
+      },
+      {
+        "id": "tenant_wallets",
+        "label": "tenant_wallets",
+        "column_count": 10,
+        "primary_key": "id"
+      },
+      {
+        "id": "tenants",
+        "label": "tenants",
+        "column_count": 17,
+        "primary_key": "id"
+      },
+      {
+        "id": "tool_execution_cache",
+        "label": "tool_execution_cache",
+        "column_count": 7,
+        "primary_key": "tool_call_id"
+      },
+      {
+        "id": "trusted_publishers",
+        "label": "trusted_publishers",
+        "column_count": 13,
+        "primary_key": "id"
+      },
+      {
+        "id": "user_tenants",
+        "label": "user_tenants",
+        "column_count": 11,
+        "primary_key": "id"
+      },
+      {
+        "id": "user_workspaces",
+        "label": "user_workspaces",
+        "column_count": 8,
+        "primary_key": "id"
+      },
+      {
+        "id": "workflow_execution_checkpoints",
+        "label": "workflow_execution_checkpoints",
+        "column_count": 17,
+        "primary_key": "id"
+      },
+      {
+        "id": "workflow_execution_logs",
+        "label": "workflow_execution_logs",
+        "column_count": 15,
+        "primary_key": "id"
+      },
+      {
+        "id": "workflow_triggers",
+        "label": "workflow_triggers",
+        "column_count": 15,
+        "primary_key": "trigger_id"
+      },
+      {
+        "id": "workflows",
+        "label": "workflows",
+        "column_count": 17,
+        "primary_key": "id"
+      },
+      {
+        "id": "workspaces",
+        "label": "workspaces",
+        "column_count": 15,
+        "primary_key": "id"
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge_1",
+        "source": "agent_tool_call_log",
+        "target": "agent_execution_log",
+        "label": "N:1",
+        "source_columns": [
+          "agent_execution_log_id"
+        ],
+        "target_columns": [
+          "id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'agent_tool_call_log' references one row in 'agent_execution_log'"
+      },
+      {
+        "id": "edge_2",
+        "source": "node_credentials",
+        "target": "flow_credentials",
+        "label": "N:1",
+        "source_columns": [
+          "credential_id"
+        ],
+        "target_columns": [
+          "id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'node_credentials' references one row in 'flow_credentials'"
+      },
+      {
+        "id": "edge_3",
+        "source": "node_execution_logs",
+        "target": "workflow_execution_logs",
+        "label": "N:1",
+        "source_columns": [
+          "workflow_execution_id"
+        ],
+        "target_columns": [
+          "id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'node_execution_logs' references one row in 'workflow_execution_logs'"
+      },
+      {
+        "id": "edge_4",
+        "source": "node_execution_logs",
+        "target": "workspaces",
+        "label": "N:1",
+        "source_columns": [
+          "workspace_id"
+        ],
+        "target_columns": [
+          "workspace_id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'node_execution_logs' references one row in 'workspaces'"
+      },
+      {
+        "id": "edge_5",
+        "source": "plan_parameter_configs",
+        "target": "billing_parameters",
+        "label": "N:1",
+        "source_columns": [
+          "parameter_id"
+        ],
+        "target_columns": [
+          "id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'plan_parameter_configs' references one row in 'billing_parameters'"
+      },
+      {
+        "id": "edge_6",
+        "source": "plan_parameter_configs",
+        "target": "plans",
+        "label": "N:1",
+        "source_columns": [
+          "plan_id"
+        ],
+        "target_columns": [
+          "id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'plan_parameter_configs' references one row in 'plans'"
+      },
+      {
+        "id": "edge_7",
+        "source": "plan_stripe_prices",
+        "target": "plans",
+        "label": "N:1",
+        "source_columns": [
+          "plan_id"
+        ],
+        "target_columns": [
+          "id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'plan_stripe_prices' references one row in 'plans'"
+      },
+      {
+        "id": "edge_8",
+        "source": "promo_code_redemptions",
+        "target": "promo_codes",
+        "label": "N:1",
+        "source_columns": [
+          "promo_code_id"
+        ],
+        "target_columns": [
+          "id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'promo_code_redemptions' references one row in 'promo_codes'"
+      },
+      {
+        "id": "edge_9",
+        "source": "referral_conversions",
+        "target": "referral_codes",
+        "label": "N:1",
+        "source_columns": [
+          "referral_code_id"
+        ],
+        "target_columns": [
+          "id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'referral_conversions' references one row in 'referral_codes'"
+      },
+      {
+        "id": "edge_10",
+        "source": "subscription_changes",
+        "target": "plans",
+        "label": "N:1",
+        "source_columns": [
+          "new_plan_id"
+        ],
+        "target_columns": [
+          "id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'subscription_changes' references one row in 'plans'"
+      },
+      {
+        "id": "edge_11",
+        "source": "subscription_changes",
+        "target": "plans",
+        "label": "N:1",
+        "source_columns": [
+          "previous_plan_id"
+        ],
+        "target_columns": [
+          "id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'subscription_changes' references one row in 'plans'"
+      },
+      {
+        "id": "edge_12",
+        "source": "subscription_changes",
+        "target": "tenant_subscriptions",
+        "label": "N:1",
+        "source_columns": [
+          "subscription_id"
+        ],
+        "target_columns": [
+          "id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'subscription_changes' references one row in 'tenant_subscriptions'"
+      },
+      {
+        "id": "edge_13",
+        "source": "tenant_credit_grants",
+        "target": "tenants",
+        "label": "N:1",
+        "source_columns": [
+          "tenant_id"
+        ],
+        "target_columns": [
+          "tenant_id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'tenant_credit_grants' references one row in 'tenants'"
+      },
+      {
+        "id": "edge_14",
+        "source": "tenant_credit_transactions",
+        "target": "tenants",
+        "label": "N:1",
+        "source_columns": [
+          "tenant_id"
+        ],
+        "target_columns": [
+          "tenant_id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'tenant_credit_transactions' references one row in 'tenants'"
+      },
+      {
+        "id": "edge_15",
+        "source": "tenant_invoices",
+        "target": "tenant_subscriptions",
+        "label": "N:1",
+        "source_columns": [
+          "subscription_id"
+        ],
+        "target_columns": [
+          "id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'tenant_invoices' references one row in 'tenant_subscriptions'"
+      },
+      {
+        "id": "edge_16",
+        "source": "tenant_invoices",
+        "target": "tenants",
+        "label": "N:1",
+        "source_columns": [
+          "tenant_id"
+        ],
+        "target_columns": [
+          "tenant_id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'tenant_invoices' references one row in 'tenants'"
+      },
+      {
+        "id": "edge_17",
+        "source": "tenant_plugins",
+        "target": "plugins",
+        "label": "N:1",
+        "source_columns": [
+          "plugin_id"
+        ],
+        "target_columns": [
+          "plugin_id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'tenant_plugins' references one row in 'plugins'"
+      },
+      {
+        "id": "edge_18",
+        "source": "tenant_subscriptions",
+        "target": "plans",
+        "label": "N:1",
+        "source_columns": [
+          "plan_id"
+        ],
+        "target_columns": [
+          "id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'tenant_subscriptions' references one row in 'plans'"
+      },
+      {
+        "id": "edge_19",
+        "source": "tenant_subscriptions",
+        "target": "tenants",
+        "label": "N:1",
+        "source_columns": [
+          "tenant_id"
+        ],
+        "target_columns": [
+          "tenant_id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'tenant_subscriptions' references one row in 'tenants'"
+      },
+      {
+        "id": "edge_20",
+        "source": "tenant_wallets",
+        "target": "tenants",
+        "label": "N:1",
+        "source_columns": [
+          "tenant_id"
+        ],
+        "target_columns": [
+          "tenant_id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'tenant_wallets' references one row in 'tenants'"
+      },
+      {
+        "id": "edge_21",
+        "source": "user_tenants",
+        "target": "tenants",
+        "label": "N:1",
+        "source_columns": [
+          "tenant_id"
+        ],
+        "target_columns": [
+          "tenant_id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'user_tenants' references one row in 'tenants'"
+      },
+      {
+        "id": "edge_22",
+        "source": "user_workspaces",
+        "target": "workspaces",
+        "label": "N:1",
+        "source_columns": [
+          "workspace_id"
+        ],
+        "target_columns": [
+          "workspace_id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'user_workspaces' references one row in 'workspaces'"
+      },
+      {
+        "id": "edge_23",
+        "source": "workflow_execution_logs",
+        "target": "workspaces",
+        "label": "N:1",
+        "source_columns": [
+          "workspace_id"
+        ],
+        "target_columns": [
+          "workspace_id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'workflow_execution_logs' references one row in 'workspaces'"
+      },
+      {
+        "id": "edge_24",
+        "source": "workflows",
+        "target": "workspaces",
+        "label": "N:1",
+        "source_columns": [
+          "workspace_id"
+        ],
+        "target_columns": [
+          "workspace_id"
+        ],
+        "relationship_type": "N:1",
+        "description": "Each row in 'workflows' references one row in 'workspaces'"
+      },
+      {
+        "id": "edge_25",
+        "source": "agent_conversation_messages",
+        "target": "agent_conversation_seq",
+        "label": "N:1 (implicit)",
+        "source_columns": [
+          "conversation_id"
+        ],
+        "target_columns": [
+          "conversation_id"
+        ],
+        "relationship_type": "N:1 (implicit)",
+        "description": "Column 'conversation_id' suggests relationship to 'agent_conversation_seq'"
+      },
+      {
+        "id": "edge_26",
+        "source": "agent_conversation_messages",
+        "target": "tool_execution_cache",
+        "label": "N:1 (implicit)",
+        "source_columns": [
+          "tool_call_id"
+        ],
+        "target_columns": [
+          "tool_call_id"
+        ],
+        "relationship_type": "N:1 (implicit)",
+        "description": "Column 'tool_call_id' suggests relationship to 'tool_execution_cache'"
+      },
+      {
+        "id": "edge_27",
+        "source": "agent_execution_log",
+        "target": "agent_conversation_seq",
+        "label": "N:1 (implicit)",
+        "source_columns": [
+          "conversation_id"
+        ],
+        "target_columns": [
+          "conversation_id"
+        ],
+        "relationship_type": "N:1 (implicit)",
+        "description": "Column 'conversation_id' suggests relationship to 'agent_conversation_seq'"
+      },
+      {
+        "id": "edge_28",
+        "source": "agent_tool_call_log",
+        "target": "tool_execution_cache",
+        "label": "N:1 (implicit)",
+        "source_columns": [
+          "tool_call_id"
+        ],
+        "target_columns": [
+          "tool_call_id"
+        ],
+        "relationship_type": "N:1 (implicit)",
+        "description": "Column 'tool_call_id' suggests relationship to 'tool_execution_cache'"
+      },
+      {
+        "id": "edge_29",
+        "source": "databasechangelog",
+        "target": "databasechangeloglock",
+        "label": "N:1 (implicit)",
+        "source_columns": [
+          "ID"
+        ],
+        "target_columns": [
+          "ID"
+        ],
+        "relationship_type": "N:1 (implicit)",
+        "description": "Column 'ID' suggests relationship to 'databasechangeloglock'"
+      }
+    ]
+  },
+  "relationships": [
+    {
+      "from_table": "agent_tool_call_log",
+      "from_columns": [
+        "agent_execution_log_id"
+      ],
+      "to_table": "agent_execution_log",
+      "to_columns": [
+        "id"
+      ],
+      "constraint_name": "fk_atcl_agent_execution_log",
+      "relationship_type": "N:1",
+      "cardinality": "Many agent_tool_call_log rows -> One agent_execution_log",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'agent_tool_call_log' references one row in 'agent_execution_log'"
+    },
+    {
+      "from_table": "node_credentials",
+      "from_columns": [
+        "credential_id"
+      ],
+      "to_table": "flow_credentials",
+      "to_columns": [
+        "id"
+      ],
+      "constraint_name": "fk_node_credential",
+      "relationship_type": "N:1",
+      "cardinality": "Many node_credentials rows -> One flow_credentials",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'node_credentials' references one row in 'flow_credentials'"
+    },
+    {
+      "from_table": "node_execution_logs",
+      "from_columns": [
+        "workflow_execution_id"
+      ],
+      "to_table": "workflow_execution_logs",
+      "to_columns": [
+        "id"
+      ],
+      "constraint_name": "fk_node_execution_logs_workflow_execution_id",
+      "relationship_type": "N:1",
+      "cardinality": "Many node_execution_logs rows -> One workflow_execution_logs",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'node_execution_logs' references one row in 'workflow_execution_logs'"
+    },
+    {
+      "from_table": "node_execution_logs",
+      "from_columns": [
+        "workspace_id"
+      ],
+      "to_table": "workspaces",
+      "to_columns": [
+        "workspace_id"
+      ],
+      "constraint_name": "fk_node_logs_workspace",
+      "relationship_type": "N:1",
+      "cardinality": "Many node_execution_logs rows -> One workspaces",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'node_execution_logs' references one row in 'workspaces'"
+    },
+    {
+      "from_table": "plan_parameter_configs",
+      "from_columns": [
+        "parameter_id"
+      ],
+      "to_table": "billing_parameters",
+      "to_columns": [
+        "id"
+      ],
+      "constraint_name": "fk_plan_param_config_parameter",
+      "relationship_type": "N:1",
+      "cardinality": "Many plan_parameter_configs rows -> One billing_parameters",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'plan_parameter_configs' references one row in 'billing_parameters'"
+    },
+    {
+      "from_table": "plan_parameter_configs",
+      "from_columns": [
+        "plan_id"
+      ],
+      "to_table": "plans",
+      "to_columns": [
+        "id"
+      ],
+      "constraint_name": "fk_plan_param_config_plan",
+      "relationship_type": "N:1",
+      "cardinality": "Many plan_parameter_configs rows -> One plans",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'plan_parameter_configs' references one row in 'plans'"
+    },
+    {
+      "from_table": "plan_stripe_prices",
+      "from_columns": [
+        "plan_id"
+      ],
+      "to_table": "plans",
+      "to_columns": [
+        "id"
+      ],
+      "constraint_name": "fk_plan_stripe_prices_plan",
+      "relationship_type": "N:1",
+      "cardinality": "Many plan_stripe_prices rows -> One plans",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'plan_stripe_prices' references one row in 'plans'"
+    },
+    {
+      "from_table": "promo_code_redemptions",
+      "from_columns": [
+        "promo_code_id"
+      ],
+      "to_table": "promo_codes",
+      "to_columns": [
+        "id"
+      ],
+      "constraint_name": "fk_pcr_promo_code",
+      "relationship_type": "N:1",
+      "cardinality": "Many promo_code_redemptions rows -> One promo_codes",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'promo_code_redemptions' references one row in 'promo_codes'"
+    },
+    {
+      "from_table": "referral_conversions",
+      "from_columns": [
+        "referral_code_id"
+      ],
+      "to_table": "referral_codes",
+      "to_columns": [
+        "id"
+      ],
+      "constraint_name": "fk_rc_referral_code",
+      "relationship_type": "N:1",
+      "cardinality": "Many referral_conversions rows -> One referral_codes",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'referral_conversions' references one row in 'referral_codes'"
+    },
+    {
+      "from_table": "subscription_changes",
+      "from_columns": [
+        "new_plan_id"
+      ],
+      "to_table": "plans",
+      "to_columns": [
+        "id"
+      ],
+      "constraint_name": "fk_subscription_changes_new_plan",
+      "relationship_type": "N:1",
+      "cardinality": "Many subscription_changes rows -> One plans",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'subscription_changes' references one row in 'plans'"
+    },
+    {
+      "from_table": "subscription_changes",
+      "from_columns": [
+        "previous_plan_id"
+      ],
+      "to_table": "plans",
+      "to_columns": [
+        "id"
+      ],
+      "constraint_name": "fk_subscription_changes_previous_plan",
+      "relationship_type": "N:1",
+      "cardinality": "Many subscription_changes rows -> One plans",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'subscription_changes' references one row in 'plans'"
+    },
+    {
+      "from_table": "subscription_changes",
+      "from_columns": [
+        "subscription_id"
+      ],
+      "to_table": "tenant_subscriptions",
+      "to_columns": [
+        "id"
+      ],
+      "constraint_name": "fk_subscription_changes_subscription",
+      "relationship_type": "N:1",
+      "cardinality": "Many subscription_changes rows -> One tenant_subscriptions",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'subscription_changes' references one row in 'tenant_subscriptions'"
+    },
+    {
+      "from_table": "tenant_credit_grants",
+      "from_columns": [
+        "tenant_id"
+      ],
+      "to_table": "tenants",
+      "to_columns": [
+        "tenant_id"
+      ],
+      "constraint_name": "fk_tcg_tenant_id",
+      "relationship_type": "N:1",
+      "cardinality": "Many tenant_credit_grants rows -> One tenants",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'tenant_credit_grants' references one row in 'tenants'"
+    },
+    {
+      "from_table": "tenant_credit_transactions",
+      "from_columns": [
+        "tenant_id"
+      ],
+      "to_table": "tenants",
+      "to_columns": [
+        "tenant_id"
+      ],
+      "constraint_name": "fk_tct_tenant_id",
+      "relationship_type": "N:1",
+      "cardinality": "Many tenant_credit_transactions rows -> One tenants",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'tenant_credit_transactions' references one row in 'tenants'"
+    },
+    {
+      "from_table": "tenant_invoices",
+      "from_columns": [
+        "subscription_id"
+      ],
+      "to_table": "tenant_subscriptions",
+      "to_columns": [
+        "id"
+      ],
+      "constraint_name": "fk_tenant_invoices_subscription",
+      "relationship_type": "N:1",
+      "cardinality": "Many tenant_invoices rows -> One tenant_subscriptions",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'tenant_invoices' references one row in 'tenant_subscriptions'"
+    },
+    {
+      "from_table": "tenant_invoices",
+      "from_columns": [
+        "tenant_id"
+      ],
+      "to_table": "tenants",
+      "to_columns": [
+        "tenant_id"
+      ],
+      "constraint_name": "fk_tenant_invoices_tenant",
+      "relationship_type": "N:1",
+      "cardinality": "Many tenant_invoices rows -> One tenants",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'tenant_invoices' references one row in 'tenants'"
+    },
+    {
+      "from_table": "tenant_plugins",
+      "from_columns": [
+        "plugin_id"
+      ],
+      "to_table": "plugins",
+      "to_columns": [
+        "plugin_id"
+      ],
+      "constraint_name": "fk_tenant_plugins_plugin",
+      "relationship_type": "N:1",
+      "cardinality": "Many tenant_plugins rows -> One plugins",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'tenant_plugins' references one row in 'plugins'"
+    },
+    {
+      "from_table": "tenant_subscriptions",
+      "from_columns": [
+        "plan_id"
+      ],
+      "to_table": "plans",
+      "to_columns": [
+        "id"
+      ],
+      "constraint_name": "fk_tenant_subscriptions_plan",
+      "relationship_type": "N:1",
+      "cardinality": "Many tenant_subscriptions rows -> One plans",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'tenant_subscriptions' references one row in 'plans'"
+    },
+    {
+      "from_table": "tenant_subscriptions",
+      "from_columns": [
+        "tenant_id"
+      ],
+      "to_table": "tenants",
+      "to_columns": [
+        "tenant_id"
+      ],
+      "constraint_name": "fk_tenant_subscriptions_tenant",
+      "relationship_type": "N:1",
+      "cardinality": "Many tenant_subscriptions rows -> One tenants",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'tenant_subscriptions' references one row in 'tenants'"
+    },
+    {
+      "from_table": "tenant_wallets",
+      "from_columns": [
+        "tenant_id"
+      ],
+      "to_table": "tenants",
+      "to_columns": [
+        "tenant_id"
+      ],
+      "constraint_name": "fk_tw_tenant_id",
+      "relationship_type": "N:1",
+      "cardinality": "Many tenant_wallets rows -> One tenants",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'tenant_wallets' references one row in 'tenants'"
+    },
+    {
+      "from_table": "user_tenants",
+      "from_columns": [
+        "tenant_id"
+      ],
+      "to_table": "tenants",
+      "to_columns": [
+        "tenant_id"
+      ],
+      "constraint_name": "fk_user_tenants_tenant_id",
+      "relationship_type": "N:1",
+      "cardinality": "Many user_tenants rows -> One tenants",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'user_tenants' references one row in 'tenants'"
+    },
+    {
+      "from_table": "user_workspaces",
+      "from_columns": [
+        "workspace_id"
+      ],
+      "to_table": "workspaces",
+      "to_columns": [
+        "workspace_id"
+      ],
+      "constraint_name": "fk_user_workspaces_workspace_id",
+      "relationship_type": "N:1",
+      "cardinality": "Many user_workspaces rows -> One workspaces",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'user_workspaces' references one row in 'workspaces'"
+    },
+    {
+      "from_table": "workflow_execution_logs",
+      "from_columns": [
+        "workspace_id"
+      ],
+      "to_table": "workspaces",
+      "to_columns": [
+        "workspace_id"
+      ],
+      "constraint_name": "fk_exec_logs_workspace",
+      "relationship_type": "N:1",
+      "cardinality": "Many workflow_execution_logs rows -> One workspaces",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'workflow_execution_logs' references one row in 'workspaces'"
+    },
+    {
+      "from_table": "workflows",
+      "from_columns": [
+        "workspace_id"
+      ],
+      "to_table": "workspaces",
+      "to_columns": [
+        "workspace_id"
+      ],
+      "constraint_name": "fk_workflows_workspace",
+      "relationship_type": "N:1",
+      "cardinality": "Many workflows rows -> One workspaces",
+      "via": "FOREIGN KEY",
+      "description": "Each row in 'workflows' references one row in 'workspaces'"
+    },
+    {
+      "from_table": "agent_conversation_messages",
+      "from_columns": [
+        "conversation_id"
+      ],
+      "to_table": "agent_conversation_seq",
+      "to_columns": [
+        "conversation_id"
+      ],
+      "constraint_name": null,
+      "relationship_type": "N:1 (implicit)",
+      "cardinality": "Many agent_conversation_messages rows -> One agent_conversation_seq",
+      "via": "COLUMN NAMING PATTERN",
+      "description": "Column 'conversation_id' suggests relationship to 'agent_conversation_seq'"
+    },
+    {
+      "from_table": "agent_conversation_messages",
+      "from_columns": [
+        "tool_call_id"
+      ],
+      "to_table": "tool_execution_cache",
+      "to_columns": [
+        "tool_call_id"
+      ],
+      "constraint_name": null,
+      "relationship_type": "N:1 (implicit)",
+      "cardinality": "Many agent_conversation_messages rows -> One tool_execution_cache",
+      "via": "COLUMN NAMING PATTERN",
+      "description": "Column 'tool_call_id' suggests relationship to 'tool_execution_cache'"
+    },
+    {
+      "from_table": "agent_execution_log",
+      "from_columns": [
+        "conversation_id"
+      ],
+      "to_table": "agent_conversation_seq",
+      "to_columns": [
+        "conversation_id"
+      ],
+      "constraint_name": null,
+      "relationship_type": "N:1 (implicit)",
+      "cardinality": "Many agent_execution_log rows -> One agent_conversation_seq",
+      "via": "COLUMN NAMING PATTERN",
+      "description": "Column 'conversation_id' suggests relationship to 'agent_conversation_seq'"
+    },
+    {
+      "from_table": "agent_tool_call_log",
+      "from_columns": [
+        "tool_call_id"
+      ],
+      "to_table": "tool_execution_cache",
+      "to_columns": [
+        "tool_call_id"
+      ],
+      "constraint_name": null,
+      "relationship_type": "N:1 (implicit)",
+      "cardinality": "Many agent_tool_call_log rows -> One tool_execution_cache",
+      "via": "COLUMN NAMING PATTERN",
+      "description": "Column 'tool_call_id' suggests relationship to 'tool_execution_cache'"
+    },
+    {
+      "from_table": "databasechangelog",
+      "from_columns": [
+        "ID"
+      ],
+      "to_table": "databasechangeloglock",
+      "to_columns": [
+        "ID"
+      ],
+      "constraint_name": null,
+      "relationship_type": "N:1 (implicit)",
+      "cardinality": "Many databasechangelog rows -> One databasechangeloglock",
+      "via": "COLUMN NAMING PATTERN",
+      "description": "Column 'ID' suggests relationship to 'databasechangeloglock'"
+    }
+  ],
+  "table_details": [
+    {
+      "table_name": "agent_conversation_messages",
+      "primary_key": "id",
+      "column_count": 11,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "conversation_id",
+          "data_type": "char(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "char(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "sequence",
+          "data_type": "int NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "role",
+          "data_type": "varchar(20) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "content",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "tool_call_id",
+          "data_type": "char(36) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tool_name",
+          "data_type": "varchar(150) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "agent_conversation_seq",
+          "via_columns": [
+            "conversation_id"
+          ],
+          "relationship_type": "N:1 (implicit)",
+          "description": "Column 'conversation_id' suggests relationship to 'agent_conversation_seq'"
+        },
+        {
+          "to_table": "tool_execution_cache",
+          "via_columns": [
+            "tool_call_id"
+          ],
+          "relationship_type": "N:1 (implicit)",
+          "description": "Column 'tool_call_id' suggests relationship to 'tool_execution_cache'"
+        }
+      ],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "agent_conversation_seq",
+      "primary_key": "conversation_id",
+      "column_count": 2,
+      "columns": [
+        {
+          "col_name": "conversation_id",
+          "data_type": "char(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "next_seq",
+          "data_type": "int NOT NULL DEFAULT '0'",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": [
+        {
+          "from_table": "agent_conversation_messages",
+          "via_columns": [
+            "conversation_id"
+          ],
+          "relationship_type": "N:1 (implicit)",
+          "description": "Column 'conversation_id' suggests relationship to 'agent_conversation_seq'"
+        },
+        {
+          "from_table": "agent_execution_log",
+          "via_columns": [
+            "conversation_id"
+          ],
+          "relationship_type": "N:1 (implicit)",
+          "description": "Column 'conversation_id' suggests relationship to 'agent_conversation_seq'"
+        }
+      ]
+    },
+    {
+      "table_name": "agent_execution_log",
+      "primary_key": "id",
+      "column_count": 30,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "request_id",
+          "data_type": "char(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_execution_id",
+          "data_type": "char(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "node_id",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "node_identifier",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "char(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "project_id",
+          "data_type": "char(36) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "conversation_id",
+          "data_type": "char(36) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "model_provider",
+          "data_type": "varchar(50) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "model_id",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(30) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "user_message",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "system_prompt",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "final_text",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "final_json",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "reasoning_trace",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "prompt_tokens",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "completion_tokens",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "total_tokens",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "agent_iteration_count",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tool_call_count",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "duration_ms",
+          "data_type": "bigint DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "error_type",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "billing_deduction_status",
+          "data_type": "varchar(30) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "token_usage",
+          "data_type": "json DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tool_call_summary",
+          "data_type": "json DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "agent_conversation_seq",
+          "via_columns": [
+            "conversation_id"
+          ],
+          "relationship_type": "N:1 (implicit)",
+          "description": "Column 'conversation_id' suggests relationship to 'agent_conversation_seq'"
+        }
+      ],
+      "incoming_relationships": [
+        {
+          "from_table": "agent_tool_call_log",
+          "via_columns": [
+            "agent_execution_log_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'agent_tool_call_log' references one row in 'agent_execution_log'"
+        }
+      ]
+    },
+    {
+      "table_name": "agent_tool_call_log",
+      "primary_key": "id",
+      "column_count": 17,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "agent_execution_log_id",
+          "data_type": "bigint NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tool_call_id",
+          "data_type": "char(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tool_name",
+          "data_type": "varchar(150) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "plugin_id",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "action_id",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "iteration_number",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "inputs",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "outputs",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(30) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "duration_ms",
+          "data_type": "bigint DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "cached_result",
+          "data_type": "tinyint DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "prompt_tokens",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "completion_tokens",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "agent_execution_log",
+          "via_columns": [
+            "agent_execution_log_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'agent_tool_call_log' references one row in 'agent_execution_log'"
+        },
+        {
+          "to_table": "tool_execution_cache",
+          "via_columns": [
+            "tool_call_id"
+          ],
+          "relationship_type": "N:1 (implicit)",
+          "description": "Column 'tool_call_id' suggests relationship to 'tool_execution_cache'"
+        }
+      ],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "billing_parameters",
+      "primary_key": "id",
+      "column_count": 19,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "code",
+          "data_type": "varchar(100) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "name",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "type",
+          "data_type": "varchar(50) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "unit",
+          "data_type": "varchar(100) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "credit_cost",
+          "data_type": "decimal(19",
+          "description": ""
+        },
+        {
+          "col_name": "deduction_timing",
+          "data_type": "varchar(50) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "billing_window",
+          "data_type": "varchar(50) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "measurement_type",
+          "data_type": "varchar(50) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "enforcement_type",
+          "data_type": "varchar(50) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "active",
+          "data_type": "tinyint NOT NULL DEFAULT '1'",
+          "description": ""
+        },
+        {
+          "col_name": "display_order",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "json DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "metering_key",
+          "data_type": "varchar(50) DEFAULT NULL COMMENT 'System metering key - only used for QUOTA parameters (e.g.",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": [
+        {
+          "from_table": "plan_parameter_configs",
+          "via_columns": [
+            "parameter_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'plan_parameter_configs' references one row in 'billing_parameters'"
+        }
+      ]
+    },
+    {
+      "table_name": "credential_types",
+      "primary_key": "id",
+      "column_count": 15,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "varchar(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "type_key",
+          "data_type": "varchar(191) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "display_name",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "category",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "icon",
+          "data_type": "varchar(512) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "docs_url",
+          "data_type": "varchar(1024) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "fields_schema",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "oauth2_config",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "test_connection",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "source_plugin_id",
+          "data_type": "varchar(191) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "varchar(191) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "active",
+          "data_type": "tinyint NOT NULL DEFAULT '1'",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "databasechangelog",
+      "primary_key": null,
+      "column_count": 14,
+      "columns": [
+        {
+          "col_name": "ID",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "AUTHOR",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "FILENAME",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "DATEEXECUTED",
+          "data_type": "datetime NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "ORDEREXECUTED",
+          "data_type": "int NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "EXECTYPE",
+          "data_type": "varchar(10) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "MD5SUM",
+          "data_type": "varchar(35) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "DESCRIPTION",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "COMMENTS",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "TAG",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "LIQUIBASE",
+          "data_type": "varchar(20) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "CONTEXTS",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "LABELS",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "DEPLOYMENT_ID",
+          "data_type": "varchar(10) DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "databasechangeloglock",
+          "via_columns": [
+            "ID"
+          ],
+          "relationship_type": "N:1 (implicit)",
+          "description": "Column 'ID' suggests relationship to 'databasechangeloglock'"
+        }
+      ],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "databasechangeloglock",
+      "primary_key": "ID",
+      "column_count": 4,
+      "columns": [
+        {
+          "col_name": "ID",
+          "data_type": "int NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "LOCKED",
+          "data_type": "tinyint NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "LOCKGRANTED",
+          "data_type": "datetime DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "LOCKEDBY",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": [
+        {
+          "from_table": "databasechangelog",
+          "via_columns": [
+            "ID"
+          ],
+          "relationship_type": "N:1 (implicit)",
+          "description": "Column 'ID' suggests relationship to 'databasechangeloglock'"
+        }
+      ]
+    },
+    {
+      "table_name": "email_audit_log",
+      "primary_key": "id",
+      "column_count": 8,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "recipient",
+          "data_type": "varchar(320) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "subject",
+          "data_type": "varchar(998) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "template_name",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(20) NOT NULL DEFAULT 'PENDING'",
+          "description": ""
+        },
+        {
+          "col_name": "provider",
+          "data_type": "varchar(20) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "varchar(1000) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "sent_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "flow_credentials",
+      "primary_key": "id",
+      "column_count": 17,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "varchar(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "name",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "credential_type",
+          "data_type": "varchar(191) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "varchar(191) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(191) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "encrypted_data",
+          "data_type": "longtext NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(50) NOT NULL DEFAULT 'ACTIVE'",
+          "description": ""
+        },
+        {
+          "col_name": "last_tested_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "test_result",
+          "data_type": "varchar(50) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "test_message",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "varchar(191) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "varchar(191) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "active",
+          "data_type": "tinyint NOT NULL DEFAULT '1'",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": [
+        {
+          "from_table": "node_credentials",
+          "via_columns": [
+            "credential_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'node_credentials' references one row in 'flow_credentials'"
+        }
+      ]
+    },
+    {
+      "table_name": "flow_ui_nodes",
+      "primary_key": "id",
+      "column_count": 15,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "node_type",
+          "data_type": "varchar(50) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "type",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "label",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "icon",
+          "data_type": "varchar(512) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "properties_json",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "cel_helpers_json",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "outputs_json",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "raw_json",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "name",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "identifier",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "fail_on_error",
+          "data_type": "tinyint DEFAULT '1'",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "node_cached_outputs",
+      "primary_key": "id",
+      "column_count": 15,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "varchar(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "node_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "node_identifier",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "node_name",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "cached_output",
+          "data_type": "longtext NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "size_bytes",
+          "data_type": "bigint NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "source",
+          "data_type": "varchar(20) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "step_session_id",
+          "data_type": "varchar(36) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "node_credentials",
+      "primary_key": "id",
+      "column_count": 9,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "varchar(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "varchar(191) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "node_id",
+          "data_type": "varchar(191) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "credential_type",
+          "data_type": "varchar(191) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "credential_id",
+          "data_type": "varchar(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "varchar(191) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(191) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "flow_credentials",
+          "via_columns": [
+            "credential_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'node_credentials' references one row in 'flow_credentials'"
+        }
+      ],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "node_execution_logs",
+      "primary_key": "id",
+      "column_count": 17,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_execution_id",
+          "data_type": "varchar(36) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "node_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "node_type",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "start_time",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "end_time",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(50) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "duration_ms",
+          "data_type": "bigint DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "input_data",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "output_data",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "ttl_days",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "node_subtype",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "workflow_execution_logs",
+          "via_columns": [
+            "workflow_execution_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'node_execution_logs' references one row in 'workflow_execution_logs'"
+        },
+        {
+          "to_table": "workspaces",
+          "via_columns": [
+            "workspace_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'node_execution_logs' references one row in 'workspaces'"
+        }
+      ],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "oauth_states",
+      "primary_key": "id",
+      "column_count": 14,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "varchar(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "state",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "credential_type",
+          "data_type": "varchar(191) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "varchar(191) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(191) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "user_id",
+          "data_type": "varchar(191) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "code_verifier",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "encrypted_client_id",
+          "data_type": "text NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "encrypted_client_secret",
+          "data_type": "text NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "scopes",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "redirect_uri",
+          "data_type": "varchar(1024) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "timestamp NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NOT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "plan_parameter_configs",
+      "primary_key": "id",
+      "column_count": 14,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "plan_id",
+          "data_type": "bigint NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "parameter_id",
+          "data_type": "bigint NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "included_value",
+          "data_type": "bigint DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "limit_value",
+          "data_type": "bigint DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "reset_on_cycle",
+          "data_type": "tinyint NOT NULL DEFAULT '1'",
+          "description": ""
+        },
+        {
+          "col_name": "overage_enabled",
+          "data_type": "tinyint NOT NULL DEFAULT '0'",
+          "description": ""
+        },
+        {
+          "col_name": "overage_mode",
+          "data_type": "varchar(50) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "overage_price_per_unit",
+          "data_type": "decimal(19",
+          "description": ""
+        },
+        {
+          "col_name": "overage_max_units",
+          "data_type": "bigint DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "display_order",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "json DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "billing_parameters",
+          "via_columns": [
+            "parameter_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'plan_parameter_configs' references one row in 'billing_parameters'"
+        },
+        {
+          "to_table": "plans",
+          "via_columns": [
+            "plan_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'plan_parameter_configs' references one row in 'plans'"
+        }
+      ],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "plan_stripe_prices",
+      "primary_key": "id",
+      "column_count": 11,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "plan_id",
+          "data_type": "bigint NOT NULL COMMENT 'Reference to the plan'",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_price_id",
+          "data_type": "varchar(255) NOT NULL COMMENT 'Stripe Price ID (price_xxx)'",
+          "description": ""
+        },
+        {
+          "col_name": "version",
+          "data_type": "int NOT NULL COMMENT 'Price version number (increments with each price change)'",
+          "description": ""
+        },
+        {
+          "col_name": "amount",
+          "data_type": "decimal(19",
+          "description": ""
+        },
+        {
+          "col_name": "currency",
+          "data_type": "varchar(3) NOT NULL COMMENT 'Currency code (ISO 4217)'",
+          "description": ""
+        },
+        {
+          "col_name": "billing_cycle",
+          "data_type": "varchar(50) NOT NULL COMMENT 'Billing cycle at time of price creation'",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(50) NOT NULL DEFAULT 'ACTIVE' COMMENT 'ACTIVE or ARCHIVED'",
+          "description": ""
+        },
+        {
+          "col_name": "is_current",
+          "data_type": "tinyint NOT NULL DEFAULT '1' COMMENT 'Whether this is the current active price for the plan'",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'When this price was created in Stripe'",
+          "description": ""
+        },
+        {
+          "col_name": "archived_at",
+          "data_type": "timestamp NULL DEFAULT NULL COMMENT 'When this price was archived (if status is ARCHIVED)'",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "plans",
+          "via_columns": [
+            "plan_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'plan_stripe_prices' references one row in 'plans'"
+        }
+      ],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "plans",
+      "primary_key": "id",
+      "column_count": 23,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "code",
+          "data_type": "varchar(100) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "name",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "base_price",
+          "data_type": "decimal(19",
+          "description": ""
+        },
+        {
+          "col_name": "billing_cycle",
+          "data_type": "varchar(50) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "custom_cycle_days",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "currency",
+          "data_type": "varchar(10) NOT NULL DEFAULT 'USD'",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(50) NOT NULL DEFAULT 'DRAFT'",
+          "description": ""
+        },
+        {
+          "col_name": "is_public",
+          "data_type": "tinyint NOT NULL DEFAULT '0'",
+          "description": ""
+        },
+        {
+          "col_name": "display_order",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "json DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_product_id",
+          "data_type": "varchar(255) DEFAULT NULL COMMENT 'Stripe Product ID (prod_xxx)'",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_price_id",
+          "data_type": "varchar(255) DEFAULT NULL COMMENT 'Stripe Price ID (price_xxx)'",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_price_version",
+          "data_type": "int NOT NULL DEFAULT '1' COMMENT 'Version number for price changes (immutable prices)'",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_sync_status",
+          "data_type": "varchar(50) NOT NULL DEFAULT 'NOT_SYNCED' COMMENT 'Sync status: NOT_SYNCED",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_synced_at",
+          "data_type": "timestamp NULL DEFAULT NULL COMMENT 'Last successful sync timestamp'",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_sync_error",
+          "data_type": "text COMMENT 'Last sync error message if any'",
+          "description": ""
+        },
+        {
+          "col_name": "is_default",
+          "data_type": "tinyint NOT NULL DEFAULT '0'",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": [
+        {
+          "from_table": "plan_parameter_configs",
+          "via_columns": [
+            "plan_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'plan_parameter_configs' references one row in 'plans'"
+        },
+        {
+          "from_table": "plan_stripe_prices",
+          "via_columns": [
+            "plan_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'plan_stripe_prices' references one row in 'plans'"
+        },
+        {
+          "from_table": "subscription_changes",
+          "via_columns": [
+            "new_plan_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'subscription_changes' references one row in 'plans'"
+        },
+        {
+          "from_table": "subscription_changes",
+          "via_columns": [
+            "previous_plan_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'subscription_changes' references one row in 'plans'"
+        },
+        {
+          "from_table": "tenant_subscriptions",
+          "via_columns": [
+            "plan_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'tenant_subscriptions' references one row in 'plans'"
+        }
+      ]
+    },
+    {
+      "table_name": "platform_configs",
+      "primary_key": "id",
+      "column_count": 7,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "config_key",
+          "data_type": "varchar(200) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "config_value",
+          "data_type": "text NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "plugin_registrations",
+      "primary_key": "id",
+      "column_count": 21,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "varchar(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "plugin_id",
+          "data_type": "varchar(191) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "varchar(191) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(191) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "varchar(191) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "registration_type",
+          "data_type": "varchar(50) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "external_registration_id",
+          "data_type": "varchar(512) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "webhook_url",
+          "data_type": "varchar(1024) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(50) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "credentials",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "registration_data",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_renewal_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "varchar(2048) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "connection_name",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "varchar(128) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "varchar(128) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "configured_events",
+          "data_type": "text COMMENT 'JSON array of configured event types that this registration should receive. Events not in this list will be dropped.'",
+          "description": ""
+        },
+        {
+          "col_name": "event_type_field",
+          "data_type": "varchar(255) DEFAULT NULL COMMENT 'The field name/path in the webhook payload that contains the event type. If null",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "plugin_storage",
+      "primary_key": "id",
+      "column_count": 9,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "plugin_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "version",
+          "data_type": "varchar(50) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "file_name",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "file_data",
+          "data_type": "longblob NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "file_size",
+          "data_type": "bigint NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "content_type",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "updated_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "plugins",
+      "primary_key": "id",
+      "column_count": 32,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "plugin_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "name",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "display_name",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "version",
+          "data_type": "varchar(50) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "category",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(50) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "icon_url",
+          "data_type": "varchar(500) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "homepage_url",
+          "data_type": "varchar(500) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "repository_url",
+          "data_type": "varchar(500) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "author_name",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "author_email",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "author_organization",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "installed_at",
+          "data_type": "datetime NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "datetime DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "requires_configuration",
+          "data_type": "tinyint DEFAULT '0'",
+          "description": ""
+        },
+        {
+          "col_name": "configuration",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "current_config",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "capabilities",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "authentication",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "components",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "ui_components",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "runtime_info",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "permissions",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "package_path",
+          "data_type": "varchar(500) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "package_size",
+          "data_type": "bigint DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "package_checksum",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "datetime NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "updated_at",
+          "data_type": "datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "signature_verified",
+          "data_type": "tinyint NOT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": [
+        {
+          "from_table": "tenant_plugins",
+          "via_columns": [
+            "plugin_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'tenant_plugins' references one row in 'plugins'"
+        }
+      ]
+    },
+    {
+      "table_name": "promo_code_redemptions",
+      "primary_key": "id",
+      "column_count": 7,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "promo_code_id",
+          "data_type": "bigint NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "redeemed_at",
+          "data_type": "timestamp NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "credit_grant_id",
+          "data_type": "bigint DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "promo_codes",
+          "via_columns": [
+            "promo_code_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'promo_code_redemptions' references one row in 'promo_codes'"
+        }
+      ],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "promo_codes",
+      "primary_key": "id",
+      "column_count": 12,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "code",
+          "data_type": "varchar(50) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "credits",
+          "data_type": "bigint NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "metering_key",
+          "data_type": "varchar(100) NOT NULL DEFAULT 'workflow_executions_total'",
+          "description": ""
+        },
+        {
+          "col_name": "validity_days",
+          "data_type": "int NOT NULL DEFAULT '30'",
+          "description": ""
+        },
+        {
+          "col_name": "max_redemptions",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "current_redemptions",
+          "data_type": "int NOT NULL DEFAULT '0'",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "is_active",
+          "data_type": "tinyint NOT NULL DEFAULT '1'",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "varchar(500) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": [
+        {
+          "from_table": "promo_code_redemptions",
+          "via_columns": [
+            "promo_code_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'promo_code_redemptions' references one row in 'promo_codes'"
+        }
+      ]
+    },
+    {
+      "table_name": "referral_codes",
+      "primary_key": "id",
+      "column_count": 9,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "code",
+          "data_type": "varchar(100) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "credits_for_referrer",
+          "data_type": "bigint NOT NULL DEFAULT '500'",
+          "description": ""
+        },
+        {
+          "col_name": "credits_for_referee",
+          "data_type": "bigint NOT NULL DEFAULT '500'",
+          "description": ""
+        },
+        {
+          "col_name": "total_referrals",
+          "data_type": "int NOT NULL DEFAULT '0'",
+          "description": ""
+        },
+        {
+          "col_name": "is_active",
+          "data_type": "tinyint NOT NULL DEFAULT '1'",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NOT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": [
+        {
+          "from_table": "referral_conversions",
+          "via_columns": [
+            "referral_code_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'referral_conversions' references one row in 'referral_codes'"
+        }
+      ]
+    },
+    {
+      "table_name": "referral_conversions",
+      "primary_key": "id",
+      "column_count": 9,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "referral_code_id",
+          "data_type": "bigint NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "referee_tenant_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "referrer_credit_grant_id",
+          "data_type": "bigint DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "referee_credit_grant_id",
+          "data_type": "bigint DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "converted_at",
+          "data_type": "timestamp NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(20) NOT NULL DEFAULT 'CREDITED'",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NOT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "referral_codes",
+          "via_columns": [
+            "referral_code_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'referral_conversions' references one row in 'referral_codes'"
+        }
+      ],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "scheduled_job_locks",
+      "primary_key": "job_name",
+      "column_count": 4,
+      "columns": [
+        {
+          "col_name": "job_name",
+          "data_type": "varchar(100) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "locked_by",
+          "data_type": "varchar(100) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "locked_at",
+          "data_type": "timestamp NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "lock_until",
+          "data_type": "timestamp NOT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "secrets",
+      "primary_key": "id",
+      "column_count": 15,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "varchar(100) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "secret_key",
+          "data_type": "varchar(191) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "encrypted_value",
+          "data_type": "text NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "scope",
+          "data_type": "varchar(20) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "scope_id",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "varchar(500) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_accessed_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "access_count",
+          "data_type": "bigint DEFAULT '0'",
+          "description": ""
+        },
+        {
+          "col_name": "active",
+          "data_type": "tinyint DEFAULT '1'",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "step_execution_sessions",
+      "primary_key": "id",
+      "column_count": 28,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "varchar(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_execution_id",
+          "data_type": "varchar(36) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "strategy",
+          "data_type": "varchar(20) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(20) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "current_node_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "node_outputs_cache",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "executed_nodes",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "initial_payload",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "current_payload",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_definition",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "total_nodes",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "executed_node_count",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "stop_at_node_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_token",
+          "data_type": "varchar(64) DEFAULT NULL COMMENT 'Unique token for test trigger URL'",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_node_id",
+          "data_type": "varchar(255) DEFAULT NULL COMMENT 'ID of the trigger node in the workflow'",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_type",
+          "data_type": "varchar(50) DEFAULT NULL COMMENT 'Type of trigger (API_CALL",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_payload_cache",
+          "data_type": "longtext COMMENT 'Cached trigger payload received via test endpoint'",
+          "description": ""
+        },
+        {
+          "col_name": "plugin_registration_id",
+          "data_type": "varchar(36) DEFAULT NULL COMMENT 'Plugin registration ID for plugin-based triggers (e.g.",
+          "description": ""
+        },
+        {
+          "col_name": "registered_webhook_url",
+          "data_type": "varchar(512) DEFAULT NULL COMMENT 'The registered webhook URL for plugin-based triggers'",
+          "description": ""
+        },
+        {
+          "col_name": "paused_reason",
+          "data_type": "varchar(50) DEFAULT NULL COMMENT 'Why execution was paused: BREAKPOINT_HIT",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "stripe_events",
+      "primary_key": "id",
+      "column_count": 12,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "event_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "event_type",
+          "data_type": "varchar(100) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "api_version",
+          "data_type": "varchar(50) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "data_object_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "data_object_type",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(50) NOT NULL DEFAULT 'PENDING'",
+          "description": ""
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "retry_count",
+          "data_type": "int NOT NULL DEFAULT '0'",
+          "description": ""
+        },
+        {
+          "col_name": "processed_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "subscription_changes",
+      "primary_key": "id",
+      "column_count": 19,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "subscription_id",
+          "data_type": "bigint NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "change_type",
+          "data_type": "varchar(50) NOT NULL COMMENT 'CREATED",
+          "description": ""
+        },
+        {
+          "col_name": "previous_plan_id",
+          "data_type": "bigint DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "new_plan_id",
+          "data_type": "bigint DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "previous_status",
+          "data_type": "varchar(50) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "new_status",
+          "data_type": "varchar(50) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "previous_period_end",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "new_period_end",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_event_id",
+          "data_type": "varchar(255) DEFAULT NULL COMMENT 'Reference to the Stripe event that triggered this change'",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_invoice_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "proration_amount",
+          "data_type": "bigint DEFAULT NULL COMMENT 'Proration amount in cents for upgrades/downgrades'",
+          "description": ""
+        },
+        {
+          "col_name": "change_reason",
+          "data_type": "varchar(500) DEFAULT NULL COMMENT 'Optional description or reason for the change'",
+          "description": ""
+        },
+        {
+          "col_name": "metadata_json",
+          "data_type": "text COMMENT 'JSON blob for additional data specific to the change type'",
+          "description": ""
+        },
+        {
+          "col_name": "performed_by",
+          "data_type": "varchar(255) DEFAULT NULL COMMENT 'User ID who initiated the change",
+          "description": ""
+        },
+        {
+          "col_name": "performed_by_email",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "plans",
+          "via_columns": [
+            "new_plan_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'subscription_changes' references one row in 'plans'"
+        },
+        {
+          "to_table": "plans",
+          "via_columns": [
+            "previous_plan_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'subscription_changes' references one row in 'plans'"
+        },
+        {
+          "to_table": "tenant_subscriptions",
+          "via_columns": [
+            "subscription_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'subscription_changes' references one row in 'tenant_subscriptions'"
+        }
+      ],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "tenant_credit_grants",
+      "primary_key": "id",
+      "column_count": 18,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "metering_key",
+          "data_type": "varchar(100) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "granted_credits",
+          "data_type": "decimal(19",
+          "description": ""
+        },
+        {
+          "col_name": "consumed_credits",
+          "data_type": "decimal(19",
+          "description": ""
+        },
+        {
+          "col_name": "reserved_credits",
+          "data_type": "decimal(19",
+          "description": ""
+        },
+        {
+          "col_name": "source",
+          "data_type": "varchar(50) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "reference_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "effective_from",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "is_active",
+          "data_type": "tinyint NOT NULL DEFAULT '1'",
+          "description": ""
+        },
+        {
+          "col_name": "priority",
+          "data_type": "int DEFAULT '100'",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_by_email",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "version",
+          "data_type": "bigint DEFAULT '0'",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "tenants",
+          "via_columns": [
+            "tenant_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'tenant_credit_grants' references one row in 'tenants'"
+        }
+      ],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "tenant_credit_transactions",
+      "primary_key": "id",
+      "column_count": 12,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "transaction_type",
+          "data_type": "varchar(50) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "category",
+          "data_type": "varchar(50) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "amount",
+          "data_type": "decimal(19",
+          "description": ""
+        },
+        {
+          "col_name": "balance_after",
+          "data_type": "decimal(19",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "reference_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "performed_by",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "performed_by_email",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "tenants",
+          "via_columns": [
+            "tenant_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'tenant_credit_transactions' references one row in 'tenants'"
+        }
+      ],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "tenant_invoices",
+      "primary_key": "id",
+      "column_count": 17,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "subscription_id",
+          "data_type": "bigint DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_invoice_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "invoice_number",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(50) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "amount_due",
+          "data_type": "bigint NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "amount_paid",
+          "data_type": "bigint NOT NULL DEFAULT '0'",
+          "description": ""
+        },
+        {
+          "col_name": "currency",
+          "data_type": "varchar(10) NOT NULL DEFAULT 'usd'",
+          "description": ""
+        },
+        {
+          "col_name": "invoice_pdf_url",
+          "data_type": "varchar(1000) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "hosted_invoice_url",
+          "data_type": "varchar(1000) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "period_start",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "period_end",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "due_date",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "paid_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "tenant_subscriptions",
+          "via_columns": [
+            "subscription_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'tenant_invoices' references one row in 'tenant_subscriptions'"
+        },
+        {
+          "to_table": "tenants",
+          "via_columns": [
+            "tenant_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'tenant_invoices' references one row in 'tenants'"
+        }
+      ],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "tenant_plugins",
+      "primary_key": "id",
+      "column_count": 12,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(36) NOT NULL COMMENT 'References tenant in identity-svc database'",
+          "description": ""
+        },
+        {
+          "col_name": "plugin_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(50) NOT NULL DEFAULT 'DISABLED'",
+          "description": ""
+        },
+        {
+          "col_name": "configuration",
+          "data_type": "text COMMENT 'Tenant-specific plugin configuration (JSON)'",
+          "description": ""
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "text COMMENT 'Additional metadata (JSON)'",
+          "description": ""
+        },
+        {
+          "col_name": "enabled_by",
+          "data_type": "varchar(255) DEFAULT NULL COMMENT 'User who enabled the plugin'",
+          "description": ""
+        },
+        {
+          "col_name": "enabled_at",
+          "data_type": "datetime DEFAULT NULL COMMENT 'When the plugin was enabled'",
+          "description": ""
+        },
+        {
+          "col_name": "last_modified_by",
+          "data_type": "varchar(255) DEFAULT NULL COMMENT 'User who last modified the configuration'",
+          "description": ""
+        },
+        {
+          "col_name": "notes",
+          "data_type": "text COMMENT 'Admin notes'",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "datetime NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "datetime NOT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "plugins",
+          "via_columns": [
+            "plugin_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'tenant_plugins' references one row in 'plugins'"
+        }
+      ],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "tenant_subscriptions",
+      "primary_key": "id",
+      "column_count": 14,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "plan_id",
+          "data_type": "bigint NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_subscription_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(50) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "current_period_start",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "current_period_end",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "cancel_at_period_end",
+          "data_type": "tinyint NOT NULL DEFAULT '0'",
+          "description": ""
+        },
+        {
+          "col_name": "canceled_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "trial_start",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "trial_end",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "latest_invoice_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "plans",
+          "via_columns": [
+            "plan_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'tenant_subscriptions' references one row in 'plans'"
+        },
+        {
+          "to_table": "tenants",
+          "via_columns": [
+            "tenant_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'tenant_subscriptions' references one row in 'tenants'"
+        }
+      ],
+      "incoming_relationships": [
+        {
+          "from_table": "subscription_changes",
+          "via_columns": [
+            "subscription_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'subscription_changes' references one row in 'tenant_subscriptions'"
+        },
+        {
+          "from_table": "tenant_invoices",
+          "via_columns": [
+            "subscription_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'tenant_invoices' references one row in 'tenant_subscriptions'"
+        }
+      ]
+    },
+    {
+      "table_name": "tenant_wallets",
+      "primary_key": "id",
+      "column_count": 10,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "metering_key",
+          "data_type": "varchar(100) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "available_credits",
+          "data_type": "decimal(19",
+          "description": ""
+        },
+        {
+          "col_name": "reserved_credits",
+          "data_type": "decimal(19",
+          "description": ""
+        },
+        {
+          "col_name": "consumed_credits",
+          "data_type": "decimal(19",
+          "description": ""
+        },
+        {
+          "col_name": "currency",
+          "data_type": "varchar(10) DEFAULT 'CREDITS'",
+          "description": ""
+        },
+        {
+          "col_name": "version",
+          "data_type": "bigint DEFAULT '0'",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "tenants",
+          "via_columns": [
+            "tenant_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'tenant_wallets' references one row in 'tenants'"
+        }
+      ],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "tenants",
+      "primary_key": "id",
+      "column_count": 17,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "name",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(50) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "keycloak_realm",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "keycloak_client_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "json DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_customer_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "default_payment_method_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "billing_email",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "billing_address_json",
+          "data_type": "json DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_customer_synced_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": [
+        {
+          "from_table": "tenant_credit_grants",
+          "via_columns": [
+            "tenant_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'tenant_credit_grants' references one row in 'tenants'"
+        },
+        {
+          "from_table": "tenant_credit_transactions",
+          "via_columns": [
+            "tenant_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'tenant_credit_transactions' references one row in 'tenants'"
+        },
+        {
+          "from_table": "tenant_invoices",
+          "via_columns": [
+            "tenant_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'tenant_invoices' references one row in 'tenants'"
+        },
+        {
+          "from_table": "tenant_subscriptions",
+          "via_columns": [
+            "tenant_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'tenant_subscriptions' references one row in 'tenants'"
+        },
+        {
+          "from_table": "tenant_wallets",
+          "via_columns": [
+            "tenant_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'tenant_wallets' references one row in 'tenants'"
+        },
+        {
+          "from_table": "user_tenants",
+          "via_columns": [
+            "tenant_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'user_tenants' references one row in 'tenants'"
+        }
+      ]
+    },
+    {
+      "table_name": "tool_execution_cache",
+      "primary_key": "tool_call_id",
+      "column_count": 7,
+      "columns": [
+        {
+          "col_name": "tool_call_id",
+          "data_type": "char(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_execution_id",
+          "data_type": "char(36) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tool_name",
+          "data_type": "varchar(150) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "result",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(30) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "timestamp NOT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": [
+        {
+          "from_table": "agent_conversation_messages",
+          "via_columns": [
+            "tool_call_id"
+          ],
+          "relationship_type": "N:1 (implicit)",
+          "description": "Column 'tool_call_id' suggests relationship to 'tool_execution_cache'"
+        },
+        {
+          "from_table": "agent_tool_call_log",
+          "via_columns": [
+            "tool_call_id"
+          ],
+          "relationship_type": "N:1 (implicit)",
+          "description": "Column 'tool_call_id' suggests relationship to 'tool_execution_cache'"
+        }
+      ]
+    },
+    {
+      "table_name": "trusted_publishers",
+      "primary_key": "id",
+      "column_count": 13,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "name",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "public_key",
+          "data_type": "text NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "key_fingerprint",
+          "data_type": "varchar(64) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "enabled",
+          "data_type": "tinyint NOT NULL DEFAULT '1'",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "website_url",
+          "data_type": "varchar(500) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "updated_at",
+          "data_type": "timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "revocation_reason",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "revoked_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "user_tenants",
+      "primary_key": "id",
+      "column_count": 11,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "keycloak_user_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "role",
+          "data_type": "varchar(50) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "email",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "display_name",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "is_default",
+          "data_type": "tinyint NOT NULL DEFAULT '0'",
+          "description": ""
+        },
+        {
+          "col_name": "invitation_status",
+          "data_type": "varchar(50) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "joined_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "tenants",
+          "via_columns": [
+            "tenant_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'user_tenants' references one row in 'tenants'"
+        }
+      ],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "user_workspaces",
+      "primary_key": "id",
+      "column_count": 8,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "keycloak_user_id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "varchar(100) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "role",
+          "data_type": "varchar(30) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "joined_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "added_by",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "workspaces",
+          "via_columns": [
+            "workspace_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'user_workspaces' references one row in 'workspaces'"
+        }
+      ],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "workflow_execution_checkpoints",
+      "primary_key": "id",
+      "column_count": 17,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_execution_id",
+          "data_type": "char(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "varchar(100) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "char(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "project_id",
+          "data_type": "char(36) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "char(36) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "suspended_at_node_id",
+          "data_type": "varchar(100) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "resume_from_node_id",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "execution_context",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "parsed_workflow",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(30) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "suspension_reason",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "agent_request_id",
+          "data_type": "char(36) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "fail_on_error",
+          "data_type": "tinyint DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "workflow_execution_logs",
+      "primary_key": "id",
+      "column_count": 15,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "varchar(36) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "correlation_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "start_time",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "end_time",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(50) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "input_payload",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "duration_ms",
+          "data_type": "bigint DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "ttl_days",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "developer_mode",
+          "data_type": "tinyint NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "workspaces",
+          "via_columns": [
+            "workspace_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'workflow_execution_logs' references one row in 'workspaces'"
+        }
+      ],
+      "incoming_relationships": [
+        {
+          "from_table": "node_execution_logs",
+          "via_columns": [
+            "workflow_execution_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'node_execution_logs' references one row in 'workflow_execution_logs'"
+        }
+      ]
+    },
+    {
+      "table_name": "workflow_triggers",
+      "primary_key": "trigger_id",
+      "column_count": 15,
+      "columns": [
+        {
+          "col_name": "trigger_id",
+          "data_type": "varchar(64) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "varchar(64) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "project_id",
+          "data_type": "varchar(64) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(64) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_type",
+          "data_type": "varchar(32) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_name",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "varchar(500) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "active",
+          "data_type": "tinyint NOT NULL DEFAULT '1'",
+          "description": ""
+        },
+        {
+          "col_name": "http_method",
+          "data_type": "varchar(16) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "content_type",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "max_request_size",
+          "data_type": "bigint DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "rate_limit",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_source",
+          "data_type": "varchar(50) DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "workflows",
+      "primary_key": "id",
+      "column_count": 17,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "name",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "payload",
+          "data_type": "longtext",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NULL DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "varchar(1000) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_type",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_source",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "event_type",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_status",
+          "data_type": "varchar(50) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "nodes_count",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "edges_count",
+          "data_type": "int DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_filter_cel",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "project_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "version",
+          "data_type": "varchar(10) NOT NULL DEFAULT '1.0'",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "varchar(100) DEFAULT NULL",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [
+        {
+          "to_table": "workspaces",
+          "via_columns": [
+            "workspace_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'workflows' references one row in 'workspaces'"
+        }
+      ],
+      "incoming_relationships": []
+    },
+    {
+      "table_name": "workspaces",
+      "primary_key": "id",
+      "column_count": 15,
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "bigint NOT NULL AUTO_INCREMENT",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "varchar(100) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "varchar(100) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "name",
+          "data_type": "varchar(255) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "slug",
+          "data_type": "varchar(100) NOT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "text",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "varchar(20) NOT NULL DEFAULT 'ACTIVE'",
+          "description": ""
+        },
+        {
+          "col_name": "is_default",
+          "data_type": "tinyint NOT NULL DEFAULT '0'",
+          "description": ""
+        },
+        {
+          "col_name": "settings",
+          "data_type": "json DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "icon",
+          "data_type": "varchar(50) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "color",
+          "data_type": "varchar(7) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "varchar(255) DEFAULT NULL",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "description": ""
+        }
+      ],
+      "outgoing_relationships": [],
+      "incoming_relationships": [
+        {
+          "from_table": "node_execution_logs",
+          "via_columns": [
+            "workspace_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'node_execution_logs' references one row in 'workspaces'"
+        },
+        {
+          "from_table": "user_workspaces",
+          "via_columns": [
+            "workspace_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'user_workspaces' references one row in 'workspaces'"
+        },
+        {
+          "from_table": "workflow_execution_logs",
+          "via_columns": [
+            "workspace_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'workflow_execution_logs' references one row in 'workspaces'"
+        },
+        {
+          "from_table": "workflows",
+          "via_columns": [
+            "workspace_id"
+          ],
+          "relationship_type": "N:1",
+          "description": "Each row in 'workflows' references one row in 'workspaces'"
+        }
+      ]
+    }
+  ]
+}

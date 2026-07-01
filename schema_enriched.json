@@ -1,0 +1,3620 @@
+{
+  "database_name": "enveu_flow_db",
+  "total_tables": 47,
+  "tables": [
+    {
+      "table_name": "agent_conversation_messages",
+      "description": "This table captures every individual message exchanged during interactions with AI agents, including user prompts, agent responses, and any tool invocations made throughout the dialogue. It enables reconstruction of complete conversation histories for context preservation, auditing, and analytics while maintaining proper data isolation across customer tenants.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique identifier assigned to each message recorded in the conversation log."
+        },
+        {
+          "col_name": "conversation_id",
+          "data_type": "CHAR(36)",
+          "description": "Identifies the broader conversation session that this individual message belongs to."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "CHAR(36)",
+          "description": "Identifies which customer organization this message belongs to, ensuring proper separation of data between tenants in the multi-tenant environment."
+        },
+        {
+          "col_name": "sequence",
+          "data_type": "INT",
+          "description": "The position number of this message within the conversation, preserving the correct order of dialogue exchanges."
+        },
+        {
+          "col_name": "role",
+          "data_type": "VARCHAR(20)",
+          "description": "Specifies who created the message, such as the end user, the AI agent, or the system providing foundational instructions."
+        },
+        {
+          "col_name": "content",
+          "data_type": "LONGTEXT",
+          "description": "The full text body of the message, containing either the user's prompt or the agent's response."
+        },
+        {
+          "col_name": "tool_call_id",
+          "data_type": "CHAR(36)",
+          "description": "Connects the message to a specific tool invocation when the AI agent triggered an external function as part of generating its response."
+        },
+        {
+          "col_name": "tool_name",
+          "data_type": "VARCHAR(150)",
+          "description": "The name of the external tool or function the AI agent chose to invoke to fulfill the user's request."
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when this message should be automatically purged, supporting data retention policies and privacy compliance requirements."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the message was first generated and stored in the platform."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The most recent date and time when this message record was modified after its initial creation."
+        }
+      ]
+    },
+    {
+      "table_name": "agent_conversation_seq",
+      "description": "This table maintains the running sequence counter for individual AI agent conversations, ensuring messages or events are properly ordered within each conversation thread. It serves as a reference point that supports consistent message sequencing and retrieval across the agent interaction platform.",
+      "primary_key": "conversation_id",
+      "columns": [
+        {
+          "col_name": "conversation_id",
+          "data_type": "CHAR(36)",
+          "description": "A unique identifier that links to a specific AI agent conversation, allowing the sequence counter to be tracked independently for each conversation thread."
+        },
+        {
+          "col_name": "next_seq",
+          "data_type": "INT",
+          "description": "The next sequential number to be assigned to a new message or event within the corresponding agent conversation, supporting ordered delivery and chronological tracking of interactions."
+        }
+      ]
+    },
+    {
+      "table_name": "agent_execution_log",
+      "description": "This table captures detailed execution records for individual AI agent runs triggered within automated workflows. Each entry documents how an agent processed a user request, including the prompts sent to the language model, the reasoning and tool usage performed, the final output produced, token consumption for billing, and any errors encountered. It serves as the primary audit and analytics source for understanding agent behavior, debugging issues, and reconciling costs across tenants and projects.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique business identifier for a single agent execution record, used to track and retrieve individual runs across the platform."
+        },
+        {
+          "col_name": "request_id",
+          "data_type": "CHAR(36)",
+          "description": "References the originating API or user request that initiated this particular agent execution, allowing traceability from inbound request to agent outcome."
+        },
+        {
+          "col_name": "workflow_execution_id",
+          "data_type": "CHAR(36)",
+          "description": "Identifies the parent workflow run to which this agent step belongs, enabling reconstruction of the full multi-step automation context."
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "VARCHAR(100)",
+          "description": "Identifies the workflow definition this agent execution is an instance of, useful for analyzing behavior and performance by workflow template."
+        },
+        {
+          "col_name": "node_id",
+          "data_type": "VARCHAR(100)",
+          "description": "Identifies the specific workflow node being executed, pinpointing exactly where in the workflow graph this agent step occurred."
+        },
+        {
+          "col_name": "node_identifier",
+          "data_type": "VARCHAR(100)",
+          "description": "Human-readable label for the workflow node, making it easier for operators and analysts to understand what the agent was tasked to do at this step."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "CHAR(36)",
+          "description": "Identifies the customer organization on whose behalf this agent execution was performed, supporting multi-tenant isolation, billing, and usage analytics."
+        },
+        {
+          "col_name": "project_id",
+          "data_type": "CHAR(36)",
+          "description": "Identifies the specific project within the tenant that this agent execution belongs to, enabling project-level usage tracking and cost allocation."
+        },
+        {
+          "col_name": "conversation_id",
+          "data_type": "CHAR(36)",
+          "description": "Identifies the ongoing conversation thread this agent execution is part of, preserving continuity across multiple agent turns with the same user."
+        },
+        {
+          "col_name": "model_provider",
+          "data_type": "VARCHAR(50)",
+          "description": "Records which AI vendor's service was used to power this execution, such as OpenAI, Anthropic, or another supported provider."
+        },
+        {
+          "col_name": "model_id",
+          "data_type": "VARCHAR(100)",
+          "description": "Identifies the specific AI model version invoked for this execution, enabling performance, quality, and cost comparisons across model choices."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(30)",
+          "description": "Indicates the current lifecycle state of the agent execution, such as running, succeeded, failed, or cancelled."
+        },
+        {
+          "col_name": "user_message",
+          "data_type": "LONGTEXT",
+          "description": "Captures the natural language input from the user or upstream step that triggered this agent invocation, providing context for the agent's task."
+        },
+        {
+          "col_name": "system_prompt",
+          "data_type": "LONGTEXT",
+          "description": "Stores the instruction set and behavioral guidance provided to the AI model for this execution, defining the agent's role and constraints."
+        },
+        {
+          "col_name": "final_text",
+          "data_type": "LONGTEXT",
+          "description": "Contains the free-form textual response produced by the agent at the end of its execution, representing the natural language answer or summary."
+        },
+        {
+          "col_name": "final_json",
+          "data_type": "LONGTEXT",
+          "description": "Holds the structured machine-readable output produced by the agent when the task required returning data in a specific schema rather than free-form text."
+        },
+        {
+          "col_name": "reasoning_trace",
+          "data_type": "LONGTEXT",
+          "description": "Captures the step-by-step internal reasoning the agent followed to arrive at its conclusion, supporting transparency and debuggability."
+        },
+        {
+          "col_name": "prompt_tokens",
+          "data_type": "INT",
+          "description": "Records the number of tokens consumed by the input prompt sent to the AI model, a key driver of inference cost."
+        },
+        {
+          "col_name": "completion_tokens",
+          "data_type": "INT",
+          "description": "Records the number of tokens generated by the AI model in its response, the other key driver of inference cost."
+        },
+        {
+          "col_name": "total_tokens",
+          "data_type": "INT",
+          "description": "Provides the combined token count for prompt and completion, giving the overall consumption figure for this execution."
+        },
+        {
+          "col_name": "agent_iteration_count",
+          "data_type": "INT",
+          "description": "Tracks how many reasoning or planning cycles the agent went through before producing its final answer, useful for understanding complexity and cost."
+        },
+        {
+          "col_name": "tool_call_count",
+          "data_type": "INT",
+          "description": "Counts the number of external tools or functions the agent invoked during this execution, indicating the depth of its autonomous actions."
+        },
+        {
+          "col_name": "duration_ms",
+          "data_type": "BIGINT",
+          "description": "Measures the wall-clock time the agent execution took from start to finish, supporting latency analysis and performance monitoring."
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "TEXT",
+          "description": "Contains the human-readable description of any failure that prevented the agent from completing successfully, aiding troubleshooting."
+        },
+        {
+          "col_name": "error_type",
+          "data_type": "VARCHAR(100)",
+          "description": "Categorizes the class of failure encountered, such as a model error, timeout, validation failure, or tool execution issue, for easier reporting and alerting."
+        },
+        {
+          "col_name": "billing_deduction_status",
+          "data_type": "VARCHAR(30)",
+          "description": "Indicates whether credits or charges have been successfully applied to the tenant's account for this agent execution, supporting financial reconciliation."
+        },
+        {
+          "col_name": "token_usage",
+          "data_type": "JSON",
+          "description": "Provides a detailed breakdown of token consumption, typically separating costs by input, output, cached, and other usage categories for granular billing analysis."
+        },
+        {
+          "col_name": "tool_call_summary",
+          "data_type": "JSON",
+          "description": "Summarizes the tools invoked and their results during the execution, offering a quick view of the agent's actions without parsing the full reasoning trace."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "Records the exact moment this agent execution log entry was first written, marking when the run began."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "Records the most recent change to this log entry, reflecting updates such as status transitions or finalization of the execution."
+        }
+      ]
+    },
+    {
+      "table_name": "agent_tool_call_log",
+      "description": "This table captures a detailed audit trail of every tool invocation made by an AI agent during its execution. It records which tool, plugin, or action was called, what information was passed in and returned, how long it took, and whether it succeeded, enabling performance analysis, debugging, and cost tracking for agent-driven workflows.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "A unique identifier assigned to each individual tool invocation record within the agent's execution log."
+        },
+        {
+          "col_name": "agent_execution_log_id",
+          "data_type": "BIGINT",
+          "description": "Links the tool call record back to the specific overall agent execution session it belongs to, allowing grouping of all tool activity for a single agent run."
+        },
+        {
+          "col_name": "tool_call_id",
+          "data_type": "CHAR(36)",
+          "description": "A unique identifier for the specific tool call instance, useful for tracing a particular invocation across systems and debugging chains of operations."
+        },
+        {
+          "col_name": "tool_name",
+          "data_type": "VARCHAR(150)",
+          "description": "The human-readable name of the tool or capability the agent invoked, providing quick visibility into which capability was exercised."
+        },
+        {
+          "col_name": "plugin_id",
+          "data_type": "VARCHAR(100)",
+          "description": "Identifies which plugin provided the tool being called, supporting attribution, plugin usage analysis, and vendor or module-level reporting."
+        },
+        {
+          "col_name": "action_id",
+          "data_type": "VARCHAR(100)",
+          "description": "Identifies the specific action or operation within a plugin that was executed, allowing fine-grained tracking of distinct agent capabilities."
+        },
+        {
+          "col_name": "iteration_number",
+          "data_type": "INT",
+          "description": "Indicates which step or loop iteration within the agent's reasoning cycle the tool call occurred, helping reconstruct the sequence of agent decisions."
+        },
+        {
+          "col_name": "inputs",
+          "data_type": "LONGTEXT",
+          "description": "The data and parameters provided to the tool when the call was made, preserved for reproducibility and forensic review."
+        },
+        {
+          "col_name": "outputs",
+          "data_type": "LONGTEXT",
+          "description": "The data returned by the tool to the agent, captured for understanding what information the agent received and used in its reasoning."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(30)",
+          "description": "The outcome of the tool call, such as success or failure, providing at-a-glance visibility into whether the agent's requested action completed successfully."
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "TEXT",
+          "description": "A descriptive explanation of what went wrong when a tool call did not succeed, supporting troubleshooting and reliability improvements."
+        },
+        {
+          "col_name": "duration_ms",
+          "data_type": "BIGINT",
+          "description": "The total time the tool call took to complete in milliseconds, used to identify slow operations and optimize agent responsiveness."
+        },
+        {
+          "col_name": "cached_result",
+          "data_type": "TINYINT",
+          "description": "A flag indicating whether the tool's response was served from cache rather than being recomputed, supporting efficiency and cost-reduction analysis."
+        },
+        {
+          "col_name": "prompt_tokens",
+          "data_type": "INT",
+          "description": "The number of input tokens consumed from the language model to format or interpret this tool call, contributing to overall usage and cost tracking."
+        },
+        {
+          "col_name": "completion_tokens",
+          "data_type": "INT",
+          "description": "The number of output tokens generated by the language model in connection with this tool call, contributing to overall usage and cost tracking."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the tool call record was first created, establishing when the agent invoked the tool."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the tool call record was most recently modified, capturing any updates made after initial creation such as status changes."
+        }
+      ]
+    },
+    {
+      "table_name": "billing_parameters",
+      "description": "Defines the catalog of billable activities and resource consumption rules used to charge customers on a credit-based system. Each entry specifies how a particular service or resource is measured, priced, and enforced for billing purposes. This table serves as the central configuration for translating platform usage into customer charges.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique internal identifier for each billable activity or resource rule in the system."
+        },
+        {
+          "col_name": "code",
+          "data_type": "VARCHAR(100)",
+          "description": "Short, stable reference code used by internal systems and integrations to identify the specific billable activity."
+        },
+        {
+          "col_name": "name",
+          "data_type": "VARCHAR(255)",
+          "description": "Human-readable display name shown to administrators and stakeholders when reviewing billable activities."
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": "Detailed explanation of what the billable activity represents and when it applies to customer usage."
+        },
+        {
+          "col_name": "type",
+          "data_type": "VARCHAR(50)",
+          "description": "Category classification that groups similar billable activities together for reporting and administration."
+        },
+        {
+          "col_name": "unit",
+          "data_type": "VARCHAR(100)",
+          "description": "Defines the measurement unit in which the activity is tracked, such as per call, per token, per minute, or per request."
+        },
+        {
+          "col_name": "credit_cost",
+          "data_type": "DECIMAL(19,4)",
+          "description": "Number of credits a customer is charged per unit of this activity consumed."
+        },
+        {
+          "col_name": "deduction_timing",
+          "data_type": "VARCHAR(50)",
+          "description": "Specifies when credits are deducted from a customer's balance, such as in advance, upon completion, or at the end of a billing cycle."
+        },
+        {
+          "col_name": "billing_window",
+          "data_type": "VARCHAR(50)",
+          "description": "The time period over which usage of this activity is accumulated and billed, such as daily, monthly, or per session."
+        },
+        {
+          "col_name": "measurement_type",
+          "data_type": "VARCHAR(50)",
+          "description": "Indicates how usage of this activity is measured and aggregated, such as cumulative, incremental, or peak-based."
+        },
+        {
+          "col_name": "enforcement_type",
+          "data_type": "VARCHAR(50)",
+          "description": "Defines the policy applied when usage limits are reached, such as hard block, soft warning, or overage allowance."
+        },
+        {
+          "col_name": "active",
+          "data_type": "TINYINT",
+          "description": "Indicates whether the billable activity is currently enabled and available for charging customers."
+        },
+        {
+          "col_name": "display_order",
+          "data_type": "INT",
+          "description": "Determines the sequence in which billable activities are shown in administrative interfaces and customer-facing reports."
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "JSON",
+          "description": "Flexible container for additional configuration attributes and custom properties specific to the billable activity."
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(255)",
+          "description": "Username or identifier of the administrator who originally defined this billable activity."
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "VARCHAR(255)",
+          "description": "Username or identifier of the administrator who most recently modified this billable activity."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp recording when this billable activity was first added to the system."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp recording when this billable activity was most recently modified."
+        },
+        {
+          "col_name": "metering_key",
+          "data_type": "VARCHAR(50)",
+          "description": "Identifier used by the usage tracking system to record and attribute consumption events to this billable activity."
+        }
+      ]
+    },
+    {
+      "table_name": "credential_types",
+      "description": "This table serves as a catalog of credential types that users can configure to securely connect with external services and data sources within their workspace. It defines the structure, behavior, and validation rules for different kinds of credentials (such as API keys, OAuth2 tokens, or database logins) that power integrations managed by source plugins. Each entry acts as a reusable template that determines what information users must provide and how connections are tested before use.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(36)",
+          "description": "A unique identifier assigned to each credential type definition in the catalog, used to reference it reliably across the platform."
+        },
+        {
+          "col_name": "type_key",
+          "data_type": "VARCHAR(191)",
+          "description": "A short, machine-friendly code that uniquely names the credential type (for example, 'slack_oauth' or 'postgres_basic'), used internally when referencing this credential shape."
+        },
+        {
+          "col_name": "display_name",
+          "data_type": "VARCHAR(255)",
+          "description": "The human-readable name shown to users when they select a credential type, making it easy to recognize the integration being configured."
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": "A longer explanation that helps users understand what the credential type is used for and when they should choose it during setup."
+        },
+        {
+          "col_name": "category",
+          "data_type": "VARCHAR(100)",
+          "description": "A grouping label used to organize credential types in the user interface, helping users browse related connection options together (for example, 'Messaging', 'Databases', or 'Cloud Storage')."
+        },
+        {
+          "col_name": "icon",
+          "data_type": "VARCHAR(512)",
+          "description": "A reference to a visual icon that represents the credential type, allowing users to quickly identify integrations at a glance."
+        },
+        {
+          "col_name": "docs_url",
+          "data_type": "VARCHAR(1024)",
+          "description": "A link to the official documentation page that explains how to obtain and configure this type of credential from the underlying service provider."
+        },
+        {
+          "col_name": "fields_schema",
+          "data_type": "LONGTEXT",
+          "description": "The structured definition of the input fields users must fill in when creating a credential of this type, such as labels, whether values are secret, and what validation rules apply."
+        },
+        {
+          "col_name": "oauth2_config",
+          "data_type": "LONGTEXT",
+          "description": "Configuration settings used when the credential type relies on OAuth2 authentication, specifying the authorization flow, scopes, and endpoints required to connect securely."
+        },
+        {
+          "col_name": "test_connection",
+          "data_type": "TEXT",
+          "description": "A definition describing how the platform verifies that a credential is valid and can successfully communicate with the target service before it is used in production workflows."
+        },
+        {
+          "col_name": "source_plugin_id",
+          "data_type": "VARCHAR(191)",
+          "description": "Identifies the source plugin that owns and provides this credential type, linking it to the broader integration responsible for using the credential."
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(191)",
+          "description": "Identifies the workspace that owns this credential type definition, ensuring that credential templates are scoped and isolated per tenant."
+        },
+        {
+          "col_name": "active",
+          "data_type": "TINYINT",
+          "description": "Indicates whether this credential type is currently available for users to select, allowing administrators to disable templates without deleting them."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when this credential type definition was first added to the catalog."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when this credential type definition was most recently changed, helping administrators track when templates were last reviewed or modified."
+        }
+      ]
+    },
+    {
+      "table_name": "databasechangelog",
+      "description": "This table maintains a comprehensive audit trail of all database schema changes applied to the system, recording who made each change, when it was executed, and what modifications were performed. It serves as the central record for tracking deployment history, supporting compliance reviews, troubleshooting data issues, and understanding the evolution of the database over time. The table enables teams to verify successful deployments, roll back changes when needed, and maintain governance over the database environment.",
+      "primary_key": null,
+      "columns": [
+        {
+          "col_name": "ID",
+          "data_type": "VARCHAR(255)",
+          "description": "A unique identifier assigned to each database change record, allowing the system to reference and track individual modifications throughout their lifecycle."
+        },
+        {
+          "col_name": "AUTHOR",
+          "data_type": "VARCHAR(255)",
+          "description": "The name of the team member or developer responsible for creating and submitting the database change, supporting accountability and ownership tracking."
+        },
+        {
+          "col_name": "FILENAME",
+          "data_type": "VARCHAR(255)",
+          "description": "The name of the script or file containing the database change definition, providing traceability back to the source artifact used for deployment."
+        },
+        {
+          "col_name": "DATEEXECUTED",
+          "data_type": "DATETIME",
+          "description": "The timestamp recording when the database change was actually applied to the environment, enabling historical analysis of deployment timing and sequencing."
+        },
+        {
+          "col_name": "ORDEREXECUTED",
+          "data_type": "INT",
+          "description": "The sequence position in which the change was applied relative to other changes, ensuring changes are executed in the correct order during deployment."
+        },
+        {
+          "col_name": "EXECTYPE",
+          "data_type": "VARCHAR(10)",
+          "description": "The category of action performed for this change, such as whether it was successfully executed, rolled back, or marked as failed during deployment."
+        },
+        {
+          "col_name": "MD5SUM",
+          "data_type": "VARCHAR(35)",
+          "description": "A unique checksum fingerprint of the change file that helps verify the integrity of the script and detect any unintended modifications after deployment."
+        },
+        {
+          "col_name": "DESCRIPTION",
+          "data_type": "VARCHAR(255)",
+          "description": "A human-readable summary of what the database change accomplishes, explaining the business purpose of the modification for stakeholders reviewing the history."
+        },
+        {
+          "col_name": "COMMENTS",
+          "data_type": "VARCHAR(255)",
+          "description": "Free-form notes from the author providing additional context, rationale, or important information about the change that may not be captured in the formal description."
+        },
+        {
+          "col_name": "TAG",
+          "data_type": "VARCHAR(255)",
+          "description": "An optional label that marks a significant point in the deployment history, often used to identify releases, milestones, or version cutoffs for reference and rollback purposes."
+        },
+        {
+          "col_name": "LIQUIBASE",
+          "data_type": "VARCHAR(20)",
+          "description": "The version of the database change management tool used to apply the change, useful for compatibility assessment and troubleshooting deployment issues."
+        },
+        {
+          "col_name": "CONTEXTS",
+          "data_type": "VARCHAR(255)",
+          "description": "The conditions or environments under which this change should be applied, such as production, staging, or development, enabling controlled and targeted deployments."
+        },
+        {
+          "col_name": "LABELS",
+          "data_type": "VARCHAR(255)",
+          "description": "Custom tags or categories assigned to changes for grouping, filtering, and organizing related modifications by feature, project, or business initiative."
+        },
+        {
+          "col_name": "DEPLOYMENT_ID",
+          "data_type": "VARCHAR(10)",
+          "description": "A unique identifier that groups together all changes executed in a single deployment event, allowing teams to track and manage changes as a cohesive release batch."
+        }
+      ]
+    },
+    {
+      "table_name": "databasechangeloglock",
+      "description": "This table serves as a safeguard to ensure that only one database update or migration process runs at a time, preventing conflicts and data corruption when the system is being changed or upgraded. It acts as a coordinator that tracks whether a maintenance operation is currently in progress and who is responsible for it.",
+      "primary_key": "ID",
+      "columns": [
+        {
+          "col_name": "ID",
+          "data_type": "INT",
+          "description": "Unique identifier that distinguishes this lock record from any other record in the system."
+        },
+        {
+          "col_name": "LOCKED",
+          "data_type": "TINYINT",
+          "description": "Indicates whether a database change or migration process is currently active, acting as a flag that prevents overlapping operations."
+        },
+        {
+          "col_name": "LOCKGRANTED",
+          "data_type": "DATETIME",
+          "description": "Records the date and time when the current database update process started, allowing teams to track how long the operation has been running."
+        },
+        {
+          "col_name": "LOCKEDBY",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifies the specific process, application, or user that is currently performing a database update, helping with accountability and troubleshooting."
+        }
+      ]
+    },
+    {
+      "table_name": "email_audit_log",
+      "description": "This table serves as a comprehensive audit trail of all email communications dispatched by the system, capturing essential details about each message for monitoring, troubleshooting, and compliance purposes. It enables the business to track email delivery performance, identify patterns in failures, and verify that customer communications were sent as intended.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique identifier for each email transmission record, allowing every individual send event to be referenced and retrieved independently."
+        },
+        {
+          "col_name": "recipient",
+          "data_type": "VARCHAR(320)",
+          "description": "The email address of the intended recipient who was targeted to receive the message, representing the end user or downstream system the communication was directed to."
+        },
+        {
+          "col_name": "subject",
+          "data_type": "VARCHAR(998)",
+          "description": "The subject line text used in the outgoing email, providing context about the message's purpose and enabling quick identification of the communication content."
+        },
+        {
+          "col_name": "template_name",
+          "data_type": "VARCHAR(255)",
+          "description": "The name of the predefined email template that was used to generate the message, allowing the business to track which communication workflows and campaigns were executed."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(20)",
+          "description": "The delivery outcome of the email send attempt, indicating whether the message was successfully delivered, is pending, bounced, or failed."
+        },
+        {
+          "col_name": "provider",
+          "data_type": "VARCHAR(20)",
+          "description": "The third-party email delivery service used to transmit the message, helping the business monitor performance across different email vendors and providers."
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "VARCHAR(1000)",
+          "description": "Detailed information describing any issue encountered during the email send process, enabling support teams and engineers to diagnose and resolve delivery problems."
+        },
+        {
+          "col_name": "sent_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the email transmission was initiated by the system, supporting timing analysis, delivery latency tracking, and audit verification of when communications occurred."
+        }
+      ]
+    },
+    {
+      "table_name": "flow_credentials",
+      "description": "This table stores authentication credentials used by automated flows and integrations within the platform, supporting multi-tenant workspaces. Each credential entry tracks the type, encrypted secret data, testing status, and expiration to ensure secure and reliable connectivity to external services. The table enables centralized management, validation, and lifecycle tracking of credentials used across tenant environments.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(36)",
+          "description": "Unique identifier assigned to each stored credential entry, used to reference and manage the credential across the platform."
+        },
+        {
+          "col_name": "name",
+          "data_type": "VARCHAR(255)",
+          "description": "Human-readable label chosen to identify the credential, making it easy for users to recognize its purpose within their flows and integrations."
+        },
+        {
+          "col_name": "credential_type",
+          "data_type": "VARCHAR(191)",
+          "description": "Category that describes the kind of credential being stored, such as API key, OAuth token, or service-specific authentication method."
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(191)",
+          "description": "Reference to the workspace that owns this credential, ensuring credentials are scoped and accessible only within the correct team environment."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(191)",
+          "description": "Reference to the tenant organization that the credential belongs to, supporting isolated credential management across different customers."
+        },
+        {
+          "col_name": "encrypted_data",
+          "data_type": "LONGTEXT",
+          "description": "The sensitive secret information such as tokens, passwords, or keys, stored in encrypted form to protect against unauthorized access."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": "Current operational state of the credential, indicating whether it is active, disabled, or in another lifecycle stage."
+        },
+        {
+          "col_name": "last_tested_at",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp recording when the credential was most recently validated against its target service to confirm it still works."
+        },
+        {
+          "col_name": "test_result",
+          "data_type": "VARCHAR(50)",
+          "description": "Outcome of the most recent credential validation attempt, such as success or failure, helping users assess reliability."
+        },
+        {
+          "col_name": "test_message",
+          "data_type": "TEXT",
+          "description": "Detailed feedback returned from the last credential test, providing context about why a validation succeeded or failed."
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": "Date and time when the credential is expected to become invalid, helping teams plan ahead for renewals or rotations."
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "TEXT",
+          "description": "Additional flexible information associated with the credential, allowing custom attributes relevant to its use or source."
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(191)",
+          "description": "Identifier of the user who originally added the credential to the system, supporting accountability and audit trails."
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "VARCHAR(191)",
+          "description": "Identifier of the user who most recently modified the credential details, supporting accountability and change tracking."
+        },
+        {
+          "col_name": "active",
+          "data_type": "TINYINT",
+          "description": "Flag indicating whether the credential is currently enabled for use by flows or temporarily turned off by the user."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "Date and time when the credential was first registered in the platform."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "Date and time when the credential record was most recently changed, useful for tracking modification history."
+        }
+      ]
+    },
+    {
+      "table_name": "flow_ui_nodes",
+      "description": "This table stores the catalog of node definitions available in the visual flow builder interface, representing each building block that users can add to their workflows. It serves as a registry of available actions, triggers, and processing steps, capturing both the user-facing presentation details and the underlying configuration that powers each node's behavior at runtime.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(255)",
+          "description": "Unique business identifier that distinguishes each node definition in the flow builder catalog."
+        },
+        {
+          "col_name": "node_type",
+          "data_type": "VARCHAR(50)",
+          "description": "High-level category that groups the node (such as a trigger, action, or transformation) within the flow builder palette."
+        },
+        {
+          "col_name": "type",
+          "data_type": "VARCHAR(255)",
+          "description": "Specific variant within the node category, distinguishing similar nodes by their underlying capability or purpose."
+        },
+        {
+          "col_name": "label",
+          "data_type": "VARCHAR(255)",
+          "description": "Friendly display name shown to users when browsing or selecting the node from the flow builder interface."
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": "Plain-language explanation of what the node does and when it should be used in a workflow."
+        },
+        {
+          "col_name": "icon",
+          "data_type": "VARCHAR(512)",
+          "description": "Visual representation of the node that helps users quickly recognize it within the flow builder canvas."
+        },
+        {
+          "col_name": "properties_json",
+          "data_type": "TEXT",
+          "description": "Configurable inputs and settings that a user can customize when adding the node to a workflow."
+        },
+        {
+          "col_name": "cel_helpers_json",
+          "data_type": "TEXT",
+          "description": "Reusable expression helpers available to users when defining conditional logic or dynamic values for the node."
+        },
+        {
+          "col_name": "outputs_json",
+          "data_type": "TEXT",
+          "description": "Structured definition of the results that the node produces, which downstream nodes in the workflow can reference."
+        },
+        {
+          "col_name": "raw_json",
+          "data_type": "TEXT",
+          "description": "Complete original payload of the node definition, preserved for traceability and round-tripping of the source record."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp recording when the node definition was first introduced into the catalog."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp recording the most recent change made to the node definition."
+        },
+        {
+          "col_name": "name",
+          "data_type": "VARCHAR(255)",
+          "description": "Internal reference name used by the platform to refer to this node behind the scenes."
+        },
+        {
+          "col_name": "identifier",
+          "data_type": "VARCHAR(255)",
+          "description": "Programmatic handle used by other systems and integrations to invoke or reference this node."
+        },
+        {
+          "col_name": "fail_on_error",
+          "data_type": "TINYINT",
+          "description": "Flag that determines whether the entire workflow should halt and report a failure when this node encounters an error."
+        }
+      ]
+    },
+    {
+      "table_name": "node_cached_outputs",
+      "description": "This table stores the cached results produced by individual nodes within AI agent workflows, allowing the platform to reuse previously computed outputs and avoid redundant processing. Each entry captures the output of a specific workflow node along with metadata about its origin, ownership, and expiration, supporting performance optimization and cost control across multi-tenant environments.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(36)",
+          "description": "Unique identifier for each cached node output record in the system."
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Reference to the workflow that the cached output belongs to, linking the result to its parent automation flow."
+        },
+        {
+          "col_name": "node_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Reference to the specific node within the workflow that produced the cached output."
+        },
+        {
+          "col_name": "node_identifier",
+          "data_type": "VARCHAR(255)",
+          "description": "Programmatic identifier or code used to reference the node, typically used for lookup and matching during workflow execution."
+        },
+        {
+          "col_name": "node_name",
+          "data_type": "VARCHAR(255)",
+          "description": "Human-readable display name of the node that generated the cached result, making it easy to identify which step produced the output."
+        },
+        {
+          "col_name": "cached_output",
+          "data_type": "LONGTEXT",
+          "description": "The actual stored response or result produced by the node, preserved so it can be reused without re-executing the underlying operation."
+        },
+        {
+          "col_name": "size_bytes",
+          "data_type": "BIGINT",
+          "description": "Storage footprint of the cached output, used to monitor and manage how much space each cached result consumes."
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp at which the cached output becomes invalid and is no longer eligible for reuse, ensuring stale results are eventually refreshed."
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifier of the user or system component that triggered the creation of this cached output entry."
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Reference to the workspace under which this cached output was generated, supporting collaboration and isolation between teams."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Reference to the customer organization that owns this cached output, enabling proper data separation between tenants."
+        },
+        {
+          "col_name": "source",
+          "data_type": "VARCHAR(20)",
+          "description": "Categorization of where the cached output originated, such as from user interaction, an automated run, or an external system integration."
+        },
+        {
+          "col_name": "step_session_id",
+          "data_type": "VARCHAR(36)",
+          "description": "Reference to the specific execution session of the workflow step, allowing cached outputs to be traced back to a particular run."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp marking when the cached output was first stored in the system."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp recording the most recent time the cached output was modified or refreshed."
+        }
+      ]
+    },
+    {
+      "table_name": "node_credentials",
+      "description": "This table establishes the connections between individual workflow steps (nodes) and the authentication credentials they need to interact with external services, APIs, or systems. It enables the platform to securely associate the right authentication details with each step in an automated workflow, ensuring nodes can perform their designated actions. The table supports multi-tenant, multi-workspace environments by tracking which tenant and workspace each credential association belongs to.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(36)",
+          "description": "A unique identifier for each specific association between a node and a credential, ensuring every linkage can be individually tracked and managed."
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "VARCHAR(191)",
+          "description": "Identifies the parent automated workflow that contains the node using this credential, linking the authentication back to the broader automation it supports."
+        },
+        {
+          "col_name": "node_id",
+          "data_type": "VARCHAR(191)",
+          "description": "Identifies the specific step or action within a workflow that requires this credential to authenticate against an external service or system."
+        },
+        {
+          "col_name": "credential_type",
+          "data_type": "VARCHAR(191)",
+          "description": "The category or classification of the credential (such as API key, OAuth token, or database password) used to determine how the node authenticates with its target service."
+        },
+        {
+          "col_name": "credential_id",
+          "data_type": "VARCHAR(36)",
+          "description": "References the actual credential record containing the authentication details that the node will use when executing its action."
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(191)",
+          "description": "The workspace context under which this node-credential association operates, supporting isolated environments for different teams or projects."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(191)",
+          "description": "The owning organization that this credential association belongs to, ensuring credentials are scoped to the correct customer account in a multi-tenant environment."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the credential was first linked to the node, useful for auditing when authentication access was granted."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the node-credential association was most recently modified, such as when a credential was rotated or replaced."
+        }
+      ]
+    },
+    {
+      "table_name": "node_execution_logs",
+      "description": "This table records detailed execution history for individual nodes that run as part of automated workflows, capturing timing, inputs, outputs, and any errors for operational monitoring and troubleshooting. It supports tenant and workspace-level visibility into how each step within a workflow performed during a run. Use it to analyze node-level performance, debug failures, and audit workflow behavior over time.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique internal identifier for each node execution record, used to distinguish individual runs of nodes within the system."
+        },
+        {
+          "col_name": "workflow_execution_id",
+          "data_type": "VARCHAR(36)",
+          "description": "Identifier linking this node execution to the overall workflow run it belongs to, allowing all node activities to be traced back to a single workflow invocation."
+        },
+        {
+          "col_name": "node_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifier of the specific node definition within the workflow whose execution is being recorded."
+        },
+        {
+          "col_name": "node_type",
+          "data_type": "VARCHAR(100)",
+          "description": "Category or classification of the node being executed, such as a data transformation, API call, or decision step."
+        },
+        {
+          "col_name": "start_time",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp indicating when the node began executing during the workflow run."
+        },
+        {
+          "col_name": "end_time",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp indicating when the node completed execution, whether successfully or with a failure."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": "Outcome of the node execution, such as succeeded, failed, running, or skipped."
+        },
+        {
+          "col_name": "duration_ms",
+          "data_type": "BIGINT",
+          "description": "Total time in milliseconds that the node took to complete its execution, useful for performance analysis and bottleneck detection."
+        },
+        {
+          "col_name": "input_data",
+          "data_type": "LONGTEXT",
+          "description": "The data payload that was passed into the node when it began executing, captured for traceability and debugging."
+        },
+        {
+          "col_name": "output_data",
+          "data_type": "LONGTEXT",
+          "description": "The data payload produced by the node after execution, allowing downstream consumers and analysts to inspect what the node returned."
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "TEXT",
+          "description": "Description of any error or exception encountered during node execution, supporting troubleshooting and root cause analysis."
+        },
+        {
+          "col_name": "ttl_days",
+          "data_type": "INT",
+          "description": "Number of days this execution record should be retained before being purged, based on data lifecycle policies."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp when the node execution record was first written to the system."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp when the node execution record was most recently modified, such as when its status changed."
+        },
+        {
+          "col_name": "node_subtype",
+          "data_type": "VARCHAR(100)",
+          "description": "More granular classification of the node, providing additional detail beyond the general node type for finer reporting and filtering."
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(100)",
+          "description": "Identifier of the workspace that owns the workflow and node execution, enabling workspace-level reporting and access control."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(100)",
+          "description": "Identifier of the tenant organization that owns this execution record, supporting multi-tenant isolation and reporting."
+        }
+      ]
+    },
+    {
+      "table_name": "oauth_states",
+      "description": "This table tracks temporary OAuth authorization records that securely manage the handshake process when users connect third-party applications and services to their workspace. It captures all the necessary security parameters, credentials, and contextual information required to complete or validate each authorization request, ensuring that integrations are established safely and within the appropriate tenant and user context.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(36)",
+          "description": "Unique identifier assigned to each OAuth authorization record to distinguish it from all others in the system."
+        },
+        {
+          "col_name": "state",
+          "data_type": "VARCHAR(255)",
+          "description": "A randomly generated security token that protects against fraudulent authorization requests by ensuring the response matches the original request."
+        },
+        {
+          "col_name": "credential_type",
+          "data_type": "VARCHAR(191)",
+          "description": "The category or type of OAuth credential being used, indicating which kind of integration or service is being connected."
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(191)",
+          "description": "Identifies the specific workspace where the authorized integration or service connection will be established and managed."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(191)",
+          "description": "Identifies the tenant organization that owns the workspace and is responsible for the OAuth connection being established."
+        },
+        {
+          "col_name": "user_id",
+          "data_type": "VARCHAR(191)",
+          "description": "Identifies the individual user who initiated the authorization process to connect a third-party service."
+        },
+        {
+          "col_name": "code_verifier",
+          "data_type": "VARCHAR(255)",
+          "description": "A secret value used during the authorization process to verify that the request to exchange an authorization code originated from the same party that started it."
+        },
+        {
+          "col_name": "encrypted_client_id",
+          "data_type": "TEXT",
+          "description": "The securely stored identifier of the third-party application that is requesting access on behalf of the user."
+        },
+        {
+          "col_name": "encrypted_client_secret",
+          "data_type": "TEXT",
+          "description": "The securely stored confidential key associated with the third-party application, used to authenticate the client during the authorization exchange."
+        },
+        {
+          "col_name": "scopes",
+          "data_type": "TEXT",
+          "description": "The list of permissions or access levels being requested from the external service during the authorization process."
+        },
+        {
+          "col_name": "redirect_uri",
+          "data_type": "VARCHAR(1024)",
+          "description": "The destination URL where users are sent after completing or canceling the authorization process with the third-party service."
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when this authorization record becomes invalid and can no longer be used to complete the connection."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the authorization record was originally generated and stored in the system."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the authorization record was most recently modified, helping track any changes made during its lifecycle."
+        }
+      ]
+    },
+    {
+      "table_name": "plan_parameter_configs",
+      "description": "This table defines how specific usage parameters are configured for each subscription plan, linking plans to billable metrics like conversation volume or AI agent interactions. It captures the included allowances, usage limits, and overage pricing rules that govern how customers are billed when they exceed their plan's entitlements. Together, these configurations shape the customer experience by determining what is bundled into a plan, when usage caps apply, and how additional consumption is charged.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "A unique identifier for each plan-to-parameter configuration record, ensuring every link between a subscription plan and a billable metric can be individually referenced and managed."
+        },
+        {
+          "col_name": "plan_id",
+          "data_type": "BIGINT",
+          "description": "Identifies which subscription plan this configuration applies to, allowing each plan to carry its own tailored usage rules and allowances."
+        },
+        {
+          "col_name": "parameter_id",
+          "data_type": "BIGINT",
+          "description": "Identifies the specific billable metric being configured, such as conversation minutes, AI agent runs, or other measurable usage elements tracked within the platform."
+        },
+        {
+          "col_name": "included_value",
+          "data_type": "BIGINT",
+          "description": "The baseline quantity of this metric that is included in the plan at no additional cost, representing the customer's core entitlement before any overage charges apply."
+        },
+        {
+          "col_name": "limit_value",
+          "data_type": "BIGINT",
+          "description": "The maximum amount of this metric the customer may consume under the plan before overage rules are triggered, defining the hard ceiling of included usage."
+        },
+        {
+          "col_name": "reset_on_cycle",
+          "data_type": "TINYINT",
+          "description": "Indicates whether the included value and usage tracking for this parameter reset at the start of each new billing cycle, returning the customer to a fresh allowance."
+        },
+        {
+          "col_name": "overage_enabled",
+          "data_type": "TINYINT",
+          "description": "Signals whether customers are permitted to exceed the plan's included limit and continue consuming this metric with additional charges applied."
+        },
+        {
+          "col_name": "overage_mode",
+          "data_type": "VARCHAR(50)",
+          "description": "Defines the method by which overage consumption is billed, such as charging per unit consumed, applying tiered pricing, or capping charges at a defined maximum."
+        },
+        {
+          "col_name": "overage_price_per_unit",
+          "data_type": "DECIMAL(19,4)",
+          "description": "The unit price charged for each increment of usage beyond the plan's included limit, directly impacting the customer's bill when overages occur."
+        },
+        {
+          "col_name": "overage_max_units",
+          "data_type": "BIGINT",
+          "description": "The maximum number of additional units a customer may consume beyond their plan limit, serving as a safeguard against runaway usage and unexpected charges."
+        },
+        {
+          "col_name": "display_order",
+          "data_type": "INT",
+          "description": "Determines the position this parameter occupies when listed within a plan, supporting a logical and user-friendly presentation of plan features in customer-facing materials."
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "JSON",
+          "description": "A flexible storage area for additional contextual information about the configuration, such as feature descriptions, internal notes, or attributes not captured by standard fields."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when this plan-parameter configuration was originally established, providing an audit trail for when the rule was first introduced."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when this configuration was most recently modified, supporting governance and change tracking for evolving pricing and entitlement rules."
+        }
+      ]
+    },
+    {
+      "table_name": "plan_stripe_prices",
+      "description": "This table serves as the bridge between our internal subscription plans and Stripe's pricing system, capturing each pricing configuration across different versions and currencies. It maintains a complete history of pricing changes, allowing the business to track which Stripe price is currently active for each plan and preserve historical pricing for audit and grandfathering purposes.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "A unique identifier for each plan-to-Stripe-price mapping record, used to distinguish individual entries in this mapping table."
+        },
+        {
+          "col_name": "plan_id",
+          "data_type": "BIGINT",
+          "description": "Identifies which internal subscription plan this Stripe pricing configuration belongs to, linking the price back to the specific plan offering."
+        },
+        {
+          "col_name": "stripe_price_id",
+          "data_type": "VARCHAR(255)",
+          "description": "The identifier from Stripe that corresponds to a specific price object, allowing direct integration with the Stripe billing platform."
+        },
+        {
+          "col_name": "version",
+          "data_type": "INT",
+          "description": "Tracks the version number of this pricing configuration, incrementing each time pricing changes so historical price changes can be clearly distinguished."
+        },
+        {
+          "col_name": "amount",
+          "data_type": "DECIMAL(19,2)",
+          "description": "The monetary value charged to customers for this plan under this pricing configuration, expressed as a decimal number."
+        },
+        {
+          "col_name": "currency",
+          "data_type": "VARCHAR(3)",
+          "description": "The three-letter currency code (such as USD or EUR) in which this plan price is denominated and charged to customers."
+        },
+        {
+          "col_name": "billing_cycle",
+          "data_type": "VARCHAR(50)",
+          "description": "Specifies the billing frequency for this pricing configuration, such as monthly or annually, defining how often customers are charged."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": "Indicates the current lifecycle state of this pricing configuration, such as whether it is active, hidden, or otherwise available to customers."
+        },
+        {
+          "col_name": "is_current",
+          "data_type": "TINYINT",
+          "description": "A flag that designates whether this is the most up-to-date pricing configuration for the associated plan, used to quickly identify the active price."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when this plan-to-Stripe-price mapping record was first created in the system."
+        },
+        {
+          "col_name": "archived_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when this pricing configuration was retired or superseded, allowing historical prices to be retained while signaling they are no longer in use."
+        }
+      ]
+    },
+    {
+      "table_name": "plans",
+      "description": "The plans table defines the subscription offerings available to customers, capturing pricing, billing cadence, and presentation details. It maintains a synchronized link with the Stripe payment platform, enabling consistent management of subscription products and their associated pricing tiers across systems.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique identifier for each subscription plan, used to distinguish one offering from another throughout the system."
+        },
+        {
+          "col_name": "code",
+          "data_type": "VARCHAR(100)",
+          "description": "Short, machine-friendly reference code for the plan, often used in integrations, reporting, and internal references."
+        },
+        {
+          "col_name": "name",
+          "data_type": "VARCHAR(255)",
+          "description": "Customer-facing display name of the subscription plan, shown in pricing pages, checkout flows, and account summaries."
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": "Marketing or explanatory text that describes the benefits, features, and intended audience of the plan."
+        },
+        {
+          "col_name": "base_price",
+          "data_type": "DECIMAL(19,4)",
+          "description": "The standard recurring charge amount applied to the plan before any discounts or promotional adjustments."
+        },
+        {
+          "col_name": "billing_cycle",
+          "data_type": "VARCHAR(50)",
+          "description": "Defines how frequently customers are charged for the plan, such as monthly, quarterly, or annually."
+        },
+        {
+          "col_name": "custom_cycle_days",
+          "data_type": "INT",
+          "description": "Optional override for plans that do not follow standard billing intervals, specifying a custom number of days between charges."
+        },
+        {
+          "col_name": "currency",
+          "data_type": "VARCHAR(10)",
+          "description": "The monetary currency in which the plan's price is denominated, such as USD, EUR, or GBP."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": "Current lifecycle state of the plan, indicating whether it is active, archived, or in another state controlling its availability and use."
+        },
+        {
+          "col_name": "is_public",
+          "data_type": "TINYINT",
+          "description": "Flag that determines whether the plan is visible to prospective customers on public-facing pricing pages."
+        },
+        {
+          "col_name": "display_order",
+          "data_type": "INT",
+          "description": "Numeric ordering value used to arrange plans in a preferred sequence on pricing pages and plan selectors."
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "JSON",
+          "description": "Flexible structure for storing additional plan attributes that do not have dedicated columns, useful for custom business logic or integrations."
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifier of the user or administrator who originally created the plan record."
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifier of the user or administrator who most recently modified the plan record."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp marking when the plan was first created in the system."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp marking the most recent change made to the plan record."
+        },
+        {
+          "col_name": "stripe_product_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Reference to the corresponding product entry in Stripe, linking the plan to its representation in the payment platform."
+        },
+        {
+          "col_name": "stripe_price_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Reference to the specific pricing tier in Stripe associated with the plan, controlling how charges are calculated."
+        },
+        {
+          "col_name": "stripe_price_version",
+          "data_type": "INT",
+          "description": "Counter that tracks how many times the plan's pricing has been updated and re-synced to Stripe, supporting auditability of price changes."
+        },
+        {
+          "col_name": "stripe_sync_status",
+          "data_type": "VARCHAR(50)",
+          "description": "Current state of synchronization between the plan and Stripe, indicating whether the link is up to date, pending, or has encountered issues."
+        },
+        {
+          "col_name": "stripe_synced_at",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp of the most recent successful synchronization of the plan's details with Stripe."
+        },
+        {
+          "col_name": "stripe_sync_error",
+          "data_type": "TEXT",
+          "description": "Captured error message from the last failed synchronization attempt with Stripe, supporting troubleshooting and resolution."
+        },
+        {
+          "col_name": "is_default",
+          "data_type": "TINYINT",
+          "description": "Flag indicating whether the plan should be pre-selected or treated as the default option for new customer subscriptions."
+        }
+      ]
+    },
+    {
+      "table_name": "platform_configs",
+      "description": "This table serves as the central repository for all platform-wide configuration settings, storing key-value pairs that control various system behaviors and feature flags. It enables administrators to manage, audit, and modify platform preferences without code changes, providing full visibility into who changed what and when.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "A unique identifier assigned to each configuration entry to distinguish it from other settings in the platform."
+        },
+        {
+          "col_name": "config_key",
+          "data_type": "VARCHAR(200)",
+          "description": "The name or label of a specific configuration setting, used to look up and reference the corresponding value throughout the platform."
+        },
+        {
+          "col_name": "config_value",
+          "data_type": "TEXT",
+          "description": "The actual content or setting value associated with a configuration key, defining how the platform behaves for that particular option."
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": "A plain-language explanation of what the configuration setting controls, helping administrators understand its purpose and impact."
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "VARCHAR(255)",
+          "description": "The name of the person or system account who most recently modified the configuration value, supporting accountability and audit tracking."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the configuration setting was first added to the platform, indicating when the option became available."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the configuration setting was most recently changed, helping administrators track how current each value is."
+        }
+      ]
+    },
+    {
+      "table_name": "plugin_registrations",
+      "description": "This table tracks connections established between plugins and external services, capturing the lifecycle of each integration from initial setup through renewal or expiration. Each registration represents a configured link that allows a workflow within a workspace to receive and act on events from an outside system, with associated credentials and subscription details.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(36)",
+          "description": "A unique identifier assigned to each plugin registration record, used to track and reference a specific connection throughout its lifecycle."
+        },
+        {
+          "col_name": "plugin_id",
+          "data_type": "VARCHAR(191)",
+          "description": "Identifies which plugin or integration is being registered, linking the connection to the specific external service it communicates with."
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(191)",
+          "description": "Designates the workspace that owns this registration, scoping the connection and its data to a defined collaboration environment."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(191)",
+          "description": "Identifies the tenant organization that the workspace and registration belong to, ensuring proper multi-tenant isolation."
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "VARCHAR(191)",
+          "description": "References the workflow that depends on this registration, indicating which automated process consumes the events or data from the external service."
+        },
+        {
+          "col_name": "registration_type",
+          "data_type": "VARCHAR(50)",
+          "description": "Describes the method of registration used to establish the connection, such as OAuth authorization, API key exchange, or webhook subscription."
+        },
+        {
+          "col_name": "external_registration_id",
+          "data_type": "VARCHAR(512)",
+          "description": "The identifier assigned by the external service to this connection, allowing the system to reference the registration on the third-party side."
+        },
+        {
+          "col_name": "webhook_url",
+          "data_type": "VARCHAR(1024)",
+          "description": "The destination endpoint to which the external service sends event notifications, enabling real-time data flow into the platform."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": "Reflects the current operational state of the registration, such as active, pending, expired, or failed, to support monitoring and troubleshooting."
+        },
+        {
+          "col_name": "credentials",
+          "data_type": "TEXT",
+          "description": "Stores the authentication information used to access the external service, maintained securely and used for ongoing communication."
+        },
+        {
+          "col_name": "registration_data",
+          "data_type": "TEXT",
+          "description": "Holds additional configuration details returned during the registration process, capturing any extra metadata provided by the external service."
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": "Indicates the date and time when the registration's access or authentication will lapse, signaling when renewal is required."
+        },
+        {
+          "col_name": "last_renewal_at",
+          "data_type": "TIMESTAMP",
+          "description": "Records the most recent time the registration's credentials or authorization was refreshed, helping track renewal history."
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "VARCHAR(2048)",
+          "description": "Captures diagnostic information when the registration encounters a problem, supporting investigation and resolution of integration issues."
+        },
+        {
+          "col_name": "connection_name",
+          "data_type": "VARCHAR(255)",
+          "description": "A user-defined label that makes the registration easy to identify within interfaces, often describing its purpose or scope."
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(128)",
+          "description": "Identifies the user who originally established the registration, providing accountability for when the connection was first set up."
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "VARCHAR(128)",
+          "description": "Identifies the user who most recently modified the registration, supporting audit trails and change management."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "Marks the date and time the registration was initially created, establishing the start of its lifecycle."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "Reflects the most recent date and time any aspect of the registration was changed, indicating the freshness of its current configuration."
+        },
+        {
+          "col_name": "configured_events",
+          "data_type": "TEXT",
+          "description": "Lists the specific events from the external service that the registration is subscribed to, defining which triggers the workflow will respond to."
+        },
+        {
+          "col_name": "event_type_field",
+          "data_type": "VARCHAR(255)",
+          "description": "Specifies the field within incoming webhook payloads that identifies the event type, allowing the system to route and react to the right events."
+        }
+      ]
+    },
+    {
+      "table_name": "plugin_storage",
+      "description": "This table maintains the file assets associated with each plugin, capturing version history and the actual binary contents uploaded by plugin authors. It enables the platform to store, retrieve, and serve plugin files across releases while preserving metadata about each upload. Together with the plugin master record, it supports reliable distribution and versioning of plugin packages.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique identifier assigned to each stored plugin file record within the system."
+        },
+        {
+          "col_name": "plugin_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Reference to the specific plugin that this stored file asset belongs to, linking the binary content to its parent plugin record."
+        },
+        {
+          "col_name": "version",
+          "data_type": "VARCHAR(50)",
+          "description": "Semantic or release-based version label that identifies which release of the plugin this file corresponds to."
+        },
+        {
+          "col_name": "file_name",
+          "data_type": "VARCHAR(255)",
+          "description": "The original name of the uploaded plugin file, including its extension, as provided by the author."
+        },
+        {
+          "col_name": "file_data",
+          "data_type": "LONGBLOB",
+          "description": "The actual binary contents of the plugin package, stored so the file can be downloaded and installed by users."
+        },
+        {
+          "col_name": "file_size",
+          "data_type": "BIGINT",
+          "description": "The size of the uploaded plugin file in bytes, useful for storage monitoring and download time estimation."
+        },
+        {
+          "col_name": "content_type",
+          "data_type": "VARCHAR(100)",
+          "description": "The media type of the stored file, indicating how the plugin package should be handled during download."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp recording when this plugin file version was first uploaded and stored."
+        },
+        {
+          "col_name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp recording the most recent modification to this plugin file record, such as a re-upload or metadata change."
+        }
+      ]
+    },
+    {
+      "table_name": "plugins",
+      "description": "This table stores comprehensive information about plugins that extend and customize the platform's functionality. Each record represents a single plugin installation, capturing its identity, authorship, configuration state, and operational metadata. It serves as the central registry for managing the lifecycle, security verification, and capability tracking of all available plugins.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique internal identifier assigned to each plugin record in the system."
+        },
+        {
+          "col_name": "plugin_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Business identifier used to reference the plugin from external systems and integrations."
+        },
+        {
+          "col_name": "name",
+          "data_type": "VARCHAR(255)",
+          "description": "The technical or short name of the plugin used internally for identification and routing."
+        },
+        {
+          "col_name": "display_name",
+          "data_type": "VARCHAR(255)",
+          "description": "The human-readable name shown to users in menus, listings, and the user interface."
+        },
+        {
+          "col_name": "version",
+          "data_type": "VARCHAR(50)",
+          "description": "The currently installed version number of the plugin, used to track updates and compatibility."
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": "A narrative summary explaining what the plugin does and the value it provides to users."
+        },
+        {
+          "col_name": "category",
+          "data_type": "VARCHAR(100)",
+          "description": "The grouping or classification of the plugin, used for organization, filtering, and discovery."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": "The current operational state of the plugin, such as active, inactive, or under maintenance."
+        },
+        {
+          "col_name": "icon_url",
+          "data_type": "VARCHAR(500)",
+          "description": "Web address pointing to the visual icon representing the plugin in the interface."
+        },
+        {
+          "col_name": "homepage_url",
+          "data_type": "VARCHAR(500)",
+          "description": "Web address of the plugin's public homepage where users can learn more about it."
+        },
+        {
+          "col_name": "repository_url",
+          "data_type": "VARCHAR(500)",
+          "description": "Web address of the source code repository where the plugin's code is maintained."
+        },
+        {
+          "col_name": "author_name",
+          "data_type": "VARCHAR(255)",
+          "description": "The name of the individual or team responsible for creating and maintaining the plugin."
+        },
+        {
+          "col_name": "author_email",
+          "data_type": "VARCHAR(255)",
+          "description": "Contact email address for reaching the plugin's author for support or inquiries."
+        },
+        {
+          "col_name": "author_organization",
+          "data_type": "VARCHAR(255)",
+          "description": "The company or organization affiliated with the plugin's development and ownership."
+        },
+        {
+          "col_name": "installed_at",
+          "data_type": "DATETIME",
+          "description": "The date and time when the plugin was first installed in the environment."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "DATETIME",
+          "description": "The date and time when the plugin's package or content was last refreshed or changed."
+        },
+        {
+          "col_name": "requires_configuration",
+          "data_type": "TINYINT",
+          "description": "Flag indicating whether the plugin needs additional setup or configuration before it can be used."
+        },
+        {
+          "col_name": "configuration",
+          "data_type": "TEXT",
+          "description": "The default configuration settings that define how the plugin is intended to operate."
+        },
+        {
+          "col_name": "current_config",
+          "data_type": "TEXT",
+          "description": "The active configuration values currently applied to the plugin in the running environment."
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "TEXT",
+          "description": "Supplementary descriptive information about the plugin stored in a flexible format."
+        },
+        {
+          "col_name": "capabilities",
+          "data_type": "TEXT",
+          "description": "The set of features and functions the plugin offers to extend platform functionality."
+        },
+        {
+          "col_name": "authentication",
+          "data_type": "TEXT",
+          "description": "Authentication details defining how the plugin verifies identity and manages secure access."
+        },
+        {
+          "col_name": "components",
+          "data_type": "TEXT",
+          "description": "The structural building blocks that make up the plugin's functionality."
+        },
+        {
+          "col_name": "ui_components",
+          "data_type": "TEXT",
+          "description": "The user interface elements contributed by the plugin to enhance the overall experience."
+        },
+        {
+          "col_name": "runtime_info",
+          "data_type": "TEXT",
+          "description": "Operational details about how the plugin runs, including dependencies and execution context."
+        },
+        {
+          "col_name": "permissions",
+          "data_type": "TEXT",
+          "description": "The access rights and privileges granted to the plugin, defining what resources it may use."
+        },
+        {
+          "col_name": "package_path",
+          "data_type": "VARCHAR(500)",
+          "description": "File system location where the plugin's installation package is stored."
+        },
+        {
+          "col_name": "package_size",
+          "data_type": "BIGINT",
+          "description": "The total storage footprint occupied by the plugin's installation package."
+        },
+        {
+          "col_name": "package_checksum",
+          "data_type": "VARCHAR(255)",
+          "description": "A unique fingerprint used to verify the integrity and authenticity of the plugin package."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "DATETIME",
+          "description": "The date and time when the plugin record was first added to the system."
+        },
+        {
+          "col_name": "updated_at",
+          "data_type": "DATETIME",
+          "description": "The date and time when the plugin record was most recently modified."
+        },
+        {
+          "col_name": "signature_verified",
+          "data_type": "TINYINT",
+          "description": "Flag indicating whether the plugin's digital signature has been validated as authentic and trustworthy."
+        }
+      ]
+    },
+    {
+      "table_name": "promo_code_redemptions",
+      "description": "This table records every successful redemption of a promotional code, capturing which tenant used which code and the resulting credit grant that was issued to their account. It serves as the audit trail connecting promotional campaigns to actual credit issuance, enabling reporting on redemption rates, fraud prevention, and promotion effectiveness.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique identifier for each promotional code redemption event, allowing the system to distinguish individual redemption records."
+        },
+        {
+          "col_name": "promo_code_id",
+          "data_type": "BIGINT",
+          "description": "Identifies the specific promotional code that was redeemed, linking the redemption back to the original promotion definition and its terms."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifies the customer account or organization that redeemed the promotional code and received the associated credits."
+        },
+        {
+          "col_name": "redeemed_at",
+          "data_type": "TIMESTAMP",
+          "description": "The exact date and time when the promotional code was successfully applied, used for analytics, reporting, and validating time-limited promotions."
+        },
+        {
+          "col_name": "credit_grant_id",
+          "data_type": "BIGINT",
+          "description": "References the credit grant that was created as a result of the redemption, showing the direct link between the promo code usage and the credits added to the tenant's balance."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the redemption record was first generated in the system."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The most recent date and time when any details of this redemption record were modified, supporting data lineage and audit purposes."
+        }
+      ]
+    },
+    {
+      "table_name": "promo_codes",
+      "description": "This table stores promotional codes used in marketing campaigns and customer acquisition initiatives. Each code grants recipients a defined amount of platform credits that can be applied against usage, with controls around validity periods, redemption limits, and activation status to support flexible promotional strategies.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique internal identifier for each promotional code record in the system."
+        },
+        {
+          "col_name": "code",
+          "data_type": "VARCHAR(50)",
+          "description": "The actual promotional string that customers enter to redeem the offer, such as a word or alphanumeric sequence used in marketing materials."
+        },
+        {
+          "col_name": "credits",
+          "data_type": "BIGINT",
+          "description": "The number of platform credits awarded to a customer when they successfully redeem this promotional code."
+        },
+        {
+          "col_name": "metering_key",
+          "data_type": "VARCHAR(100)",
+          "description": "Specifies which usage dimension or service the granted credits apply to, determining what the credits can be spent on within the platform."
+        },
+        {
+          "col_name": "validity_days",
+          "data_type": "INT",
+          "description": "The number of days a redeemed code remains usable before the granted credits expire for the individual recipient."
+        },
+        {
+          "col_name": "max_redemptions",
+          "data_type": "INT",
+          "description": "The total number of times this promotional code can be redeemed across all customers before it becomes unavailable."
+        },
+        {
+          "col_name": "current_redemptions",
+          "data_type": "INT",
+          "description": "Tracks how many times the promotional code has been redeemed to date, used to enforce the maximum redemption limit."
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": "The absolute date and time after which the promotional code can no longer be redeemed by any customer, regardless of individual validity."
+        },
+        {
+          "col_name": "is_active",
+          "data_type": "TINYINT",
+          "description": "Indicates whether the promotional code is currently enabled for redemption or has been manually disabled by administrators."
+        },
+        {
+          "col_name": "description",
+          "data_type": "VARCHAR(500)",
+          "description": "Internal notes describing the purpose, campaign, or intended audience of the promotional code for business and operational reference."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the promotional code record was first created in the system."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the promotional code record was most recently modified, useful for auditing changes to its configuration."
+        }
+      ]
+    },
+    {
+      "table_name": "referral_codes",
+      "description": "Manages promotional referral codes that incentivize existing customers to invite new users, with credit rewards issued to both the referrer and the new signup. Supports tenant-level isolation so each organization can run its own referral campaigns independently. Tracks usage volume and code status to monitor campaign performance and lifecycle.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique internal identifier assigned to each referral code record for system tracking purposes."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifies the specific organization or account that owns this referral code, ensuring codes are isolated per tenant environment."
+        },
+        {
+          "col_name": "code",
+          "data_type": "VARCHAR(100)",
+          "description": "The actual alphanumeric referral code string that customers share with prospects to redeem the referral offer."
+        },
+        {
+          "col_name": "credits_for_referrer",
+          "data_type": "BIGINT",
+          "description": "Number of credits awarded to the existing customer who successfully refers a new user using this code."
+        },
+        {
+          "col_name": "credits_for_referee",
+          "data_type": "BIGINT",
+          "description": "Number of credits awarded to the newly referred user when they sign up using this referral code."
+        },
+        {
+          "col_name": "total_referrals",
+          "data_type": "INT",
+          "description": "Running count of how many successful referrals have been generated using this code, used to gauge campaign effectiveness."
+        },
+        {
+          "col_name": "is_active",
+          "data_type": "TINYINT",
+          "description": "Flag indicating whether the referral code is currently eligible for new redemptions or has been paused or retired."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp marking when the referral code was originally generated and made available for distribution."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp recording the most recent change to the referral code, such as updated credit amounts, status changes, or usage increments."
+        }
+      ]
+    },
+    {
+      "table_name": "referral_conversions",
+      "description": "This table captures successful referral conversions, linking the customer who referred a new user with the new user who signed up, along with the rewards credited to both parties. It serves as the central record for tracking how referral programs drive customer acquisition and the financial incentives exchanged.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique business identifier for each referral conversion event recorded in the system."
+        },
+        {
+          "col_name": "referral_code_id",
+          "data_type": "BIGINT",
+          "description": "The specific referral code that was shared and used to attribute the new customer to the referring individual."
+        },
+        {
+          "col_name": "referee_tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": "The newly acquired customer or tenant account that signed up by applying a referral code."
+        },
+        {
+          "col_name": "referrer_credit_grant_id",
+          "data_type": "BIGINT",
+          "description": "The reward credit that was issued to the existing customer who successfully referred the new user."
+        },
+        {
+          "col_name": "referee_credit_grant_id",
+          "data_type": "BIGINT",
+          "description": "The welcome or signup credit that was awarded to the new customer as an incentive for using a referral."
+        },
+        {
+          "col_name": "converted_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the referred user completed the qualifying action that triggered the referral conversion."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(20)",
+          "description": "The current lifecycle state of the conversion, indicating whether it is pending validation, fully rewarded, reversed, or otherwise resolved."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The timestamp when the conversion record was first generated in the system."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The timestamp of the most recent change made to the conversion record, such as status updates or reward adjustments."
+        }
+      ]
+    },
+    {
+      "table_name": "scheduled_job_locks",
+      "description": "This table ensures that scheduled background jobs run safely by tracking which job is currently being executed and preventing multiple instances from running the same job at the same time. It acts as a coordination mechanism so that critical automated tasks (such as billing cycles, report generation, or data syncs) are not duplicated or interrupted by overlapping executions.",
+      "primary_key": "job_name",
+      "columns": [
+        {
+          "col_name": "job_name",
+          "data_type": "VARCHAR(100)",
+          "description": "The unique identifier of the scheduled job that is currently being executed, such as a nightly billing recalculation or daily report generation task."
+        },
+        {
+          "col_name": "locked_by",
+          "data_type": "VARCHAR(100)",
+          "description": "The identifier of the worker, server, or process instance that has claimed the job and is responsible for running it, helping teams trace which component is performing the work."
+        },
+        {
+          "col_name": "locked_at",
+          "data_type": "TIMESTAMP",
+          "description": "The timestamp showing when the job was picked up and execution began, useful for monitoring job start times and diagnosing delays in scheduled operations."
+        },
+        {
+          "col_name": "lock_until",
+          "data_type": "TIMESTAMP",
+          "description": "The timestamp indicating how long the job is expected to run, after which the lock can be considered stale and safely taken over by another worker if the original one has not completed."
+        }
+      ]
+    },
+    {
+      "table_name": "secrets",
+      "description": "Stores encrypted credentials, API keys, and tokens used by applications, AI agents, and integrations across the platform. Each secret is scoped to a specific workspace or sub-entity, with built-in lifecycle management including expiration tracking, access auditing, and active/inactive status control.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique identifier automatically assigned to each secret record upon creation."
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(100)",
+          "description": "Identifies the workspace that owns this secret, ensuring credentials are isolated between different tenant environments."
+        },
+        {
+          "col_name": "secret_key",
+          "data_type": "VARCHAR(191)",
+          "description": "The human-readable name or label used to look up and reference a specific secret within integrations and applications."
+        },
+        {
+          "col_name": "encrypted_value",
+          "data_type": "TEXT",
+          "description": "The sensitive credential, token, or API key content stored in encrypted form to protect it from unauthorized access."
+        },
+        {
+          "col_name": "scope",
+          "data_type": "VARCHAR(20)",
+          "description": "Defines the level at which the secret is available, such as workspace-wide or limited to a specific project or resource."
+        },
+        {
+          "col_name": "scope_id",
+          "data_type": "VARCHAR(100)",
+          "description": "Identifies the specific project, agent, or sub-entity within the chosen scope that the secret is tied to."
+        },
+        {
+          "col_name": "description",
+          "data_type": "VARCHAR(500)",
+          "description": "A free-text note explaining the purpose of the secret, what it connects to, or any relevant context for administrators."
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the secret is scheduled to become invalid, supporting automatic credential rotation policies."
+        },
+        {
+          "col_name": "last_accessed_at",
+          "data_type": "TIMESTAMP",
+          "description": "The most recent date and time the secret was retrieved or used, supporting activity monitoring and stale credential detection."
+        },
+        {
+          "col_name": "access_count",
+          "data_type": "BIGINT",
+          "description": "The total number of times the secret has been read or used, providing insight into credential utilization."
+        },
+        {
+          "col_name": "active",
+          "data_type": "TINYINT",
+          "description": "Indicates whether the secret is currently enabled and available for use, or temporarily disabled without being deleted."
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(100)",
+          "description": "The user or system account that originally added the secret to the platform."
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "TEXT",
+          "description": "Additional structured information about the secret, such as tags, environment labels, or integration-specific configuration."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the secret was first added to the system."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the secret record was most recently modified, including value changes or status updates."
+        }
+      ]
+    },
+    {
+      "table_name": "step_execution_sessions",
+      "description": "This table tracks individual execution sessions for workflows, capturing the full state of a step-by-step workflow run from the initial trigger through to completion. It supports multi-tenant AI automation environments by recording which nodes have executed, what data has been produced, and where execution is currently paused or stopped. Each session enables resumable, auditable workflow execution with trigger context, plugin bindings, and intermediate results preserved.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(36)",
+          "description": "Unique identifier for a single workflow execution session, used to distinguish one run from another across the platform."
+        },
+        {
+          "col_name": "workflow_execution_id",
+          "data_type": "VARCHAR(36)",
+          "description": "Identifier linking this session back to the overall workflow execution it belongs to, tying individual steps to the parent run."
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Reference to the specific workflow definition being executed during this session."
+        },
+        {
+          "col_name": "strategy",
+          "data_type": "VARCHAR(20)",
+          "description": "Defines the execution approach for the workflow, such as running steps sequentially or in a different routing mode."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(20)",
+          "description": "Current state of the execution session, indicating whether it is running, paused, completed, failed, or another lifecycle stage."
+        },
+        {
+          "col_name": "current_node_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifies the workflow node that is actively being processed or awaiting processing in this session."
+        },
+        {
+          "col_name": "node_outputs_cache",
+          "data_type": "LONGTEXT",
+          "description": "Cached results produced by previously executed nodes, available for downstream steps to reference without recomputation."
+        },
+        {
+          "col_name": "executed_nodes",
+          "data_type": "LONGTEXT",
+          "description": "List of workflow nodes that have already been processed during this session, providing an audit trail of progress."
+        },
+        {
+          "col_name": "initial_payload",
+          "data_type": "LONGTEXT",
+          "description": "The original input data that triggered the workflow, preserved as the starting context for the entire execution."
+        },
+        {
+          "col_name": "current_payload",
+          "data_type": "LONGTEXT",
+          "description": "The data being passed between nodes at the current point in execution, reflecting the latest transformed state."
+        },
+        {
+          "col_name": "workflow_definition",
+          "data_type": "LONGTEXT",
+          "description": "The complete workflow structure and configuration captured at the time of execution, ensuring consistency even if the workflow changes later."
+        },
+        {
+          "col_name": "total_nodes",
+          "data_type": "INT",
+          "description": "Total number of nodes contained in the workflow, used to measure overall progress and completion."
+        },
+        {
+          "col_name": "executed_node_count",
+          "data_type": "INT",
+          "description": "Number of nodes that have finished executing so far, supporting progress tracking and reporting."
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": "The point in time after which this session is considered stale and can be cleaned up or no longer resumed."
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "TEXT",
+          "description": "Details of any failure encountered during execution, providing context for troubleshooting and retry decisions."
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifies the workspace that owns this execution session, enabling workspace-level isolation and access control."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifies the organization or tenant that owns this execution session in multi-tenant deployments."
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(255)",
+          "description": "The user or system actor that initiated this workflow execution session."
+        },
+        {
+          "col_name": "stop_at_node_id",
+          "data_type": "VARCHAR(255)",
+          "description": "The specific node at which execution should halt, used for debugging, breakpoint-style runs, or partial execution."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The timestamp recording when this execution session was first created."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The timestamp of the most recent change to the session, useful for monitoring activity and staleness."
+        },
+        {
+          "col_name": "trigger_token",
+          "data_type": "VARCHAR(64)",
+          "description": "Unique token associated with the trigger event that started this session, enabling traceability and authentication of the initiating request."
+        },
+        {
+          "col_name": "trigger_node_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifies the node that served as the entry point or trigger for this workflow execution."
+        },
+        {
+          "col_name": "trigger_type",
+          "data_type": "VARCHAR(50)",
+          "description": "Describes the category of trigger that launched the session, such as webhook, schedule, or manual initiation."
+        },
+        {
+          "col_name": "trigger_payload_cache",
+          "data_type": "LONGTEXT",
+          "description": "Cached copy of the trigger event data, preserved for replay, debugging, and reference during execution."
+        },
+        {
+          "col_name": "plugin_registration_id",
+          "data_type": "VARCHAR(36)",
+          "description": "Links the session to a registered plugin that provides capabilities used during workflow execution."
+        },
+        {
+          "col_name": "registered_webhook_url",
+          "data_type": "VARCHAR(512)",
+          "description": "The webhook endpoint registered for this session, used to receive callbacks or deliver asynchronous results."
+        },
+        {
+          "col_name": "paused_reason",
+          "data_type": "VARCHAR(50)",
+          "description": "Indicates why the execution session is currently in a paused state, such as awaiting human input or external approval."
+        }
+      ]
+    },
+    {
+      "table_name": "stripe_events",
+      "description": "Tracks individual events received from Stripe to ensure payment-related notifications are captured, processed, and reconciled. Provides visibility into event handling status, supports troubleshooting of failed events, and maintains an audit trail of retries and errors for billing operations.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique internal identifier for each Stripe event record captured by the system."
+        },
+        {
+          "col_name": "event_id",
+          "data_type": "VARCHAR(255)",
+          "description": "The reference number Stripe assigns to each event, used to link the captured event back to its source notification."
+        },
+        {
+          "col_name": "event_type",
+          "data_type": "VARCHAR(100)",
+          "description": "The category of event delivered by Stripe, such as a successful payment, subscription update, or refund, indicating what business action triggered the notification."
+        },
+        {
+          "col_name": "api_version",
+          "data_type": "VARCHAR(50)",
+          "description": "The version of the Stripe API that was active when the event was generated, useful for understanding the event format and behavior."
+        },
+        {
+          "col_name": "data_object_id",
+          "data_type": "VARCHAR(255)",
+          "description": "The identifier of the underlying Stripe object that the event relates to, such as a specific invoice, charge, or customer record."
+        },
+        {
+          "col_name": "data_object_type",
+          "data_type": "VARCHAR(100)",
+          "description": "Describes the kind of Stripe object involved in the event, helping teams understand which part of the billing process is affected."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": "Indicates the current processing state of the event, such as whether it is pending, successfully processed, or failed."
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "TEXT",
+          "description": "Contains details of any problem encountered while handling the event, supporting diagnosis and resolution of billing discrepancies."
+        },
+        {
+          "col_name": "retry_count",
+          "data_type": "INT",
+          "description": "The number of times the system has attempted to reprocess the event after an initial failure."
+        },
+        {
+          "col_name": "processed_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the event was successfully handled by the system."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the event record was first created in the system upon receipt from Stripe."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The most recent date and time the event record was modified, reflecting the latest status or retry information."
+        }
+      ]
+    },
+    {
+      "table_name": "subscription_changes",
+      "description": "This table maintains a complete audit trail of every modification made to customer subscriptions, capturing plan switches, status transitions, and billing period adjustments. It enables the business to understand subscription lifecycle events, reconcile billing changes with payment processor records, and analyze customer upgrade/downgrade patterns.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique identifier for each subscription change record in the system."
+        },
+        {
+          "col_name": "subscription_id",
+          "data_type": "BIGINT",
+          "description": "Identifies the specific customer subscription that experienced the change."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifies the customer organization whose subscription was modified."
+        },
+        {
+          "col_name": "change_type",
+          "data_type": "VARCHAR(50)",
+          "description": "Categorizes the nature of the modification, such as plan upgrade, downgrade, renewal, or cancellation."
+        },
+        {
+          "col_name": "previous_plan_id",
+          "data_type": "BIGINT",
+          "description": "Identifies the subscription plan the customer was on before the change took effect."
+        },
+        {
+          "col_name": "new_plan_id",
+          "data_type": "BIGINT",
+          "description": "Identifies the subscription plan the customer moved to as a result of the change."
+        },
+        {
+          "col_name": "previous_status",
+          "data_type": "VARCHAR(50)",
+          "description": "Captures the subscription state prior to the change, such as active, past due, or canceled."
+        },
+        {
+          "col_name": "new_status",
+          "data_type": "VARCHAR(50)",
+          "description": "Captures the subscription state after the change was applied, reflecting its current lifecycle position."
+        },
+        {
+          "col_name": "previous_period_end",
+          "data_type": "TIMESTAMP",
+          "description": "Marks the end date of the billing cycle that was in effect before the change occurred."
+        },
+        {
+          "col_name": "new_period_end",
+          "data_type": "TIMESTAMP",
+          "description": "Marks the end date of the new billing cycle resulting from the subscription modification."
+        },
+        {
+          "col_name": "stripe_event_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Links the change to the corresponding event notification received from the Stripe payment platform."
+        },
+        {
+          "col_name": "stripe_invoice_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Links the change to the specific invoice generated by Stripe for this billing adjustment."
+        },
+        {
+          "col_name": "proration_amount",
+          "data_type": "BIGINT",
+          "description": "Records the prorated credit or charge applied to the customer when mid-cycle plan changes occurred."
+        },
+        {
+          "col_name": "change_reason",
+          "data_type": "VARCHAR(500)",
+          "description": "Provides a free-text explanation of why the subscription was modified, useful for support and analysis."
+        },
+        {
+          "col_name": "metadata_json",
+          "data_type": "TEXT",
+          "description": "Stores additional contextual information about the change in a flexible structured format for advanced reporting needs."
+        },
+        {
+          "col_name": "performed_by",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifies the user, system, or process that initiated the subscription change."
+        },
+        {
+          "col_name": "performed_by_email",
+          "data_type": "VARCHAR(255)",
+          "description": "Captures the email address associated with the person or administrator who triggered the change."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "Records the exact date and time when the subscription change was first logged."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "Indicates the most recent date and time the change record was modified after its initial creation."
+        }
+      ]
+    },
+    {
+      "table_name": "tenant_credit_grants",
+      "description": "This table tracks credit allocations provided to tenants, capturing both the original amount granted and the portion that has been used or reserved for ongoing operations. It enables the platform to manage multiple credit sources per tenant, prioritize which credits are consumed first, and enforce expiration policies across various promotional, subscription, or support-based credit programs.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique identifier for each individual credit grant record issued to a tenant."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifies the tenant or customer account that owns this particular credit grant."
+        },
+        {
+          "col_name": "metering_key",
+          "data_type": "VARCHAR(100)",
+          "description": "Specifies the type of usage or resource the credits apply to, such as a particular product feature, API, or service offering."
+        },
+        {
+          "col_name": "granted_credits",
+          "data_type": "DECIMAL(19,4)",
+          "description": "The total number of credits originally awarded to the tenant under this grant."
+        },
+        {
+          "col_name": "consumed_credits",
+          "data_type": "DECIMAL(19,4)",
+          "description": "The portion of credits that the tenant has already spent on eligible usage."
+        },
+        {
+          "col_name": "reserved_credits",
+          "data_type": "DECIMAL(19,4)",
+          "description": "The portion of credits held aside for in-progress operations or pending usage that has not yet been finalized."
+        },
+        {
+          "col_name": "source",
+          "data_type": "VARCHAR(50)",
+          "description": "Indicates the origin of the credit grant, such as a promotional campaign, subscription plan, marketing offer, or customer support gesture."
+        },
+        {
+          "col_name": "reference_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Links the credit grant to the originating record, such as the related plan, promotion, or transaction that triggered the grant."
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": "A human-readable explanation of the purpose or context behind the credit grant."
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time after which any remaining unused credits can no longer be consumed."
+        },
+        {
+          "col_name": "effective_from",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the credits become available for the tenant to use."
+        },
+        {
+          "col_name": "is_active",
+          "data_type": "TINYINT",
+          "description": "Indicates whether the credit grant is currently enabled and available for consumption."
+        },
+        {
+          "col_name": "priority",
+          "data_type": "INT",
+          "description": "Determines the order in which this grant's credits are drawn down relative to other grants when the tenant uses the service."
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(255)",
+          "description": "The name or identifier of the person or system that issued the credit grant."
+        },
+        {
+          "col_name": "created_by_email",
+          "data_type": "VARCHAR(255)",
+          "description": "The email address of the individual or administrator who created the credit grant."
+        },
+        {
+          "col_name": "version",
+          "data_type": "BIGINT",
+          "description": "Tracks how many times the credit grant record has been modified, used to manage concurrent updates safely."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the credit grant was originally issued and recorded."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when any field on the credit grant record was most recently changed."
+        }
+      ]
+    },
+    {
+      "table_name": "tenant_credit_transactions",
+      "description": "This table serves as a complete ledger of all credit movements for each tenant, capturing every addition, deduction, and adjustment to tenant credit balances. It provides full audit transparency by recording who triggered each transaction, when it occurred, and the running balance after each entry, supporting billing reconciliation, usage tracking, and customer support inquiries.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "A unique reference number assigned to each credit transaction entry, allowing every credit movement to be individually tracked and retrieved."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifies which tenant customer account the credit transaction belongs to, linking the entry to the correct organization in the platform."
+        },
+        {
+          "col_name": "transaction_type",
+          "data_type": "VARCHAR(50)",
+          "description": "Indicates the nature of the credit movement, such as a credit added, a debit used, or a manual adjustment applied to the tenant account."
+        },
+        {
+          "col_name": "category",
+          "data_type": "VARCHAR(50)",
+          "description": "Classifies the purpose of the transaction, such as a top-up purchase, platform usage consumption, promotional grant, refund, or correction."
+        },
+        {
+          "col_name": "amount",
+          "data_type": "DECIMAL(19,4)",
+          "description": "The number of credits that were added to or deducted from the tenant's balance as part of this transaction, expressed as a positive or negative value."
+        },
+        {
+          "col_name": "balance_after",
+          "data_type": "DECIMAL(19,4)",
+          "description": "The tenant's available credit balance immediately following this transaction, providing a snapshot of remaining credits at that point in time."
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": "A human-readable explanation of why the transaction occurred, offering additional context such as the feature used, campaign name, or reason for an adjustment."
+        },
+        {
+          "col_name": "reference_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Links the credit transaction to the originating record that triggered it, such as a usage event, an order, an invoice, or another related business document."
+        },
+        {
+          "col_name": "performed_by",
+          "data_type": "VARCHAR(255)",
+          "description": "The name of the user or system process responsible for initiating the transaction, supporting accountability and audit traceability."
+        },
+        {
+          "col_name": "performed_by_email",
+          "data_type": "VARCHAR(255)",
+          "description": "The email address associated with the person or account that performed the transaction, enabling follow-up communication when needed."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the credit transaction was originally recorded in the system."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the transaction record was most recently modified, useful for identifying entries that were corrected or amended after creation."
+        }
+      ]
+    },
+    {
+      "table_name": "tenant_invoices",
+      "description": "This table stores billing invoices issued to customers for their subscription services, capturing payment details, billing periods, and links to viewable invoice documents. It serves as the central record for tracking what each customer owes, what has been paid, and when payments are due. The table integrates with the payment processor to keep invoice status synchronized across systems.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique internal identifier assigned to each invoice record in the system."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifier linking the invoice to the specific customer organization that received the bill."
+        },
+        {
+          "col_name": "subscription_id",
+          "data_type": "BIGINT",
+          "description": "Identifier connecting the invoice to the customer's active service plan that generated the charge."
+        },
+        {
+          "col_name": "stripe_invoice_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Reference number from the payment processor used to reconcile this invoice with the external payment system."
+        },
+        {
+          "col_name": "invoice_number",
+          "data_type": "VARCHAR(100)",
+          "description": "Human-readable invoice identifier displayed on the document and used for customer communication and accounting."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": "Current payment state of the invoice, such as paid, outstanding, past due, or void."
+        },
+        {
+          "col_name": "amount_due",
+          "data_type": "BIGINT",
+          "description": "Total monetary value the customer is required to pay for this billing period."
+        },
+        {
+          "col_name": "amount_paid",
+          "data_type": "BIGINT",
+          "description": "Portion of the invoice total that has already been collected from the customer."
+        },
+        {
+          "col_name": "currency",
+          "data_type": "VARCHAR(10)",
+          "description": "Currency in which the invoice amounts are denominated, such as USD or EUR."
+        },
+        {
+          "col_name": "invoice_pdf_url",
+          "data_type": "VARCHAR(1000)",
+          "description": "Web address where the customer can download a printable PDF version of the invoice."
+        },
+        {
+          "col_name": "hosted_invoice_url",
+          "data_type": "VARCHAR(1000)",
+          "description": "Web address where the customer can view the full invoice details in a browser-based format."
+        },
+        {
+          "col_name": "period_start",
+          "data_type": "TIMESTAMP",
+          "description": "Start date of the service period that this invoice covers."
+        },
+        {
+          "col_name": "period_end",
+          "data_type": "TIMESTAMP",
+          "description": "End date of the service period that this invoice covers."
+        },
+        {
+          "col_name": "due_date",
+          "data_type": "TIMESTAMP",
+          "description": "Deadline by which the customer must complete payment to avoid late fees or service interruption."
+        },
+        {
+          "col_name": "paid_at",
+          "data_type": "TIMESTAMP",
+          "description": "Timestamp recording when the payment was successfully received and the invoice was settled."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "Date and time when the invoice was first generated and issued to the customer."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "Date and time when any detail on the invoice record was most recently modified."
+        }
+      ]
+    },
+    {
+      "table_name": "tenant_plugins",
+      "description": "This table records which plugins each customer organization (tenant) has installed, along with how those plugins are configured and who manages them. It serves as the central record linking tenants to the specific capabilities and integrations they have activated within the platform.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique internal identifier for each plugin installation record belonging to a tenant."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(36)",
+          "description": "Identifies the specific customer organization that has the plugin installed in their environment."
+        },
+        {
+          "col_name": "plugin_id",
+          "data_type": "VARCHAR(255)",
+          "description": "References the particular plugin or extension that the tenant has chosen to install and use."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": "Indicates the current operational state of the plugin for this tenant, such as active, disabled, or pending setup."
+        },
+        {
+          "col_name": "configuration",
+          "data_type": "TEXT",
+          "description": "Stores the tenant-specific settings and preferences that determine how the plugin behaves within their environment."
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "TEXT",
+          "description": "Holds additional flexible information about the plugin installation that doesn't fit into standard configuration fields."
+        },
+        {
+          "col_name": "enabled_by",
+          "data_type": "VARCHAR(255)",
+          "description": "Captures the name or identifier of the person who initially activated the plugin for the tenant."
+        },
+        {
+          "col_name": "enabled_at",
+          "data_type": "DATETIME",
+          "description": "Records the date and time when the plugin was first turned on for the tenant."
+        },
+        {
+          "col_name": "last_modified_by",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifies the person who made the most recent change to this plugin installation or its settings."
+        },
+        {
+          "col_name": "notes",
+          "data_type": "TEXT",
+          "description": "Provides a free-form text area for administrators to leave comments, context, or reminders about the plugin installation."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "DATETIME",
+          "description": "Marks the date and time when this plugin installation record was first created for the tenant."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "DATETIME",
+          "description": "Tracks the most recent date and time any information about this plugin installation was changed."
+        }
+      ]
+    },
+    {
+      "table_name": "tenant_subscriptions",
+      "description": "This table tracks the subscription status and billing details for each tenant, including their current plan, billing periods, and integration with the payment processor. It serves as the central record of what plan each customer is on, when they were billed, and whether they have an active trial or are scheduled to cancel.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique identifier for each subscription record in the system."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifies the specific customer or organization holding the subscription."
+        },
+        {
+          "col_name": "plan_id",
+          "data_type": "BIGINT",
+          "description": "References the specific subscription plan the tenant is currently enrolled in, such as a free, standard, or enterprise tier."
+        },
+        {
+          "col_name": "stripe_subscription_id",
+          "data_type": "VARCHAR(255)",
+          "description": "The reference number from the payment processor used to link this subscription to its corresponding external billing record."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": "Indicates the current state of the subscription, such as active, trialing, past due, or canceled."
+        },
+        {
+          "col_name": "current_period_start",
+          "data_type": "TIMESTAMP",
+          "description": "Marks the beginning of the most recent billing cycle for which the tenant has been charged."
+        },
+        {
+          "col_name": "current_period_end",
+          "data_type": "TIMESTAMP",
+          "description": "Marks the end of the current billing cycle, indicating when the next charge will occur."
+        },
+        {
+          "col_name": "cancel_at_period_end",
+          "data_type": "TINYINT",
+          "description": "Flag showing whether the tenant has requested to end their subscription when the current billing period finishes."
+        },
+        {
+          "col_name": "canceled_at",
+          "data_type": "TIMESTAMP",
+          "description": "Records the date and time when the subscription was officially terminated by the tenant or the system."
+        },
+        {
+          "col_name": "trial_start",
+          "data_type": "TIMESTAMP",
+          "description": "Captures the beginning of any free trial period that was offered before paid billing began."
+        },
+        {
+          "col_name": "trial_end",
+          "data_type": "TIMESTAMP",
+          "description": "Captures the end of the free trial period, after which normal billing charges take effect."
+        },
+        {
+          "col_name": "latest_invoice_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Links to the most recent invoice generated for this subscription, providing a reference to the latest billing document."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the subscription was first established for the tenant."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The most recent date and time when any details of this subscription were modified in the system."
+        }
+      ]
+    },
+    {
+      "table_name": "tenant_wallets",
+      "description": "Tracks the credit balance for each tenant, capturing how credits are available, reserved for ongoing work, and consumed over time. This wallet powers metered billing for tenant usage of platform services such as AI agents, conversations, and other automated resources.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique internal identifier assigned to each tenant wallet record."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifier of the tenant that owns this wallet, linking the credit balance to the correct customer account."
+        },
+        {
+          "col_name": "metering_key",
+          "data_type": "VARCHAR(100)",
+          "description": "Specifies the type of metered resource this wallet tracks, such as AI agent usage, conversation minutes, or another billable service."
+        },
+        {
+          "col_name": "available_credits",
+          "data_type": "DECIMAL(19,4)",
+          "description": "Credits the tenant can currently spend on metered platform services."
+        },
+        {
+          "col_name": "reserved_credits",
+          "data_type": "DECIMAL(19,4)",
+          "description": "Credits set aside for operations that are in progress but have not yet been finalized and deducted."
+        },
+        {
+          "col_name": "consumed_credits",
+          "data_type": "DECIMAL(19,4)",
+          "description": "Total credits the tenant has used historically across all metered activity."
+        },
+        {
+          "col_name": "currency",
+          "data_type": "VARCHAR(10)",
+          "description": "The unit or denomination in which the wallet credits are expressed."
+        },
+        {
+          "col_name": "version",
+          "data_type": "BIGINT",
+          "description": "Sequence counter that keeps wallet updates consistent when multiple balance changes occur at the same time."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "Date and time when the wallet was first created for the tenant."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "Date and time when the wallet information was most recently modified."
+        }
+      ]
+    },
+    {
+      "table_name": "tenants",
+      "description": "This table represents the top-level customer organizations on the platform, capturing each tenant's identity, authentication configuration, billing setup, and lifecycle status. Each tenant operates as an isolated workspace with its own users, access controls, payment arrangements, and integration with external systems for identity and billing.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique internal identifier assigned to the tenant record for cross-referencing throughout the system."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Alternate reference code or slug used to identify the tenant in external systems and integrations."
+        },
+        {
+          "col_name": "name",
+          "data_type": "VARCHAR(255)",
+          "description": "The display name of the tenant organization as it appears to administrators and end users."
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": "Free-form notes providing additional context about the tenant's purpose, scope, or business context."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": "Current lifecycle state of the tenant, indicating whether it is active, suspended, archived, or in another state."
+        },
+        {
+          "col_name": "keycloak_realm",
+          "data_type": "VARCHAR(255)",
+          "description": "The dedicated authentication realm in Keycloak that isolates this tenant's users and login configurations."
+        },
+        {
+          "col_name": "keycloak_client_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Reference to the Keycloak application configuration that connects the tenant to the platform's identity and access services."
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "JSON",
+          "description": "Flexible, custom attributes stored alongside the tenant to hold tenant-specific settings, tags, or configuration values."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the tenant was first registered on the platform."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The most recent date and time when any information on the tenant record was modified."
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(255)",
+          "description": "The user or system account that initially registered the tenant."
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "VARCHAR(255)",
+          "description": "The user or system account that most recently modified the tenant record."
+        },
+        {
+          "col_name": "stripe_customer_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Reference to the corresponding customer record in Stripe that manages this tenant's billing and subscriptions."
+        },
+        {
+          "col_name": "default_payment_method_id",
+          "data_type": "VARCHAR(255)",
+          "description": "The preferred payment instrument, such as a card or bank account, used to charge the tenant for services."
+        },
+        {
+          "col_name": "billing_email",
+          "data_type": "VARCHAR(255)",
+          "description": "The email address used for sending invoices, receipts, and other billing-related communications to the tenant."
+        },
+        {
+          "col_name": "billing_address_json",
+          "data_type": "JSON",
+          "description": "The structured postal address associated with the tenant's billing account, used for tax and invoicing purposes."
+        },
+        {
+          "col_name": "stripe_customer_synced_at",
+          "data_type": "TIMESTAMP",
+          "description": "The most recent point at which the tenant's billing profile was successfully reconciled with the Stripe billing system."
+        }
+      ]
+    },
+    {
+      "table_name": "tool_execution_cache",
+      "description": "This table stores cached results from tool executions performed during AI agent workflows, allowing the system to reuse previously computed outcomes and avoid redundant tool calls. Each record captures a specific tool invocation along with its result and validity window, supporting efficiency and cost reduction in automated workflow execution.",
+      "primary_key": "tool_call_id",
+      "columns": [
+        {
+          "col_name": "tool_call_id",
+          "data_type": "CHAR(36)",
+          "description": "Unique identifier for an individual tool invocation within a workflow, used to track and retrieve the cached outcome of that specific call."
+        },
+        {
+          "col_name": "workflow_execution_id",
+          "data_type": "CHAR(36)",
+          "description": "Reference to the parent workflow run that triggered this tool call, linking the cached result back to the broader automated process it belongs to."
+        },
+        {
+          "col_name": "tool_name",
+          "data_type": "VARCHAR(150)",
+          "description": "The name of the tool or external capability that was invoked during the workflow, indicating which function or service produced the cached result."
+        },
+        {
+          "col_name": "result",
+          "data_type": "LONGTEXT",
+          "description": "The output or response returned by the tool when it was originally executed, stored so it can be reused without repeating the tool call."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(30)",
+          "description": "Indicates the outcome state of the tool execution, such as whether it completed successfully or encountered an issue."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The timestamp marking when the cached tool result was first recorded, establishing when the original execution took place."
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": "The timestamp after which the cached result is considered stale and should no longer be reused, ensuring workflows rely on fresh data when needed."
+        }
+      ]
+    },
+    {
+      "table_name": "trusted_publishers",
+      "description": "Maintains a registry of trusted publishers whose cryptographic identities are recognized by the system for verifying the authenticity and integrity of signed content. The registry supports the full lifecycle of a publisher relationship, from initial registration through active use to formal revocation when trust is no longer warranted.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique internal identifier assigned to each trusted publisher record for system reference and tracking."
+        },
+        {
+          "col_name": "name",
+          "data_type": "VARCHAR(255)",
+          "description": "The human-readable name of the publisher as it should appear throughout the platform and in any published content."
+        },
+        {
+          "col_name": "public_key",
+          "data_type": "TEXT",
+          "description": "The cryptographic public key used to verify digital signatures and confirm that content was genuinely issued by this publisher."
+        },
+        {
+          "col_name": "key_fingerprint",
+          "data_type": "VARCHAR(64)",
+          "description": "A short, easily recognizable hash derived from the public key, used to quickly confirm which specific key is associated with a publisher."
+        },
+        {
+          "col_name": "enabled",
+          "data_type": "TINYINT",
+          "description": "Indicates whether the publisher is currently permitted to sign and submit content, allowing administrators to temporarily suspend trust without deleting the record."
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": "Free-form text providing additional context about the publisher, such as their role, ownership, or the nature of content they produce."
+        },
+        {
+          "col_name": "website_url",
+          "data_type": "VARCHAR(500)",
+          "description": "The official web address for the publisher, allowing users and auditors to learn more about the organization behind the content."
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(255)",
+          "description": "The username or identifier of the person who originally registered the publisher in the system."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the publisher was first added to the trusted registry."
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "VARCHAR(255)",
+          "description": "The username or identifier of the person who most recently modified the publisher's record."
+        },
+        {
+          "col_name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time of the most recent change made to the publisher's record."
+        },
+        {
+          "col_name": "revocation_reason",
+          "data_type": "TEXT",
+          "description": "A written explanation of why the publisher's trusted status was withdrawn, providing an audit trail of the decision."
+        },
+        {
+          "col_name": "revoked_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the publisher's trusted status was formally revoked, after which their content should no longer be accepted."
+        }
+      ]
+    },
+    {
+      "table_name": "user_tenants",
+      "description": "This table manages the membership relationships between individual users and tenant workspaces in a multi-tenant platform. It tracks which users belong to which tenants, their roles and invitation status, and enables users to be associated with multiple tenants while designating a default workspace. This membership structure is foundational for organizing users, enforcing access control, and delivering tenant-scoped experiences across the platform.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique identifier for each user-tenant membership record, distinguishing every individual association between a user and a tenant workspace."
+        },
+        {
+          "col_name": "keycloak_user_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Reference to the authenticated user account in the identity provider, linking this membership record to the person's core login identity across the platform."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifies the specific tenant workspace to which the user has been granted access, enabling organization and isolation of data and resources per tenant."
+        },
+        {
+          "col_name": "role",
+          "data_type": "VARCHAR(50)",
+          "description": "Defines the user's permission level within the tenant, such as administrator, member, or viewer, governing what actions and resources they can access within that workspace."
+        },
+        {
+          "col_name": "email",
+          "data_type": "VARCHAR(255)",
+          "description": "The contact email address associated with the user for this particular tenant membership, which may differ from other tenants they belong to."
+        },
+        {
+          "col_name": "display_name",
+          "data_type": "VARCHAR(255)",
+          "description": "The human-readable name shown for the user within the tenant's interface, allowing administrators and team members to identify the person in conversations, assignments, and activity logs."
+        },
+        {
+          "col_name": "is_default",
+          "data_type": "TINYINT",
+          "description": "Indicates whether this tenant is the user's primary or preferred workspace that loads by default when they sign in, helping users with multiple tenant memberships navigate quickly to their main environment."
+        },
+        {
+          "col_name": "invitation_status",
+          "data_type": "VARCHAR(50)",
+          "description": "Tracks the current state of the user's onboarding to the tenant, such as pending, accepted, or declined, allowing administrators to manage who has been invited versus who has actively joined."
+        },
+        {
+          "col_name": "joined_at",
+          "data_type": "TIMESTAMP",
+          "description": "Records the date and time when the user formally became an active member of the tenant, marking the start of their access and participation in that workspace."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "Captures the date and time when this membership record was first created in the system, providing an audit trail of when the relationship was established."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "Reflects the most recent date and time when any details of this membership record were modified, such as role changes, invitation status updates, or default tenant reassignments."
+        }
+      ]
+    },
+    {
+      "table_name": "user_workspaces",
+      "description": "Tracks which users belong to which workspaces and defines their access level within each. This enables multi-tenant collaboration by managing membership, assigned roles, and the history of who was added by whom across the platform.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique identifier for each user-workspace membership record in the system."
+        },
+        {
+          "col_name": "keycloak_user_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifies the individual user from the platform's identity management system who is being granted workspace access."
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(100)",
+          "description": "Specifies which workspace the user has been granted membership in."
+        },
+        {
+          "col_name": "role",
+          "data_type": "VARCHAR(30)",
+          "description": "Defines the user's permission level and capabilities within that particular workspace, such as admin, member, or viewer."
+        },
+        {
+          "col_name": "joined_at",
+          "data_type": "TIMESTAMP",
+          "description": "Records the date and time when the user became a member of the workspace."
+        },
+        {
+          "col_name": "added_by",
+          "data_type": "VARCHAR(255)",
+          "description": "Identifies the existing user or administrator who invited or assigned this person to the workspace."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "Captures when the membership record was originally established in the system."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "Tracks the most recent change made to the user's workspace membership details, such as role updates or reassignments."
+        }
+      ]
+    },
+    {
+      "table_name": "workflow_execution_checkpoints",
+      "description": "Stores snapshots of AI agent workflow executions when they are temporarily paused, capturing the full state needed to seamlessly resume processing later. Each checkpoint represents a saved point in an agent's decision journey, enabling workflows to be interrupted—typically for human review or external input—and continued without losing progress. This supports reliable long-running agent operations across tenants, projects, and workspaces.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique identifier for each workflow checkpoint record."
+        },
+        {
+          "col_name": "workflow_execution_id",
+          "data_type": "CHAR(36)",
+          "description": "References the specific run of a workflow that this checkpoint belongs to."
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "VARCHAR(100)",
+          "description": "Identifies the workflow definition that was being executed when the checkpoint was created."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "CHAR(36)",
+          "description": "The customer organization that owns this checkpoint, used to isolate data between tenants."
+        },
+        {
+          "col_name": "project_id",
+          "data_type": "CHAR(36)",
+          "description": "The project grouping this checkpoint belongs to, allowing related workflows to be organized together."
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "CHAR(36)",
+          "description": "The workspace environment where the workflow execution was checkpointed."
+        },
+        {
+          "col_name": "suspended_at_node_id",
+          "data_type": "VARCHAR(100)",
+          "description": "Identifies the specific step or node within the workflow where execution was paused."
+        },
+        {
+          "col_name": "resume_from_node_id",
+          "data_type": "VARCHAR(100)",
+          "description": "Indicates the node from which the workflow should continue once it is resumed."
+        },
+        {
+          "col_name": "execution_context",
+          "data_type": "LONGTEXT",
+          "description": "Captures the complete state of variables, inputs, and intermediate results at the moment of suspension so execution can continue seamlessly."
+        },
+        {
+          "col_name": "parsed_workflow",
+          "data_type": "LONGTEXT",
+          "description": "Stores the structured representation of the workflow at checkpoint time, preserving the blueprint for resumption."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(30)",
+          "description": "The current lifecycle state of the checkpoint, such as whether it is active, expired, or has been consumed."
+        },
+        {
+          "col_name": "suspension_reason",
+          "data_type": "VARCHAR(100)",
+          "description": "Explains why the workflow execution was paused, such as awaiting human approval, external input, or a scheduled delay."
+        },
+        {
+          "col_name": "agent_request_id",
+          "data_type": "CHAR(36)",
+          "description": "Links to the AI agent request that triggered or was involved in the checkpointed workflow execution."
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time after which the checkpoint is no longer valid and cannot be used to resume the workflow."
+        },
+        {
+          "col_name": "fail_on_error",
+          "data_type": "TINYINT",
+          "description": "Indicates whether the workflow should fail entirely or continue with errors encountered after resuming from this checkpoint."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the checkpoint was originally created during workflow suspension."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the checkpoint record was most recently modified."
+        }
+      ]
+    },
+    {
+      "table_name": "workflow_execution_logs",
+      "description": "This table records the execution history of automated workflows, capturing when they ran, how long they took, and whether they succeeded or failed. It supports operational monitoring, troubleshooting, and audit compliance across different tenants and workspaces. Each entry provides a complete trace of a single workflow invocation, including the inputs processed and any errors encountered.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(36)",
+          "description": "Unique identifier assigned to each workflow execution record, used to distinguish and reference individual runs across the system."
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Reference to the specific workflow definition that was executed, linking the log entry to the automated process that ran."
+        },
+        {
+          "col_name": "correlation_id",
+          "data_type": "VARCHAR(255)",
+          "description": "Shared identifier that ties related operations and logs together, enabling end-to-end tracing of a request or business process across multiple systems."
+        },
+        {
+          "col_name": "start_time",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the workflow execution began, used to track scheduling, latency, and operational timelines."
+        },
+        {
+          "col_name": "end_time",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the workflow execution finished, whether successfully or with an error, used to calculate total runtime."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": "The outcome of the workflow execution, such as success, failure, or in-progress, used for monitoring and alerting."
+        },
+        {
+          "col_name": "input_payload",
+          "data_type": "LONGTEXT",
+          "description": "The data and parameters provided to the workflow when it was triggered, preserved for auditing, debugging, and replay purposes."
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "TEXT",
+          "description": "Human-readable description of any failure that occurred during execution, helping support teams and developers diagnose issues."
+        },
+        {
+          "col_name": "duration_ms",
+          "data_type": "BIGINT",
+          "description": "Total runtime of the workflow execution in milliseconds, used to monitor performance, identify bottlenecks, and track service-level objectives."
+        },
+        {
+          "col_name": "ttl_days",
+          "data_type": "INT",
+          "description": "Number of days the execution record should be retained before automatic cleanup, supporting data retention and compliance policies."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the execution log entry was first written to the system, establishing an audit trail."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The most recent date and time when the execution record was modified, used to track changes to status or related fields."
+        },
+        {
+          "col_name": "developer_mode",
+          "data_type": "TINYINT",
+          "description": "Flag indicating whether the execution was run in developer mode for testing or experimentation purposes rather than production use."
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(100)",
+          "description": "Identifies the workspace or team environment associated with the workflow execution, supporting organizational separation and access control."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(100)",
+          "description": "Identifies the customer organization that owns the workflow execution, enabling multi-tenant isolation and per-customer reporting."
+        }
+      ]
+    },
+    {
+      "table_name": "workflow_triggers",
+      "description": "This table defines the conditions and configurations that initiate automated workflows within the platform. Each trigger represents a specific entry point—such as an incoming API call, scheduled event, or system signal—that activates a particular workflow for a given project and tenant. It governs how external requests or internal events are received, validated, and routed to the appropriate workflow execution.",
+      "primary_key": "trigger_id",
+      "columns": [
+        {
+          "col_name": "trigger_id",
+          "data_type": "VARCHAR(64)",
+          "description": "A unique identifier assigned to each trigger entry, used to reference and manage a specific workflow activation point."
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "VARCHAR(64)",
+          "description": "References the specific workflow that will be launched when this trigger fires, linking the trigger to its corresponding automated process."
+        },
+        {
+          "col_name": "project_id",
+          "data_type": "VARCHAR(64)",
+          "description": "Identifies the project under which this trigger operates, allowing triggers to be grouped and managed at the project level."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(64)",
+          "description": "Indicates which customer organization owns this trigger, ensuring triggers are isolated and scoped to the correct tenant environment."
+        },
+        {
+          "col_name": "trigger_type",
+          "data_type": "VARCHAR(32)",
+          "description": "Defines the kind of event or condition that will activate the workflow, such as a webhook call, schedule, or platform event."
+        },
+        {
+          "col_name": "trigger_name",
+          "data_type": "VARCHAR(255)",
+          "description": "A human-readable label given to the trigger to make it easy to identify and manage within the user interface."
+        },
+        {
+          "col_name": "description",
+          "data_type": "VARCHAR(500)",
+          "description": "A short summary explaining the trigger's purpose and the scenario it is designed to handle."
+        },
+        {
+          "col_name": "active",
+          "data_type": "TINYINT",
+          "description": "Indicates whether the trigger is currently enabled and will activate workflows, or disabled and ignored."
+        },
+        {
+          "col_name": "http_method",
+          "data_type": "VARCHAR(16)",
+          "description": "The HTTP action (such as GET, POST, or PUT) that the trigger accepts when it is invoked as a web endpoint."
+        },
+        {
+          "col_name": "content_type",
+          "data_type": "VARCHAR(100)",
+          "description": "The format of the request body that the trigger expects, for example JSON or form-encoded data."
+        },
+        {
+          "col_name": "max_request_size",
+          "data_type": "BIGINT",
+          "description": "The largest allowable size of an incoming request payload for this trigger, protecting the platform from oversized submissions."
+        },
+        {
+          "col_name": "rate_limit",
+          "data_type": "INT",
+          "description": "The maximum number of times the trigger can be invoked within a defined time window, preventing abuse and overuse."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the trigger was originally created and added to the system."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the trigger's configuration was most recently modified."
+        },
+        {
+          "col_name": "trigger_source",
+          "data_type": "VARCHAR(50)",
+          "description": "Categorizes the origin of the trigger, helping distinguish between user-defined triggers and those generated by the platform or integrations."
+        }
+      ]
+    },
+    {
+      "table_name": "workflows",
+      "description": "This table stores automated workflow definitions that orchestrate business processes and AI-driven tasks. Each workflow represents a configurable sequence of operations triggered by events, schedules, or manual actions, and is organized within a tenant's workspace and project structure. The table supports versioning and lifecycle management, enabling teams to design, deploy, and evolve complex automation flows.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(255)",
+          "description": "A unique identifier that distinguishes each workflow from all others in the system."
+        },
+        {
+          "col_name": "name",
+          "data_type": "VARCHAR(255)",
+          "description": "The human-readable label assigned to the workflow for easy identification by team members."
+        },
+        {
+          "col_name": "payload",
+          "data_type": "LONGTEXT",
+          "description": "The complete configuration and structural definition of the workflow, including its steps, logic, and execution settings."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the workflow was first authored and saved."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the workflow was most recently modified."
+        },
+        {
+          "col_name": "description",
+          "data_type": "VARCHAR(1000)",
+          "description": "A brief narrative explaining the purpose and intended outcome of the workflow."
+        },
+        {
+          "col_name": "trigger_type",
+          "data_type": "VARCHAR(255)",
+          "description": "The category of mechanism that initiates the workflow, such as manual invocation, scheduled execution, or event-driven activation."
+        },
+        {
+          "col_name": "trigger_source",
+          "data_type": "VARCHAR(255)",
+          "description": "The originating system, channel, or integration that produces the event causing the workflow to start."
+        },
+        {
+          "col_name": "event_type",
+          "data_type": "VARCHAR(255)",
+          "description": "The specific kind of event or signal that the workflow listens for in order to begin executing."
+        },
+        {
+          "col_name": "workflow_status",
+          "data_type": "VARCHAR(50)",
+          "description": "The current lifecycle state of the workflow, such as active, paused, draft, or archived."
+        },
+        {
+          "col_name": "nodes_count",
+          "data_type": "INT",
+          "description": "The total number of individual steps, actions, or processing blocks contained within the workflow."
+        },
+        {
+          "col_name": "edges_count",
+          "data_type": "INT",
+          "description": "The total number of connections that link workflow steps together and define the execution path."
+        },
+        {
+          "col_name": "trigger_filter_cel",
+          "data_type": "TEXT",
+          "description": "The conditional expression that determines whether an incoming trigger event should activate the workflow."
+        },
+        {
+          "col_name": "project_id",
+          "data_type": "VARCHAR(255)",
+          "description": "The project grouping to which the workflow belongs, supporting logical organization within a workspace."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": "The owning organization or customer account that has authority over the workflow."
+        },
+        {
+          "col_name": "version",
+          "data_type": "VARCHAR(10)",
+          "description": "The release label identifying the iteration of the workflow definition, supporting change tracking and rollback."
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(100)",
+          "description": "The collaborative workspace environment where the workflow is created, managed, and shared."
+        }
+      ]
+    },
+    {
+      "table_name": "workspaces",
+      "description": "Workspaces represent distinct working environments or organizational units within a tenant account, allowing customers to separate projects, teams, or business functions under a single account. Each workspace has its own branding, settings, and operational status, enabling flexible structuring of work and resources across the platform.",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": "Unique internal identifier assigned to each workspace record in the system."
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(100)",
+          "description": "Business-facing identifier used to reference a specific workspace in integrations, URLs, and external communications."
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(100)",
+          "description": "Identifier linking the workspace to its owning tenant or customer organization, ensuring workspaces are properly scoped within their parent account."
+        },
+        {
+          "col_name": "name",
+          "data_type": "VARCHAR(255)",
+          "description": "The human-readable display name of the workspace as it appears to users throughout the platform."
+        },
+        {
+          "col_name": "slug",
+          "data_type": "VARCHAR(100)",
+          "description": "A short, URL-friendly version of the workspace name used in web addresses and links to ensure clean, readable routing."
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": "Free-form text describing the purpose, scope, or intended use of the workspace for team members."
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(20)",
+          "description": "The current operational state of the workspace, indicating whether it is active, archived, suspended, or in another condition."
+        },
+        {
+          "col_name": "is_default",
+          "data_type": "TINYINT",
+          "description": "Flag indicating whether this workspace is the default landing destination for users belonging to the tenant."
+        },
+        {
+          "col_name": "settings",
+          "data_type": "JSON",
+          "description": "A flexible collection of configurable preferences and options that govern how the workspace behaves and what features are enabled."
+        },
+        {
+          "col_name": "icon",
+          "data_type": "VARCHAR(50)",
+          "description": "A visual icon or symbol used to represent and quickly identify the workspace in navigation and listings."
+        },
+        {
+          "col_name": "color",
+          "data_type": "VARCHAR(7)",
+          "description": "A color theme applied to the workspace's icon and visual elements to aid visual distinction between workspaces."
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(255)",
+          "description": "The user who originally set up and created the workspace."
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "VARCHAR(255)",
+          "description": "The user who most recently made changes to the workspace's information or configuration."
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the workspace was initially created."
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": "The date and time when the workspace's information or settings were most recently modified."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3620 @@
+{
+  "database_name": "enveu_flow_db",
+  "total_tables": 47,
+  "tables": [
+    {
+      "table_name": "agent_conversation_messages",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "conversation_id",
+          "data_type": "CHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "CHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "sequence",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "role",
+          "data_type": "VARCHAR(20)",
+          "description": ""
+        },
+        {
+          "col_name": "content",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "tool_call_id",
+          "data_type": "CHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "tool_name",
+          "data_type": "VARCHAR(150)",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "agent_conversation_seq",
+      "description": "",
+      "primary_key": "conversation_id",
+      "columns": [
+        {
+          "col_name": "conversation_id",
+          "data_type": "CHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "next_seq",
+          "data_type": "INT",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "agent_execution_log",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "request_id",
+          "data_type": "CHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_execution_id",
+          "data_type": "CHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "node_id",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "node_identifier",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "CHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "project_id",
+          "data_type": "CHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "conversation_id",
+          "data_type": "CHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "model_provider",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "model_id",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(30)",
+          "description": ""
+        },
+        {
+          "col_name": "user_message",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "system_prompt",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "final_text",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "final_json",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "reasoning_trace",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "prompt_tokens",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "completion_tokens",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "total_tokens",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "agent_iteration_count",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "tool_call_count",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "duration_ms",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "error_type",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "billing_deduction_status",
+          "data_type": "VARCHAR(30)",
+          "description": ""
+        },
+        {
+          "col_name": "token_usage",
+          "data_type": "JSON",
+          "description": ""
+        },
+        {
+          "col_name": "tool_call_summary",
+          "data_type": "JSON",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "agent_tool_call_log",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "agent_execution_log_id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "tool_call_id",
+          "data_type": "CHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "tool_name",
+          "data_type": "VARCHAR(150)",
+          "description": ""
+        },
+        {
+          "col_name": "plugin_id",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "action_id",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "iteration_number",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "inputs",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "outputs",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(30)",
+          "description": ""
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "duration_ms",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "cached_result",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "prompt_tokens",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "completion_tokens",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "billing_parameters",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "code",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "name",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "type",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "unit",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "credit_cost",
+          "data_type": "DECIMAL(19,4)",
+          "description": ""
+        },
+        {
+          "col_name": "deduction_timing",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "billing_window",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "measurement_type",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "enforcement_type",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "active",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "display_order",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "JSON",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "metering_key",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "credential_types",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "type_key",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "display_name",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "category",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "icon",
+          "data_type": "VARCHAR(512)",
+          "description": ""
+        },
+        {
+          "col_name": "docs_url",
+          "data_type": "VARCHAR(1024)",
+          "description": ""
+        },
+        {
+          "col_name": "fields_schema",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "oauth2_config",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "test_connection",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "source_plugin_id",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "active",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "databasechangelog",
+      "description": "",
+      "primary_key": null,
+      "columns": [
+        {
+          "col_name": "ID",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "AUTHOR",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "FILENAME",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "DATEEXECUTED",
+          "data_type": "DATETIME",
+          "description": ""
+        },
+        {
+          "col_name": "ORDEREXECUTED",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "EXECTYPE",
+          "data_type": "VARCHAR(10)",
+          "description": ""
+        },
+        {
+          "col_name": "MD5SUM",
+          "data_type": "VARCHAR(35)",
+          "description": ""
+        },
+        {
+          "col_name": "DESCRIPTION",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "COMMENTS",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "TAG",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "LIQUIBASE",
+          "data_type": "VARCHAR(20)",
+          "description": ""
+        },
+        {
+          "col_name": "CONTEXTS",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "LABELS",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "DEPLOYMENT_ID",
+          "data_type": "VARCHAR(10)",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "databasechangeloglock",
+      "description": "",
+      "primary_key": "ID",
+      "columns": [
+        {
+          "col_name": "ID",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "LOCKED",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "LOCKGRANTED",
+          "data_type": "DATETIME",
+          "description": ""
+        },
+        {
+          "col_name": "LOCKEDBY",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "email_audit_log",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "recipient",
+          "data_type": "VARCHAR(320)",
+          "description": ""
+        },
+        {
+          "col_name": "subject",
+          "data_type": "VARCHAR(998)",
+          "description": ""
+        },
+        {
+          "col_name": "template_name",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(20)",
+          "description": ""
+        },
+        {
+          "col_name": "provider",
+          "data_type": "VARCHAR(20)",
+          "description": ""
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "VARCHAR(1000)",
+          "description": ""
+        },
+        {
+          "col_name": "sent_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "flow_credentials",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "name",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "credential_type",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "encrypted_data",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "last_tested_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "test_result",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "test_message",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "active",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "flow_ui_nodes",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "node_type",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "type",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "label",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "icon",
+          "data_type": "VARCHAR(512)",
+          "description": ""
+        },
+        {
+          "col_name": "properties_json",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "cel_helpers_json",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "outputs_json",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "raw_json",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "name",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "identifier",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "fail_on_error",
+          "data_type": "TINYINT",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "node_cached_outputs",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "node_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "node_identifier",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "node_name",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "cached_output",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "size_bytes",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "source",
+          "data_type": "VARCHAR(20)",
+          "description": ""
+        },
+        {
+          "col_name": "step_session_id",
+          "data_type": "VARCHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "node_credentials",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "node_id",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "credential_type",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "credential_id",
+          "data_type": "VARCHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "node_execution_logs",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_execution_id",
+          "data_type": "VARCHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "node_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "node_type",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "start_time",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "end_time",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "duration_ms",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "input_data",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "output_data",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "ttl_days",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "node_subtype",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "oauth_states",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "state",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "credential_type",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "user_id",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "code_verifier",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "encrypted_client_id",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "encrypted_client_secret",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "scopes",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "redirect_uri",
+          "data_type": "VARCHAR(1024)",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "plan_parameter_configs",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "plan_id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "parameter_id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "included_value",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "limit_value",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "reset_on_cycle",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "overage_enabled",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "overage_mode",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "overage_price_per_unit",
+          "data_type": "DECIMAL(19,4)",
+          "description": ""
+        },
+        {
+          "col_name": "overage_max_units",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "display_order",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "JSON",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "plan_stripe_prices",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "plan_id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_price_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "version",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "amount",
+          "data_type": "DECIMAL(19,2)",
+          "description": ""
+        },
+        {
+          "col_name": "currency",
+          "data_type": "VARCHAR(3)",
+          "description": ""
+        },
+        {
+          "col_name": "billing_cycle",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "is_current",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "archived_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "plans",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "code",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "name",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "base_price",
+          "data_type": "DECIMAL(19,4)",
+          "description": ""
+        },
+        {
+          "col_name": "billing_cycle",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "custom_cycle_days",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "currency",
+          "data_type": "VARCHAR(10)",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "is_public",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "display_order",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "JSON",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_product_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_price_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_price_version",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_sync_status",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_synced_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_sync_error",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "is_default",
+          "data_type": "TINYINT",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "platform_configs",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "config_key",
+          "data_type": "VARCHAR(200)",
+          "description": ""
+        },
+        {
+          "col_name": "config_value",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "plugin_registrations",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "plugin_id",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "registration_type",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "external_registration_id",
+          "data_type": "VARCHAR(512)",
+          "description": ""
+        },
+        {
+          "col_name": "webhook_url",
+          "data_type": "VARCHAR(1024)",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "credentials",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "registration_data",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_renewal_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "VARCHAR(2048)",
+          "description": ""
+        },
+        {
+          "col_name": "connection_name",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(128)",
+          "description": ""
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "VARCHAR(128)",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "configured_events",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "event_type_field",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "plugin_storage",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "plugin_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "version",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "file_name",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "file_data",
+          "data_type": "LONGBLOB",
+          "description": ""
+        },
+        {
+          "col_name": "file_size",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "content_type",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "plugins",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "plugin_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "name",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "display_name",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "version",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "category",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "icon_url",
+          "data_type": "VARCHAR(500)",
+          "description": ""
+        },
+        {
+          "col_name": "homepage_url",
+          "data_type": "VARCHAR(500)",
+          "description": ""
+        },
+        {
+          "col_name": "repository_url",
+          "data_type": "VARCHAR(500)",
+          "description": ""
+        },
+        {
+          "col_name": "author_name",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "author_email",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "author_organization",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "installed_at",
+          "data_type": "DATETIME",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "DATETIME",
+          "description": ""
+        },
+        {
+          "col_name": "requires_configuration",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "configuration",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "current_config",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "capabilities",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "authentication",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "components",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "ui_components",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "runtime_info",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "permissions",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "package_path",
+          "data_type": "VARCHAR(500)",
+          "description": ""
+        },
+        {
+          "col_name": "package_size",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "package_checksum",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "DATETIME",
+          "description": ""
+        },
+        {
+          "col_name": "updated_at",
+          "data_type": "DATETIME",
+          "description": ""
+        },
+        {
+          "col_name": "signature_verified",
+          "data_type": "TINYINT",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "promo_code_redemptions",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "promo_code_id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "redeemed_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "credit_grant_id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "promo_codes",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "code",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "credits",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "metering_key",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "validity_days",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "max_redemptions",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "current_redemptions",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "is_active",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "VARCHAR(500)",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "referral_codes",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "code",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "credits_for_referrer",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "credits_for_referee",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "total_referrals",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "is_active",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "referral_conversions",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "referral_code_id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "referee_tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "referrer_credit_grant_id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "referee_credit_grant_id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "converted_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(20)",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "scheduled_job_locks",
+      "description": "",
+      "primary_key": "job_name",
+      "columns": [
+        {
+          "col_name": "job_name",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "locked_by",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "locked_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "lock_until",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "secrets",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "secret_key",
+          "data_type": "VARCHAR(191)",
+          "description": ""
+        },
+        {
+          "col_name": "encrypted_value",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "scope",
+          "data_type": "VARCHAR(20)",
+          "description": ""
+        },
+        {
+          "col_name": "scope_id",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "VARCHAR(500)",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_accessed_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "access_count",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "active",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "step_execution_sessions",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_execution_id",
+          "data_type": "VARCHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "strategy",
+          "data_type": "VARCHAR(20)",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(20)",
+          "description": ""
+        },
+        {
+          "col_name": "current_node_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "node_outputs_cache",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "executed_nodes",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "initial_payload",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "current_payload",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_definition",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "total_nodes",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "executed_node_count",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "stop_at_node_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_token",
+          "data_type": "VARCHAR(64)",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_node_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_type",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_payload_cache",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "plugin_registration_id",
+          "data_type": "VARCHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "registered_webhook_url",
+          "data_type": "VARCHAR(512)",
+          "description": ""
+        },
+        {
+          "col_name": "paused_reason",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "stripe_events",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "event_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "event_type",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "api_version",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "data_object_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "data_object_type",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "retry_count",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "processed_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "subscription_changes",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "subscription_id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "change_type",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "previous_plan_id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "new_plan_id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "previous_status",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "new_status",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "previous_period_end",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "new_period_end",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_event_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_invoice_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "proration_amount",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "change_reason",
+          "data_type": "VARCHAR(500)",
+          "description": ""
+        },
+        {
+          "col_name": "metadata_json",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "performed_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "performed_by_email",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "tenant_credit_grants",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "metering_key",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "granted_credits",
+          "data_type": "DECIMAL(19,4)",
+          "description": ""
+        },
+        {
+          "col_name": "consumed_credits",
+          "data_type": "DECIMAL(19,4)",
+          "description": ""
+        },
+        {
+          "col_name": "reserved_credits",
+          "data_type": "DECIMAL(19,4)",
+          "description": ""
+        },
+        {
+          "col_name": "source",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "reference_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "effective_from",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "is_active",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "priority",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "created_by_email",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "version",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "tenant_credit_transactions",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "transaction_type",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "category",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "amount",
+          "data_type": "DECIMAL(19,4)",
+          "description": ""
+        },
+        {
+          "col_name": "balance_after",
+          "data_type": "DECIMAL(19,4)",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "reference_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "performed_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "performed_by_email",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "tenant_invoices",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "subscription_id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_invoice_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "invoice_number",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "amount_due",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "amount_paid",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "currency",
+          "data_type": "VARCHAR(10)",
+          "description": ""
+        },
+        {
+          "col_name": "invoice_pdf_url",
+          "data_type": "VARCHAR(1000)",
+          "description": ""
+        },
+        {
+          "col_name": "hosted_invoice_url",
+          "data_type": "VARCHAR(1000)",
+          "description": ""
+        },
+        {
+          "col_name": "period_start",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "period_end",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "due_date",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "paid_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "tenant_plugins",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "plugin_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "configuration",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "enabled_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "enabled_at",
+          "data_type": "DATETIME",
+          "description": ""
+        },
+        {
+          "col_name": "last_modified_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "notes",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "DATETIME",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "DATETIME",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "tenant_subscriptions",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "plan_id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_subscription_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "current_period_start",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "current_period_end",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "cancel_at_period_end",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "canceled_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "trial_start",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "trial_end",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "latest_invoice_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "tenant_wallets",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "metering_key",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "available_credits",
+          "data_type": "DECIMAL(19,4)",
+          "description": ""
+        },
+        {
+          "col_name": "reserved_credits",
+          "data_type": "DECIMAL(19,4)",
+          "description": ""
+        },
+        {
+          "col_name": "consumed_credits",
+          "data_type": "DECIMAL(19,4)",
+          "description": ""
+        },
+        {
+          "col_name": "currency",
+          "data_type": "VARCHAR(10)",
+          "description": ""
+        },
+        {
+          "col_name": "version",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "tenants",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "name",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "keycloak_realm",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "keycloak_client_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "metadata",
+          "data_type": "JSON",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_customer_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "default_payment_method_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "billing_email",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "billing_address_json",
+          "data_type": "JSON",
+          "description": ""
+        },
+        {
+          "col_name": "stripe_customer_synced_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "tool_execution_cache",
+      "description": "",
+      "primary_key": "tool_call_id",
+      "columns": [
+        {
+          "col_name": "tool_call_id",
+          "data_type": "CHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_execution_id",
+          "data_type": "CHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "tool_name",
+          "data_type": "VARCHAR(150)",
+          "description": ""
+        },
+        {
+          "col_name": "result",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(30)",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "trusted_publishers",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "name",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "public_key",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "key_fingerprint",
+          "data_type": "VARCHAR(64)",
+          "description": ""
+        },
+        {
+          "col_name": "enabled",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "website_url",
+          "data_type": "VARCHAR(500)",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "updated_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "revocation_reason",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "revoked_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "user_tenants",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "keycloak_user_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "role",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "email",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "display_name",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "is_default",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "invitation_status",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "joined_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "user_workspaces",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "keycloak_user_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "role",
+          "data_type": "VARCHAR(30)",
+          "description": ""
+        },
+        {
+          "col_name": "joined_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "added_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "workflow_execution_checkpoints",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_execution_id",
+          "data_type": "CHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "CHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "project_id",
+          "data_type": "CHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "CHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "suspended_at_node_id",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "resume_from_node_id",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "execution_context",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "parsed_workflow",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(30)",
+          "description": ""
+        },
+        {
+          "col_name": "suspension_reason",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "agent_request_id",
+          "data_type": "CHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "expires_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "fail_on_error",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "workflow_execution_logs",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(36)",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "correlation_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "start_time",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "end_time",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "input_payload",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "error_message",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "duration_ms",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "ttl_days",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "developer_mode",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "workflow_triggers",
+      "description": "",
+      "primary_key": "trigger_id",
+      "columns": [
+        {
+          "col_name": "trigger_id",
+          "data_type": "VARCHAR(64)",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_id",
+          "data_type": "VARCHAR(64)",
+          "description": ""
+        },
+        {
+          "col_name": "project_id",
+          "data_type": "VARCHAR(64)",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(64)",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_type",
+          "data_type": "VARCHAR(32)",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_name",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "VARCHAR(500)",
+          "description": ""
+        },
+        {
+          "col_name": "active",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "http_method",
+          "data_type": "VARCHAR(16)",
+          "description": ""
+        },
+        {
+          "col_name": "content_type",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "max_request_size",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "rate_limit",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_source",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "workflows",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "name",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "payload",
+          "data_type": "LONGTEXT",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "VARCHAR(1000)",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_type",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_source",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "event_type",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "workflow_status",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "nodes_count",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "edges_count",
+          "data_type": "INT",
+          "description": ""
+        },
+        {
+          "col_name": "trigger_filter_cel",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "project_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "version",
+          "data_type": "VARCHAR(10)",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "table_name": "workspaces",
+      "description": "",
+      "primary_key": "id",
+      "columns": [
+        {
+          "col_name": "id",
+          "data_type": "BIGINT",
+          "description": ""
+        },
+        {
+          "col_name": "workspace_id",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "tenant_id",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "name",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "slug",
+          "data_type": "VARCHAR(100)",
+          "description": ""
+        },
+        {
+          "col_name": "description",
+          "data_type": "TEXT",
+          "description": ""
+        },
+        {
+          "col_name": "status",
+          "data_type": "VARCHAR(20)",
+          "description": ""
+        },
+        {
+          "col_name": "is_default",
+          "data_type": "TINYINT",
+          "description": ""
+        },
+        {
+          "col_name": "settings",
+          "data_type": "JSON",
+          "description": ""
+        },
+        {
+          "col_name": "icon",
+          "data_type": "VARCHAR(50)",
+          "description": ""
+        },
+        {
+          "col_name": "color",
+          "data_type": "VARCHAR(7)",
+          "description": ""
+        },
+        {
+          "col_name": "created_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "updated_by",
+          "data_type": "VARCHAR(255)",
+          "description": ""
+        },
+        {
+          "col_name": "created_at",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        },
+        {
+          "col_name": "last_updated",
+          "data_type": "TIMESTAMP",
+          "description": ""
+        }
+      ]
+    }
+  ]
+}
