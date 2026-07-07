@@ -1,0 +1,19 @@
+{
+  "run_id": "067cc6eceafd72ee",
+  "stage": "DESCRIBE",
+  "dump_path": "C:\\Users\\Enveu\\OneDrive\\Documents\\database_agent\\Dump20260412 (1).sql",
+  "schema_path": "output\\067cc6eceafd72ee_schema.json",
+  "described_schema_path": "",
+  "pinecone_index_name": "",
+  "neo4j_graph_id": "",
+  "metadata": {
+    "tables_count": 47,
+    "columns_count": 657
+  },
+  "errors": [],
+  "completed_stages": [
+    "EXTRACT"
+  ],
+  "started_at": "2026-07-07T05:56:05.805216",
+  "updated_at": "2026-07-07T05:56:08.053737"
+}

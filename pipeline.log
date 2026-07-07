@@ -1,0 +1,409 @@
+2026-07-07 10:23:45,867 | INFO     | Orchestrator | Starting new pipeline: 7bb81fa8ef8eca4a
+2026-07-07 10:23:45,868 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:23:45,868 | INFO     | Orchestrator | STAGE START: EXTRACT
+2026-07-07 10:23:45,868 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:23:45,870 | INFO     | Orchestrator | State saved: stage=EXTRACT
+2026-07-07 10:23:46,275 | WARNING  | Orchestrator | Tool modules not found (expected during dev): No module named 'pinecone_adpter'
+2026-07-07 10:23:46,276 | WARNING  | Orchestrator | Using placeholder schema extraction
+2026-07-07 10:23:46,277 | INFO     | Orchestrator | Extracted 0 tables, 0 columns
+2026-07-07 10:23:46,277 | INFO     | Orchestrator | STAGE COMPLETE: EXTRACT
+2026-07-07 10:23:46,277 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:23:46,278 | INFO     | Orchestrator | STAGE START: DESCRIBE
+2026-07-07 10:23:46,278 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:23:46,280 | INFO     | Orchestrator | State saved: stage=DESCRIBE
+2026-07-07 10:23:46,281 | WARNING  | Orchestrator | Tool modules not found (expected during dev): No module named 'pinecone_adpter'
+2026-07-07 10:23:46,296 | WARNING  | Orchestrator | Using placeholder schema description
+2026-07-07 10:23:46,297 | INFO     | Orchestrator | Description coverage: 0/0
+2026-07-07 10:23:46,297 | INFO     | Orchestrator | STAGE COMPLETE: DESCRIBE
+2026-07-07 10:23:46,297 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:23:46,297 | INFO     | Orchestrator | STAGE START: EMBED
+2026-07-07 10:23:46,298 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:23:46,300 | INFO     | Orchestrator | State saved: stage=EMBED
+2026-07-07 10:23:46,300 | WARNING  | Orchestrator | Tool modules not found (expected during dev): No module named 'pinecone_adpter'
+2026-07-07 10:23:46,303 | WARNING  | Orchestrator | Using placeholder embedding (Pinecone not connected)
+2026-07-07 10:23:46,303 | INFO     | Orchestrator | Schema embedded to Pinecone index: schema-7bb81fa8
+2026-07-07 10:23:46,303 | INFO     | Orchestrator | STAGE COMPLETE: EMBED
+2026-07-07 10:23:46,303 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:23:46,303 | INFO     | Orchestrator | STAGE START: GRAPH
+2026-07-07 10:23:46,304 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:23:46,307 | INFO     | Orchestrator | State saved: stage=GRAPH
+2026-07-07 10:23:46,309 | WARNING  | Orchestrator | Tool modules not found (expected during dev): No module named 'pinecone_adpter'
+2026-07-07 10:23:46,310 | WARNING  | Orchestrator | Using placeholder graph publishing (Neo4j not connected)
+2026-07-07 10:23:46,311 | INFO     | Orchestrator | Schema graph published to Neo4j: graph-7bb81fa8
+2026-07-07 10:23:46,311 | INFO     | Orchestrator | STAGE COMPLETE: GRAPH
+2026-07-07 10:23:46,313 | INFO     | Orchestrator | State saved: stage=COMPLETE
+2026-07-07 10:23:46,313 | INFO     | Orchestrator | Pipeline complete! Run ID: 7bb81fa8ef8eca4a
+2026-07-07 10:28:52,473 | WARNING  | Orchestrator | Tool modules not found (expected during dev): No module named 'pinecone_adpter'
+2026-07-07 10:28:52,528 | INFO     | Orchestrator | Loaded state: stage=COMPLETE
+2026-07-07 10:28:52,534 | INFO     | Orchestrator | SQL generation (placeholder - integrate MiniMax-M3)
+2026-07-07 10:29:26,512 | WARNING  | Orchestrator | Tool modules not found (expected during dev): No module named 'pinecone_adpter'
+2026-07-07 10:29:26,513 | INFO     | Orchestrator | Loaded state: stage=COMPLETE
+2026-07-07 10:29:26,514 | INFO     | Orchestrator | SQL generation (placeholder - integrate MiniMax-M3)
+2026-07-07 10:29:42,038 | INFO     | Orchestrator | Starting new pipeline: 3dafd8fc40141279
+2026-07-07 10:29:42,038 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:29:42,038 | INFO     | Orchestrator | STAGE START: EXTRACT
+2026-07-07 10:29:42,039 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:29:42,041 | INFO     | Orchestrator | State saved: stage=EXTRACT
+2026-07-07 10:29:42,237 | WARNING  | Orchestrator | Tool modules not found (expected during dev): No module named 'pinecone_adpter'
+2026-07-07 10:29:42,238 | WARNING  | Orchestrator | Using placeholder schema extraction
+2026-07-07 10:29:42,239 | INFO     | Orchestrator | Extracted 0 tables, 0 columns
+2026-07-07 10:29:42,239 | INFO     | Orchestrator | STAGE COMPLETE: EXTRACT
+2026-07-07 10:29:42,239 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:29:42,240 | INFO     | Orchestrator | STAGE START: DESCRIBE
+2026-07-07 10:29:42,240 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:29:42,241 | INFO     | Orchestrator | State saved: stage=DESCRIBE
+2026-07-07 10:29:42,242 | WARNING  | Orchestrator | Tool modules not found (expected during dev): No module named 'pinecone_adpter'
+2026-07-07 10:29:42,257 | WARNING  | Orchestrator | Using placeholder schema description
+2026-07-07 10:29:42,259 | INFO     | Orchestrator | Description coverage: 0/0
+2026-07-07 10:29:42,259 | INFO     | Orchestrator | STAGE COMPLETE: DESCRIBE
+2026-07-07 10:29:42,259 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:29:42,260 | INFO     | Orchestrator | STAGE START: EMBED
+2026-07-07 10:29:42,260 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:29:42,262 | INFO     | Orchestrator | State saved: stage=EMBED
+2026-07-07 10:29:42,263 | WARNING  | Orchestrator | Tool modules not found (expected during dev): No module named 'pinecone_adpter'
+2026-07-07 10:29:42,265 | WARNING  | Orchestrator | Using placeholder embedding (Pinecone not connected)
+2026-07-07 10:29:42,265 | INFO     | Orchestrator | Schema embedded to Pinecone index: schema-3dafd8fc
+2026-07-07 10:29:42,265 | INFO     | Orchestrator | STAGE COMPLETE: EMBED
+2026-07-07 10:29:42,265 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:29:42,266 | INFO     | Orchestrator | STAGE START: GRAPH
+2026-07-07 10:29:42,266 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:29:42,268 | INFO     | Orchestrator | State saved: stage=GRAPH
+2026-07-07 10:29:42,270 | WARNING  | Orchestrator | Tool modules not found (expected during dev): No module named 'pinecone_adpter'
+2026-07-07 10:29:42,272 | WARNING  | Orchestrator | Using placeholder graph publishing (Neo4j not connected)
+2026-07-07 10:29:42,272 | INFO     | Orchestrator | Schema graph published to Neo4j: graph-3dafd8fc
+2026-07-07 10:29:42,272 | INFO     | Orchestrator | STAGE COMPLETE: GRAPH
+2026-07-07 10:29:42,274 | INFO     | Orchestrator | State saved: stage=COMPLETE
+2026-07-07 10:29:42,274 | INFO     | Orchestrator | Pipeline complete! Run ID: 3dafd8fc40141279
+2026-07-07 10:32:18,350 | INFO     | Orchestrator | Starting new pipeline: 73aaee94befd2b0b
+2026-07-07 10:32:18,353 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:32:18,353 | INFO     | Orchestrator | STAGE START: EXTRACT
+2026-07-07 10:32:18,354 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:32:18,356 | INFO     | Orchestrator | State saved: stage=EXTRACT
+2026-07-07 10:32:18,549 | WARNING  | Orchestrator | Tool modules not found (expected during dev): No module named 'pinecone_adpter'
+2026-07-07 10:32:18,550 | WARNING  | Orchestrator | Using placeholder schema extraction
+2026-07-07 10:32:18,551 | INFO     | Orchestrator | Extracted 0 tables, 0 columns
+2026-07-07 10:32:18,551 | INFO     | Orchestrator | STAGE COMPLETE: EXTRACT
+2026-07-07 10:32:18,552 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:32:18,552 | INFO     | Orchestrator | STAGE START: DESCRIBE
+2026-07-07 10:32:18,552 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:32:18,554 | INFO     | Orchestrator | State saved: stage=DESCRIBE
+2026-07-07 10:32:18,555 | WARNING  | Orchestrator | Tool modules not found (expected during dev): No module named 'pinecone_adpter'
+2026-07-07 10:32:18,573 | WARNING  | Orchestrator | Using placeholder schema description
+2026-07-07 10:32:18,574 | INFO     | Orchestrator | Description coverage: 0/0
+2026-07-07 10:32:18,574 | INFO     | Orchestrator | STAGE COMPLETE: DESCRIBE
+2026-07-07 10:32:18,574 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:32:18,575 | INFO     | Orchestrator | STAGE START: EMBED
+2026-07-07 10:32:18,575 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:32:18,577 | INFO     | Orchestrator | State saved: stage=EMBED
+2026-07-07 10:32:18,577 | WARNING  | Orchestrator | Tool modules not found (expected during dev): No module named 'pinecone_adpter'
+2026-07-07 10:32:18,580 | WARNING  | Orchestrator | Using placeholder embedding (Pinecone not connected)
+2026-07-07 10:32:18,581 | INFO     | Orchestrator | Schema embedded to Pinecone index: schema-73aaee94
+2026-07-07 10:32:18,581 | INFO     | Orchestrator | STAGE COMPLETE: EMBED
+2026-07-07 10:32:18,581 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:32:18,582 | INFO     | Orchestrator | STAGE START: GRAPH
+2026-07-07 10:32:18,582 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:32:18,584 | INFO     | Orchestrator | State saved: stage=GRAPH
+2026-07-07 10:32:18,585 | WARNING  | Orchestrator | Tool modules not found (expected during dev): No module named 'pinecone_adpter'
+2026-07-07 10:32:18,585 | WARNING  | Orchestrator | Using placeholder graph publishing (Neo4j not connected)
+2026-07-07 10:32:18,585 | INFO     | Orchestrator | Schema graph published to Neo4j: graph-73aaee94
+2026-07-07 10:32:18,585 | INFO     | Orchestrator | STAGE COMPLETE: GRAPH
+2026-07-07 10:32:18,587 | INFO     | Orchestrator | State saved: stage=COMPLETE
+2026-07-07 10:32:18,587 | INFO     | Orchestrator | Pipeline complete! Run ID: 73aaee94befd2b0b
+2026-07-07 10:44:15,710 | INFO     | Orchestrator | Starting new pipeline: 9dd74ade035ae5dc
+2026-07-07 10:44:15,710 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:44:15,710 | INFO     | Orchestrator | STAGE START: EXTRACT
+2026-07-07 10:44:15,711 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:44:15,713 | INFO     | Orchestrator | State saved: stage=EXTRACT
+2026-07-07 10:44:21,337 | INFO     | Orchestrator | All tool modules loaded successfully
+2026-07-07 10:44:21,341 | ERROR    | Orchestrator | EXTRACT failed: module 'schema_extractor' has no attribute 'parse_sql_dump'
+Traceback (most recent call last):
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 133, in run_stage
+    result_state = await handler(state, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 224, in _stage_extract
+    schema = self.extractor.extract_from_dump(dump_path)
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\schema_extractor_adpter.py", line 46, in extract_from_dump
+    raw_schema = se.parse_sql_dump(dump_path)
+                 ^^^^^^^^^^^^^^^^^
+AttributeError: module 'schema_extractor' has no attribute 'parse_sql_dump'
+
+2026-07-07 10:44:21,344 | INFO     | Orchestrator | State saved: stage=FAILED
+2026-07-07 10:47:45,085 | INFO     | Orchestrator | Starting new pipeline: 987eeb8d01736cde
+2026-07-07 10:47:45,086 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:47:45,086 | INFO     | Orchestrator | STAGE START: EXTRACT
+2026-07-07 10:47:45,086 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:47:45,088 | INFO     | Orchestrator | State saved: stage=EXTRACT
+2026-07-07 10:47:46,607 | INFO     | Orchestrator | All tool modules loaded successfully
+2026-07-07 10:47:46,610 | ERROR    | Orchestrator | EXTRACT failed: module 'schema_extractor' has no attribute 'parse_sql_dump'
+Traceback (most recent call last):
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 133, in run_stage
+    result_state = await handler(state, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 224, in _stage_extract
+    schema = self.extractor.extract_from_dump(dump_path)
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\schema_extractor_adpter.py", line 46, in extract_from_dump
+    raw_schema = se.parse_sql_dump(dump_path)
+                 ^^^^^^^^^^^^^^^^^
+AttributeError: module 'schema_extractor' has no attribute 'parse_sql_dump'
+
+2026-07-07 10:47:46,612 | INFO     | Orchestrator | State saved: stage=FAILED
+2026-07-07 10:51:22,890 | INFO     | Orchestrator | Starting new pipeline: 02513ca18d9e70f6
+2026-07-07 10:51:22,891 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:51:22,891 | INFO     | Orchestrator | STAGE START: EXTRACT
+2026-07-07 10:51:22,891 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:51:22,892 | INFO     | Orchestrator | State saved: stage=EXTRACT
+2026-07-07 10:51:24,608 | INFO     | Orchestrator | All tool modules loaded successfully
+2026-07-07 10:51:24,611 | ERROR    | Orchestrator | EXTRACT failed: MySQLSchemaExtractor.__init__() missing 1 required positional argument: 'dump_path'
+Traceback (most recent call last):
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 133, in run_stage
+    result_state = await handler(state, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 224, in _stage_extract
+    schema = self.extractor.extract_from_dump(dump_path)
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\schema_extractor_adpter.py", line 46, in extract_from_dump
+    extractor = se.MySQLSchemaExtractor()
+TypeError: MySQLSchemaExtractor.__init__() missing 1 required positional argument: 'dump_path'
+
+2026-07-07 10:51:24,613 | INFO     | Orchestrator | State saved: stage=FAILED
+2026-07-07 10:53:09,217 | INFO     | Orchestrator | Starting new pipeline: d1e15dd7a3573db6
+2026-07-07 10:53:09,217 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:53:09,218 | INFO     | Orchestrator | STAGE START: EXTRACT
+2026-07-07 10:53:09,218 | INFO     | Orchestrator | ============================================================
+2026-07-07 10:53:09,220 | INFO     | Orchestrator | State saved: stage=EXTRACT
+2026-07-07 10:53:10,772 | INFO     | Orchestrator | All tool modules loaded successfully
+2026-07-07 10:53:10,971 | ERROR    | Orchestrator | EXTRACT failed: 'str' object has no attribute 'get'
+Traceback (most recent call last):
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 133, in run_stage
+    result_state = await handler(state, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 224, in _stage_extract
+    schema = self.extractor.extract_from_dump(dump_path)
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\schema_extractor_adpter.py", line 60, in extract_from_dump
+    "description": table_data.get("description", ""),
+                   ^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+
+2026-07-07 10:53:10,975 | INFO     | Orchestrator | State saved: stage=FAILED
+2026-07-07 11:00:09,726 | INFO     | Orchestrator | Starting new pipeline: eaae125119a31734
+2026-07-07 11:00:09,726 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:00:09,727 | INFO     | Orchestrator | STAGE START: EXTRACT
+2026-07-07 11:00:09,727 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:00:09,730 | INFO     | Orchestrator | State saved: stage=EXTRACT
+2026-07-07 11:00:11,217 | INFO     | Orchestrator | All tool modules loaded successfully
+2026-07-07 11:00:11,463 | ERROR    | Orchestrator | EXTRACT failed: 'list' object has no attribute 'values'
+Traceback (most recent call last):
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 133, in run_stage
+    result_state = await handler(state, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 237, in _stage_extract
+    for t in schema.get('tables', {}).values()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'values'
+
+2026-07-07 11:00:11,466 | INFO     | Orchestrator | State saved: stage=FAILED
+2026-07-07 11:02:44,962 | INFO     | Orchestrator | Starting new pipeline: 01feaf75e2249ec6
+2026-07-07 11:02:44,963 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:02:44,963 | INFO     | Orchestrator | STAGE START: EXTRACT
+2026-07-07 11:02:44,964 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:02:44,966 | INFO     | Orchestrator | State saved: stage=EXTRACT
+2026-07-07 11:02:46,369 | INFO     | Orchestrator | All tool modules loaded successfully
+2026-07-07 11:02:46,586 | INFO     | Orchestrator | Extracted 47 tables, 657 columns
+2026-07-07 11:02:46,587 | INFO     | Orchestrator | STAGE COMPLETE: EXTRACT
+2026-07-07 11:02:46,587 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:02:46,588 | INFO     | Orchestrator | STAGE START: DESCRIBE
+2026-07-07 11:02:46,589 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:02:46,591 | INFO     | Orchestrator | State saved: stage=DESCRIBE
+2026-07-07 11:02:56,552 | ERROR    | Orchestrator | DESCRIBE failed: module 'describe_schema_tool' has no attribute 'describe_schema'
+Traceback (most recent call last):
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 133, in run_stage
+    result_state = await handler(state, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 279, in _stage_describe
+    described = self.describer.enrich_schema(
+        schema,
+        model="MiniMax-M3",
+        max_tokens=100000
+    )
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\decribe_adapter.py", line 115, in enrich_schema
+    return get_describer().enrich_schema(schema, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\decribe_adapter.py", line 42, in enrich_schema
+    return dst.describe_schema(schema, model=model or self.model, max_tokens=max_tokens)
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'describe_schema_tool' has no attribute 'describe_schema'
+
+2026-07-07 11:02:56,555 | INFO     | Orchestrator | State saved: stage=FAILED
+2026-07-07 11:07:58,813 | INFO     | Orchestrator | Starting new pipeline: 13e5d21385099f30
+2026-07-07 11:07:58,814 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:07:58,814 | INFO     | Orchestrator | STAGE START: EXTRACT
+2026-07-07 11:07:58,815 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:07:58,817 | INFO     | Orchestrator | State saved: stage=EXTRACT
+2026-07-07 11:08:00,466 | INFO     | Orchestrator | All tool modules loaded successfully
+2026-07-07 11:08:00,702 | INFO     | Orchestrator | Extracted 47 tables, 657 columns
+2026-07-07 11:08:00,704 | INFO     | Orchestrator | STAGE COMPLETE: EXTRACT
+2026-07-07 11:08:00,705 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:08:00,706 | INFO     | Orchestrator | STAGE START: DESCRIBE
+2026-07-07 11:08:00,707 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:08:00,709 | INFO     | Orchestrator | State saved: stage=DESCRIBE
+2026-07-07 11:08:00,743 | ERROR    | Orchestrator | DESCRIBE failed: name 'os' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 133, in run_stage
+    result_state = await handler(state, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 278, in _stage_describe
+    described = self.describer.enrich_schema(
+        schema,
+        model="llama3.2",
+        max_tokens=4096
+    )
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\decribe_adapter.py", line 125, in enrich_schema
+    return get_describer().enrich_schema(schema, **kwargs)
+           ~~~~~~~~~~~~~^^
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\decribe_adapter.py", line 119, in get_describer
+    _describer = SchemaDescriber()
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\decribe_adapter.py", line 22, in __init__
+    self.base_url = base_url or os.getenv("LLAMA_BASE_URL", "http://localhost:11434/v1")
+                                ^^
+NameError: name 'os' is not defined. Did you forget to import 'os'?
+
+2026-07-07 11:08:00,747 | INFO     | Orchestrator | State saved: stage=FAILED
+2026-07-07 11:09:15,542 | INFO     | Orchestrator | Starting new pipeline: 21525fe4e0c6af72
+2026-07-07 11:09:15,542 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:09:15,543 | INFO     | Orchestrator | STAGE START: EXTRACT
+2026-07-07 11:09:15,543 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:09:15,545 | INFO     | Orchestrator | State saved: stage=EXTRACT
+2026-07-07 11:09:16,945 | INFO     | Orchestrator | All tool modules loaded successfully
+2026-07-07 11:09:17,148 | INFO     | Orchestrator | Extracted 47 tables, 657 columns
+2026-07-07 11:09:17,149 | INFO     | Orchestrator | STAGE COMPLETE: EXTRACT
+2026-07-07 11:09:17,150 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:09:17,150 | INFO     | Orchestrator | STAGE START: DESCRIBE
+2026-07-07 11:09:17,151 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:09:17,154 | INFO     | Orchestrator | State saved: stage=DESCRIBE
+2026-07-07 11:09:17,992 | ERROR    | Orchestrator | DESCRIBE failed: main() takes 0 positional arguments but 1 was given
+Traceback (most recent call last):
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 133, in run_stage
+    result_state = await handler(state, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 278, in _stage_describe
+    described = self.describer.enrich_schema(
+        schema,
+        model="llama3.2",
+        max_tokens=4096
+    )
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\decribe_adapter.py", line 125, in enrich_schema
+    return get_describer().enrich_schema(schema, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\decribe_adapter.py", line 43, in enrich_schema
+    return dst.main(schema)
+           ~~~~~~~~^^^^^^^^
+TypeError: main() takes 0 positional arguments but 1 was given
+
+2026-07-07 11:09:17,994 | INFO     | Orchestrator | State saved: stage=FAILED
+2026-07-07 11:13:04,334 | INFO     | Orchestrator | Starting new pipeline: 9df478692347665b
+2026-07-07 11:13:04,335 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:13:04,335 | INFO     | Orchestrator | STAGE START: EXTRACT
+2026-07-07 11:13:04,336 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:13:04,338 | INFO     | Orchestrator | State saved: stage=EXTRACT
+2026-07-07 11:13:06,327 | INFO     | Orchestrator | All tool modules loaded successfully
+2026-07-07 11:13:06,531 | INFO     | Orchestrator | Extracted 47 tables, 657 columns
+2026-07-07 11:13:06,532 | INFO     | Orchestrator | STAGE COMPLETE: EXTRACT
+2026-07-07 11:13:06,533 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:13:06,534 | INFO     | Orchestrator | STAGE START: DESCRIBE
+2026-07-07 11:13:06,535 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:13:06,540 | INFO     | Orchestrator | State saved: stage=DESCRIBE
+2026-07-07 11:13:07,705 | ERROR    | Orchestrator | DESCRIBE failed: 'list' object has no attribute 'items'
+Traceback (most recent call last):
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 133, in run_stage
+    result_state = await handler(state, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 278, in _stage_describe
+    described = self.describer.enrich_schema(
+        schema,
+        model="llama3.2",
+        max_tokens=4096
+    )
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\decribe_adapter.py", line 121, in enrich_schema
+    return get_describer().enrich_schema(schema, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\decribe_adapter.py", line 42, in enrich_schema
+    for table_name, table in schema.get("tables", {}).items():
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'items'
+
+2026-07-07 11:13:07,709 | INFO     | Orchestrator | State saved: stage=FAILED
+2026-07-07 11:15:25,836 | INFO     | Orchestrator | Starting new pipeline: b35453048423de2b
+2026-07-07 11:15:25,837 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:15:25,838 | INFO     | Orchestrator | STAGE START: EXTRACT
+2026-07-07 11:15:25,838 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:15:25,840 | INFO     | Orchestrator | State saved: stage=EXTRACT
+2026-07-07 11:15:27,853 | INFO     | Orchestrator | All tool modules loaded successfully
+2026-07-07 11:15:28,093 | INFO     | Orchestrator | Extracted 47 tables, 657 columns
+2026-07-07 11:15:28,094 | INFO     | Orchestrator | STAGE COMPLETE: EXTRACT
+2026-07-07 11:15:28,094 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:15:28,095 | INFO     | Orchestrator | STAGE START: DESCRIBE
+2026-07-07 11:15:28,096 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:15:28,098 | INFO     | Orchestrator | State saved: stage=DESCRIBE
+2026-07-07 11:15:29,475 | ERROR    | Orchestrator | DESCRIBE failed: 'list' object has no attribute 'items'
+Traceback (most recent call last):
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 133, in run_stage
+    result_state = await handler(state, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 278, in _stage_describe
+    described = self.describer.enrich_schema(
+        schema,
+        model="llama3.2",
+        max_tokens=4096
+    )
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\decribe_adapter.py", line 121, in enrich_schema
+    return get_describer().enrich_schema(schema, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\decribe_adapter.py", line 42, in enrich_schema
+    for table_name, table in schema.get("tables", {}).items():
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'items'
+
+2026-07-07 11:15:29,478 | INFO     | Orchestrator | State saved: stage=FAILED
+2026-07-07 11:21:03,661 | INFO     | Orchestrator | Starting new pipeline: 87ebd4428b65d91f
+2026-07-07 11:21:03,662 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:21:03,662 | INFO     | Orchestrator | STAGE START: EXTRACT
+2026-07-07 11:21:03,663 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:21:03,665 | INFO     | Orchestrator | State saved: stage=EXTRACT
+2026-07-07 11:21:05,972 | INFO     | Orchestrator | All tool modules loaded successfully
+2026-07-07 11:21:06,252 | INFO     | Orchestrator | Extracted 47 tables, 657 columns
+2026-07-07 11:21:06,253 | INFO     | Orchestrator | STAGE COMPLETE: EXTRACT
+2026-07-07 11:21:06,254 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:21:06,254 | INFO     | Orchestrator | STAGE START: DESCRIBE
+2026-07-07 11:21:06,255 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:21:06,258 | INFO     | Orchestrator | State saved: stage=DESCRIBE
+2026-07-07 11:21:07,697 | ERROR    | Orchestrator | DESCRIBE failed: generate_table_desc() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 133, in run_stage
+    result_state = await handler(state, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\orchestrator.py", line 278, in _stage_describe
+    described = self.describer.enrich_schema(
+        schema,
+        model="llama3.2",
+        max_tokens=4096
+    )
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\decribe_adapter.py", line 135, in enrich_schema
+    return get_describer().enrich_schema(schema, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Enveu\OneDrive\Documents\database_agent\CORE ORCHESTRATOR\decribe_adapter.py", line 53, in enrich_schema
+    table["description"] = dst.generate_table_desc(table_name, table)
+                           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+TypeError: generate_table_desc() takes 1 positional argument but 2 were given
+
+2026-07-07 11:21:07,700 | INFO     | Orchestrator | State saved: stage=FAILED
+2026-07-07 11:26:05,805 | INFO     | Orchestrator | Starting new pipeline: 067cc6eceafd72ee
+2026-07-07 11:26:05,806 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:26:05,806 | INFO     | Orchestrator | STAGE START: EXTRACT
+2026-07-07 11:26:05,806 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:26:05,809 | INFO     | Orchestrator | State saved: stage=EXTRACT
+2026-07-07 11:26:07,798 | INFO     | Orchestrator | All tool modules loaded successfully
+2026-07-07 11:26:08,051 | INFO     | Orchestrator | Extracted 47 tables, 657 columns
+2026-07-07 11:26:08,052 | INFO     | Orchestrator | STAGE COMPLETE: EXTRACT
+2026-07-07 11:26:08,052 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:26:08,053 | INFO     | Orchestrator | STAGE START: DESCRIBE
+2026-07-07 11:26:08,053 | INFO     | Orchestrator | ============================================================
+2026-07-07 11:26:08,055 | INFO     | Orchestrator | State saved: stage=DESCRIBE
